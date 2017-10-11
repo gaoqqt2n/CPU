@@ -1,0 +1,59 @@
+library ieee;
+use ieee.STD_LOGIC_1164.all;
+library ieee;
+use ieee.STD_LOGIC_ARITH.all;
+library ieee;
+use ieee.STD_LOGIC_UNSIGNED.all;
+
+
+entity  adsel  is
+    port(
+        adsel_ctrl, hactrl : in std_logic_vector(1 downto 0);
+        extend26 : in std_logic_vector(27 downto 0); 
+        pc4, extend16 : in std_logic_vector(31 downto 0);
+        nextaddress : out std_logic_vector(31 downto 0)
+        );
+    
+end adsel;
+
+architecture  rtl  of  adsel  is
+
+   begin
+
+   process (adsel_ctrl, hactrl, pc4, extend16, extend26)
+      variable pc, bpc, bbpc : std_logic_vector(31 downto 0) := x"00000000";
+      variable flag : std_logic_vector(1 downto 0) := "00";
+      begin
+      if (hactrl'event and hactrl = "01") then
+        bpc := pc4 - 4;
+        flag := "01";
+      elsif (hactrl'event and hactrl = "10") then
+        bbpc := pc4 - 8;
+        flag := "10";
+      end if;
+
+      case (adsel_ctrl) is 
+         when "00" =>
+            if(hactrl'event and hactrl = "00") then
+                if (flag = "01") then 
+                    nextaddress <= bpc;
+                    flag := "00";
+                elsif (flag = "10") then
+                    nextaddress <= bbpc;
+                    flag := "00";
+                else
+                    nextaddress <= pc4;
+                end if;
+            else 
+                nextaddress <= pc4;
+            end if;
+         when "01" => nextaddress <= extend16 + pc4;
+         when "10" =>
+            pc := pc4 - x"00000004"; 
+            nextaddress <= pc(31 downto 28) & extend26;
+         when others => nextaddress <= pc4; 
+      end case;
+
+   end process;
+
+end;
