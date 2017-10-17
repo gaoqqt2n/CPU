@@ -12,10 +12,7 @@ port(
     rs, rt, rd, shamt : out std_logic_vector(4 downto 0);
     opcode, funct : out std_logic_vector(5 downto 0);
     extend16 : out std_logic_vector(15 downto 0);
-    extend26 : out std_logic_vector(25 downto 0);
-    flagout : out std_logic_vector(1 downto 0); --test
-    brtout, brdout : out std_logic_vector(4 downto 0); --test
-    bopcdout : out std_logic_vector(5 downto 0) --test
+    extend26 : out std_logic_vector(25 downto 0)
 );
 end component; 
  
@@ -34,7 +31,7 @@ signal brtout, brdout : std_logic_vector(4 downto 0); --test
 signal bopcdout : std_logic_vector(5 downto 0); --test
  
 begin  
-    dut : stall port map(inst, hactrl, rs, rt, rd, shamt, opcode, funct, extend16, extend26, flagout, brtout, brdout, bopcdout); 
+    dut : stall port map(inst, hactrl, rs, rt, rd, shamt, opcode, funct, extend16, extend26); 
  
      process begin  
         inst <= "00000000001000100001100000100000";

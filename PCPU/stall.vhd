@@ -12,10 +12,7 @@ entity stall is
         rs, rt, rd, shamt : out std_logic_vector(4 downto 0);
         opcode, funct : out std_logic_vector(5 downto 0);
         extend16 : out std_logic_vector(15 downto 0);
-        extend26 : out std_logic_vector(25 downto 0);
-        flagout : out std_logic_vector(1 downto 0); --test
-        brtout, brdout : out std_logic_vector(4 downto 0); --test
-        bopcdout : out std_logic_vector(5 downto 0) --test
+        extend26 : out std_logic_vector(25 downto 0)
     );
 end stall;
 
@@ -217,10 +214,6 @@ architecture rtl of stall is
             brd := inst(15 downto 11);
             bopcd := inst(31 downto 26);
         end if;
-        bopcdout <= bopcd;
-        brtout <= brt;
-        brdout <= brd;
-        flagout <= flag;
         hactrl <= ctrltmp;
     end process;
     
