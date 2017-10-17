@@ -26,7 +26,7 @@ signal stall_opcode, stall_funct : std_logic_vector(5 downto 0);
 signal stall_ex16 : std_logic_vector(15 downto 0);
 signal stall_ex26 : std_logic_vector(25 downto 0);
 signal rs_rf, rt_rf : std_logic_vector(31 downto 0);
-component pc 
+component pc  
     port(
         clk, rst : in std_logic;
         next_address : in std_logic_vector(31 downto 0);
