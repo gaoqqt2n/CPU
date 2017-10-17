@@ -1,5 +1,5 @@
 $date
-  Mon Aug 28 17:23:51 2017
+  Wed Oct 11 14:40:44 2017
 $end
 $version
   GHDL v0
@@ -11,7 +11,7 @@ $var reg 32 ! a[31:0] $end
 $var reg 32 " b[31:0] $end
 $scope module dut $end
 $var reg 32 # address[31:0] $end
-$var reg 32 $ pc_adder[31:0] $end
+$var reg 32 $ pc4[31:0] $end
 $upscope $end
 $enddefinitions $end
 #0

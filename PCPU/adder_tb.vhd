@@ -8,7 +8,7 @@ architecture stimulus of adder_tb is
 component adder 
     port(
          address     : in   std_logic_vector(31 downto 0);
-         pc_adder   : out std_logic_vector(31 downto 0)
+         pc4       : out std_logic_vector(31 downto 0)
     );
 end component;
 

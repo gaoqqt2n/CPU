@@ -7,7 +7,7 @@ end pc_tb;
 architecture stimulus of pc_tb is
 component pc 
     port(
-        clk, rst, we : in std_logic;
+        clk, rst : in std_logic;
         next_address : in std_logic_vector(31 downto 0);
         address : out std_logic_vector(31 downto 0)
     );
@@ -17,14 +17,13 @@ constant cycle  : time := 400 ns;
 constant half_cycle  :  time := 200 ns;
 constant delay  : time := 10 ns;
 
-signal clk, rst, we : std_logic; 
+signal clk, rst : std_logic; 
 signal next_address, address : std_logic_vector(31 downto 0); 
 
 begin 
     dut : pc port map(
         clk => clk,
         rst => rst,
-        we => we,
         next_address => next_address,
         address => address);
 
@@ -40,11 +39,11 @@ begin
     end process;
 
      process begin 
-        next_address <= x"00000004"; rst <= '0'; we <= '0';
+        next_address <= x"00000004"; rst <= '0';
         wait for delay;
         wait for 50 ns;    
-        wait for 50 ns;    next_address <= x"00000008"; rst <= '1'; we <= '0';
-        wait for 100 ns;   next_address <= x"0000000c"; we <= '1';
+        wait for 50 ns;    next_address <= x"00000008"; rst <= '1';
+        wait for 100 ns;   next_address <= x"0000000c"; 
         wait for 100 ns;   next_address <= x"00000010";
         wait for 100 ns;   next_address <= x"00000018"; 
         wait for 100 ns;   next_address <= x"00000004"; 

@@ -10,7 +10,7 @@ component adsel
         adsel_ctrl, hactrl : in std_logic_vector(1 downto 0);
         extend26 : in std_logic_vector(27 downto 0); 
         pc4, extend16 : in std_logic_vector(31 downto 0);
-        nextaddress : out std_logic_vector(31 downto 0)
+        next_address : out std_logic_vector(31 downto 0)
         );
 end component; 
  

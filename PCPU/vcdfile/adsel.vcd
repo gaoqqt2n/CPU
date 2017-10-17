@@ -1,5 +1,5 @@
 $date
-  Fri Oct 06 17:48:31 2017
+  Wed Oct 11 14:40:48 2017
 $end
 $version
   GHDL v0
@@ -19,7 +19,7 @@ $var reg 2 ( hactrl[1:0] $end
 $var reg 28 ) extend26[27:0] $end
 $var reg 32 * pc4[31:0] $end
 $var reg 32 + extend16[31:0] $end
-$var reg 32 , nextaddress[31:0] $end
+$var reg 32 , next_address[31:0] $end
 $upscope $end
 $enddefinitions $end
 #0
