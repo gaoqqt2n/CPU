@@ -9,7 +9,7 @@ entity ctrl is
     port(
         clk, rst : in std_logic;
         opcode, funct : in std_logic_vector(5 downto 0);
-        ctrl : out std_logic_vector(7 downto 0) --mux:1,alu:4,adsel:2,regfile:1
+        ctrl : out std_logic_vector(8 downto 0) --mux:1,alu:4,dm:1,mux:1,mux:1,regfile:1
     );
 end ctrl;
 
@@ -23,22 +23,22 @@ begin
       case (opcode) is 
          when "000000" =>
          case (funct) is
-            when "000000" => ctrl <= "00000011"; --shift left logical
-            when "000001" => ctrl <= "00001011"; --shift right logical
-            when "000011" => ctrl <= "00010011"; --shift right arithmetic
-            when "100000" => ctrl <= "00100011"; --add
-            when "100010" => ctrl <= "00101011"; --sub
-            when "100100" => ctrl <= "01000011"; --and
-            when "100101" => ctrl <= "01001011"; --or
-            when "100110" => ctrl <= "01010011"; --nor
-            when "100111" => ctrl <= "01011011"; --xor
-            when "101010" => ctrl <= "01100011"; --set on less than
+            when "000000" => ctrl <= "000000111"; --shift left logical
+            when "000001" => ctrl <= "000010111"; --shift right logical
+            when "000011" => ctrl <= "000100111"; --shift right arithmetic
+            when "100000" => ctrl <= "001000111"; --add
+            when "100010" => ctrl <= "001010111"; --sub
+            when "100100" => ctrl <= "010000111"; --and
+            when "100101" => ctrl <= "010010111"; --or
+            when "100110" => ctrl <= "010100111"; --nor
+            when "100111" => ctrl <= "010110111"; --xor
+            when "101010" => ctrl <= "011000111"; --set on less than
          end case;
-         when "100011" => ctrl <= "10100001"; --load
-         when "101011" => ctrl <= "10100100"; --store
-         when "000100" => ctrl <= "01101010"; --beq
-         when "000010" => ctrl <= "01110000"; --jump
-         when "000001" => ctrl <= "00000000"; --nop
+         when "100011" => ctrl <= "101000001"; --load
+         when "101011" => ctrl <= "101001010"; --store
+         when "000100" => ctrl <= "011010110"; --beq
+         when "000010" => ctrl <= "011100010"; --jump
+         when "000001" => ctrl <= "000000010"; --nop
 
          when others => ctrl <= (others => '0');
       end case;

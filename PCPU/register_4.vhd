@@ -5,15 +5,15 @@ use ieee.STD_LOGIC_ARITH.all;
 library ieee;
 use ieee.STD_LOGIC_UNSIGNED.all;
 
-entity register_1 is
+entity register_4 is
     port(
         clk, rst : in std_logic;
         in4 : in std_logic_vector(3 downto 0);
         out4 : out std_logic_vector(3 downto 0)
     );
-end register_1;
+end register_4;
 
-architecture rtl of register_1 is
+architecture rtl of register_4 is
 begin
     
     process (clk, rst) begin

@@ -9,7 +9,7 @@ component ctrl
     port( 
         clk, rst : in std_logic; 
         opcode, funct : in std_logic_vector(5 downto 0); 
-        ctrl : out std_logic_vector(7 downto 0) 
+        ctrl : out std_logic_vector(8 downto 0) 
     ); 
 end component; 
  
@@ -19,7 +19,7 @@ constant delay  : time := 20 ns;
  
 signal clk, rst : std_logic;  
 signal opcode, funct : std_logic_vector(5 downto 0);  
-signal ctrlout : std_logic_vector(7 downto 0);  
+signal ctrlout : std_logic_vector(8 downto 0);  
  
 begin  
     dut : ctrl port map(clk, rst, opcode, funct, ctrlout); 
