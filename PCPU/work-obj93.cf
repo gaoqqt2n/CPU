@@ -130,3 +130,6 @@ file . "register_32.vhd" "20170918035956.000" "20171009141448.520":
 file . "datamem.vhd" "20171009030126.000" "20171010103539.203":
   entity datamem at 1( 0) + 0 on 2531;
   architecture rtl of datamem at 17( 393) + 0 on 2532;
+file . "ma_stage.vhd" "20171018065428.000" "20171018155430.017":
+  entity ma_stage at 1( 0) + 0 on 2776;
+  architecture rtl of ma_stage at 21( 582) + 0 on 2777;
