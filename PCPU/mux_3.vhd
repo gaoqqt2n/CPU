@@ -18,14 +18,14 @@ library ieee;
 use ieee.STD_LOGIC_UNSIGNED.all;
 
 
-entity  mux3  is
+entity  mux3_32  is
     port (
           sel : in std_logic_vector(1 downto 0); 
           in0, in1, in2 : in std_logic_vector(31 downto 0);
           out1 : out std_logic_vector(31 downto 0));
-end mux3;
+end mux3_32;
 
-architecture  rtl  of  mux3  is
+architecture  rtl  of  mux3_32  is
     begin
         process (sel, in0, in1, in2) begin
             case sel is 
