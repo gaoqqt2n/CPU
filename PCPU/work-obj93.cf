@@ -1,10 +1,10 @@
 v 3
+file . "PCPU.vhd" "20171019122500.000" "20171019212503.284":
+  entity pcpu at 1( 0) + 0 on 2782;
+  architecture rtl of pcpu at 16( 285) + 0 on 2783;
 file . "register_9.vhd" "20171018075822.000" "20171018165832.888":
   entity register_9 at 1( 0) + 0 on 2778;
   architecture rtl of register_9 at 16( 333) + 0 on 2779;
-file . "ma_stage.vhd" "20171018065428.000" "20171018155430.017":
-  entity ma_stage at 1( 0) + 0 on 2776;
-  architecture rtl of ma_stage at 21( 582) + 0 on 2777;
 file . "datamem.vhd" "20171009030126.000" "20171010103539.203":
   entity datamem at 1( 0) + 0 on 2531;
   architecture rtl of datamem at 17( 393) + 0 on 2532;
@@ -136,3 +136,6 @@ file . "mux2_5.vhd" "20171018060404.000" "20171018150413.551":
 file . "ex_stage.vhd" "20171018062556.000" "20171018152603.781":
   entity ex_stage at 1( 0) + 0 on 2772;
   architecture rtl of ex_stage at 22( 641) + 0 on 2773;
+file . "MA_stage.vhd" "20171019093248.000" "20171019183250.212":
+  entity ma_stage at 1( 0) + 0 on 2780;
+  architecture rtl of ma_stage at 21( 582) + 0 on 2781;
