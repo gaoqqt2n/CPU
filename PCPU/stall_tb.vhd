@@ -34,7 +34,7 @@ begin
     dut : stall port map(inst, hactrl, rs, rt, rd, shamt, opcode, funct, extend16, extend26); 
  
      process begin  
-        inst <= "00000000001000100001100000100000";
+        inst <= "00000000001000100001100000100000"; --
         wait for cycle; 
         inst <= "00001000000000000000000000100000"; --
         wait for cycle;         
@@ -46,7 +46,7 @@ begin
         wait for cycle;         
         inst <= "10101100110000110000000000000100";
         wait for cycle;    
-        inst <= "00000000001001010011000000100000"; ------
+        inst <= "00000000001001010011000000100000"; --
         wait for cycle;              
         inst <= "10001100111000110000000000001100";
         wait for cycle; 

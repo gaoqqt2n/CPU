@@ -25,14 +25,28 @@ architecture rtl of regfile is
          for i in regarray'range loop
             regdata(i) <= (others => '0');
             end loop;
-        elsif (clk'event and clk = '0') then
+    --     elsif (clk'event and clk = '0') then
+    --         if (we = '1' and wad /= "00000") then
+    --             regdata(conv_integer(wad)) <= indata;
+    --         end if;
+    --     end if;
+    -- end process;
+
+    -- out1 <= regdata(conv_integer(rad1));
+    -- out2 <= regdata(conv_integer(rad2));
+
+        elsif (clk'event and clk = '1') then
             if (we = '1' and wad /= "00000") then
                 regdata(conv_integer(wad)) <= indata;
+            end if;
+        elsif (clk'event and clk = '0') then
+            if (we = '1' and wad /= "00000") then
+                out1 <= regdata(conv_integer(rad1));
+                out2 <= regdata(conv_integer(rad2));
             end if;
         end if;
     end process;
 
-    out1 <= regdata(conv_integer(rad1));
-    out2 <= regdata(conv_integer(rad2));
+
 
 end;

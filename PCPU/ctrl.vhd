@@ -33,6 +33,7 @@ begin
             when "100110" => ctrl <= "011010011"; --nor
             when "100111" => ctrl <= "011011011"; --xor
             when "101010" => ctrl <= "011100011"; --set on less than
+            when others => ctrl <= (others => '0');
          end case;
          when "100011" => ctrl <= "100100001"; --load
          when "101011" => ctrl <= "110100100"; --store
