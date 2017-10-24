@@ -53,6 +53,8 @@ begin
         wait for cycle; 
         rst <= '1'; we <= '1'; wad <= "00000"; rad1 <= "00000"; rad2 <= "11111"; indata <= x"11111111"; 
         wait for cycle; 
+        rst <= '1'; we <= '0'; wad <= "01100"; rad1 <= "00001"; rad2 <= "00000"; indata <= x"22225555"; 
+        wait for cycle; 
         
         wait; 
      end process;     

@@ -20,27 +20,31 @@ architecture rtl of regfile is
    signal regdata : regarray;
    begin
     
-    process (clk, rst) begin
+    process (clk, rst) 
+    variable tmp : std_logic_vector(31 downto 0) := x"00000000";
+    begin
         if (rst = '0') then
-         for i in regarray'range loop
-            regdata(i) <= (others => '0');
+            for i in regarray'range loop
+                regdata(i) <= (others => '0');
+                tmp := (others => '0');
+                out1 <= (others => '0');
+                out2 <= (others => '0');
             end loop;
-    --     elsif (clk'event and clk = '0') then
-    --         if (we = '1' and wad /= "00000") then
-    --             regdata(conv_integer(wad)) <= indata;
-    --         end if;
-    --     end if;
-    -- end process;
-
-    -- out1 <= regdata(conv_integer(rad1));
-    -- out2 <= regdata(conv_integer(rad2));
-
         elsif (clk'event and clk = '1') then
             if (we = '1' and wad /= "00000") then
                 regdata(conv_integer(wad)) <= indata;
+                tmp := indata;
             end if;
-        elsif (clk'event and clk = '0') then
-            if (we = '1' and wad /= "00000") then
+            if (wad = rad1) then
+                out1 <= tmp;
+                out2 <= regdata(conv_integer(rad2));
+            elsif (wad = rad2) then 
+                out1 <= regdata(conv_integer(rad1));
+                out2 <= tmp;
+            elsif (wad = rad1 and rad1 = rad2) then 
+                out1 <= tmp;
+                out2 <= tmp;
+            else
                 out1 <= regdata(conv_integer(rad1));
                 out2 <= regdata(conv_integer(rad2));
             end if;
@@ -48,5 +52,14 @@ architecture rtl of regfile is
     end process;
 
 
+    --     elsif (clk'event and clk = '1') then
+    --         if (we = '1' and wad /= "00000") then
+    --             regdata(conv_integer(wad)) <= indata;
+    --         end if;
+    --     elsif (clk'event and clk = '0') then
+    --             out1 <= regdata(conv_integer(rad1));
+    --             out2 <= regdata(conv_integer(rad2));
+    --     end if;
+    -- end process;
 
 end;

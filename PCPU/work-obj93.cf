@@ -46,9 +46,9 @@ file . "ctrl_tb.vhd" "20171018045008.000" "20171020161546.729":
 file . "ctrl.vhd" "20171020071542.000" "20171020161546.601":
   entity ctrl at 1( 0) + 0 on 2784;
   architecture rtl of ctrl at 16( 372) + 0 on 2785;
-file . "regfile.vhd" "20171020092706.000" "20171020182723.370":
-  entity regfile at 1( 0) + 0 on 2914;
-  architecture rtl of regfile at 17( 402) + 0 on 2915;
+file . "regfile.vhd" "20171024090248.000" "20171024180302.618":
+  entity regfile at 1( 0) + 0 on 2990;
+  architecture rtl of regfile at 17( 402) + 0 on 2991;
 file . "alu.vhd" "20171010050032.000" "20171010140109.764":
   entity alu at 1( 0) + 0 on 2590;
   architecture rtl of alu at 19( 482) + 0 on 2591;
@@ -120,10 +120,10 @@ file . "alu_tb.vhd" "20171010050106.000" "20171010140109.860":
   entity alu_tb at 1( 0) + 0 on 2592;
   architecture stimulus of alu_tb at 7( 89) + 0 on 2593;
   configuration cfg_alu_tb at 73( 2960) + 0 on 2594;
-file . "regfile_tb.vhd" "20170911072220.000" "20171020182723.469":
-  entity regfile_tb at 1( 0) + 0 on 2916;
-  architecture stimulus of regfile_tb at 7( 97) + 0 on 2917;
-  configuration cfg_regfile_tb at 62( 2112) + 0 on 2918;
+file . "regfile_tb.vhd" "20171024090300.000" "20171024180302.727":
+  entity regfile_tb at 1( 0) + 0 on 2992;
+  architecture stimulus of regfile_tb at 7( 97) + 0 on 2993;
+  configuration cfg_regfile_tb at 64( 2244) + 0 on 2994;
 file . "instconv.vhd" "20170913061624.000" "20170913151759.623":
   entity instconv at 1( 0) + 0 on 1291;
   architecture rtl of instconv at 19( 547) + 0 on 1292;
