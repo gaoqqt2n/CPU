@@ -51,9 +51,9 @@ end component;
 
 begin
 
-    M1 : alu port map (rst, ctrlout(7 downto 4), shamt, rsdata, mux_alu, adsel_ctrl, aluout);
+    M1 : alu port map (rst, ctrlout(6 downto 3), shamt, rsdata, mux_alu, adsel_ctrl, aluout);
     M2 : mux2_32 port map (ctrlout(8), rtdata, ex16, mux_alu);
-    M3 : mux2_5 port map (ctrlout(1), rtad, rdad, wad);
+    M3 : mux2_5 port map (ctrlout(7), rtad, rdad, wad);
 
     exout_rtdata <= rtdata;
     ctrlout_3 <= ctrlout(2 downto 0);

@@ -42,7 +42,7 @@ begin
         rst <= '0'; adsel_ctrl <= "00"; hactrl <= "00"; extend16 <= x"00000000"; extend26 <= x"0000000";
         wait for delay; 
         wait for cycle; 
-        rst <= '1'; adsel_ctrl <= "00"; hactrl <= "00"; extend16 <= x"00000000"; extend26 <= x"0000000";
+        rst <= '0'; adsel_ctrl <= "00"; hactrl <= "00"; extend16 <= x"00000000"; extend26 <= x"0000000";
         wait for cycle; 
         rst <= '1'; adsel_ctrl <= "00"; hactrl <= "00"; extend16 <= x"00000000"; extend26 <= x"0000000";
         wait for cycle; 

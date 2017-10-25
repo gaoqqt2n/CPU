@@ -48,9 +48,9 @@ begin
                     aluout <= X"00000000";
                   end if;
 
-               when others => aluout <= (others => 'X');  
+               when others => aluout <= (others => '0');  
                
-                              adsel_ctrl <= (others => 'X');  
+                              adsel_ctrl <= (others => '0');  
             end case ;
 
             if (aluctrl = "1101" and (in1 = in2)) then --beq
