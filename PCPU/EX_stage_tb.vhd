@@ -46,8 +46,6 @@ begin
         wait for cycle; 
         rst <= '1'; rtad <= "00001"; rdad <= "00010"; shamt <="00000"; ctrlout <= "011110001"; rsdata <= x"00001111"; rtdata <= x"00003333"; ex16 <= x"00001820";
         wait for cycle; 
-        -- rst <= '1'; rtad <= "00001"; rdad <= "00010"; shamt <="00000"; ctrlout <= "010100011"; rsdata <= x"00001111"; rtdata <= x"00003333"; ex16 <= x"00001820";
-        -- wait for cycle; 
         wait; 
      end process;     
  

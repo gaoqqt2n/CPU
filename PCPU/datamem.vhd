@@ -7,7 +7,7 @@ use ieee.STD_LOGIC_UNSIGNED.all;
 
 entity datamem is
     port(
-        clk, rst, wren : in std_logic;
+        clk, rst, we : in std_logic;
         address : in std_logic_vector(4 downto 0);
         indata : in std_logic_vector(31 downto 0);
         outdata : out std_logic_vector(31 downto 0)
@@ -25,13 +25,13 @@ architecture rtl of datamem is
          for i in memarray'range loop
             memdata(i) <= (others => '0');
             end loop;
+            outdata <= (others => '0');
         elsif (clk'event and clk = '1') then
-            if (wren = '1') then
+            if (we = '1') then
                 memdata(conv_integer(address)) <= indata;
             end if;
+            outdata <= memdata(conv_integer(address));
         end if;
     end process;
-
-    outdata <= memdata(conv_integer(address));
     
 end;

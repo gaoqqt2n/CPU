@@ -24,7 +24,7 @@ signal dm_mux, R1_mux : std_logic_vector(31 downto 0);
 
 component datamem
     port(
-        clk, rst, wren : in std_logic;
+        clk, rst, we : in std_logic;
         address : in std_logic_vector(4 downto 0);
         indata : in std_logic_vector(31 downto 0);
         outdata : out std_logic_vector(31 downto 0)

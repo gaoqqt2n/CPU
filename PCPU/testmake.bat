@@ -2,7 +2,7 @@
 setlocal
 
 if xx%1==xx goto error
-echo ï¿½ï¿½ï¿½ï¿½ï¿½Íu%*ï¿½vï¿½Å‚ï¿½ï¿½B
+echo ˆø”‚Íu%*v‚Å‚·B
 
 echo library IEEE; > %1_tb.vhd
 echo use IEEE.std_logic_1164.all;  >> %1_tb.vhd
@@ -79,4 +79,4 @@ code %1_tb.vhd
 goto :eof  
 
 :error
-echo ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â‚ï¿½ï¿½Ä‹Nï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+echo ˆø”‚ð‚Â‚¯‚Ä‹N“®‚µ‚Ä‚­‚¾‚³‚¢
