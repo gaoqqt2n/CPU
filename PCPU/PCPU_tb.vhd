@@ -8,7 +8,8 @@ architecture stimulus of pcpu_tb is
 component pcpu  
     port(
         clk, rst : in std_logic;
-        outdata : out std_logic_vector(31 downto 0)
+        outdata : out std_logic_vector(31 downto 0);
+        instout : out std_logic_vector(31 downto 0) --debug
         );
 end component; 
  
@@ -17,7 +18,8 @@ constant half_cycle  : time := 100 ns;
 constant delay  : time := 20 ns; 
  
 signal clk, rst : std_logic;  
-signal outdata: std_logic_vector(31 downto 0);  
+signal outdata : std_logic_vector(31 downto 0);  
+signal instout: std_logic_vector(31 downto 0); --debug
  
 begin  
     dut : pcpu port map(clk, rst, outdata); 

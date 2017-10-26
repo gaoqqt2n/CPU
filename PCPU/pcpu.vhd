@@ -9,7 +9,9 @@ use ieee.STD_LOGIC_UNSIGNED.all;
 entity  pcpu  is
     port(
         clk, rst : in std_logic;
-        outdata : out std_logic_vector(31 downto 0)
+        outdata : out std_logic_vector(31 downto 0);
+        instout : out std_logic_vector(31 downto 0) --debug
+
         );
 end pcpu;
 
@@ -103,5 +105,5 @@ begin
     M4 : ma_stage port map (clk, rst, R_wad, R_ctrlout_3, R_aluout, R_rtdata, regwe, regwad, regwdata);
 
 outdata <= regwdata;
-
+instout <= inst_R;
 end;
