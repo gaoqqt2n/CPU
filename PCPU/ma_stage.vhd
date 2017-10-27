@@ -64,7 +64,7 @@ end component;
 
 begin
 
-    M1 : datamem port map (clk, rst, ctrlout_3(2), aluout(6 downto 2), rtdata, dm_mux);
+    M1 : datamem port map (clk, rst, ctrlout_3(2), aluout(4 downto 0), rtdata, dm_mux);
     M2 : mux2_32 port map (R3_mux, dm_mux, R1_mux, outdata);
     M3 : register_5 port map (clk, rst, wad, regwad);
     M4 : register_32 port map (clk, rst, aluout, R1_mux);

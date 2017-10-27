@@ -16,11 +16,11 @@ end im;
 architecture  rtl  of  im  is
     constant NOP : std_logic_vector(31 downto 0) := X"04000000";
     constant M0  : std_logic_vector(31 downto 0) := X"8C0A0000";
-    constant M1  : std_logic_vector(31 downto 0) := X"8C0B0004";
-    constant M2  : std_logic_vector(31 downto 0) := X"114B0008";
-    constant M3  : std_logic_vector(31 downto 0) := X"014BA02A";
-    constant M4  : std_logic_vector(31 downto 0) := X"12800003";
-    constant M5  : std_logic_vector(31 downto 0) := X"016A5822";
+    constant M1  : std_logic_vector(31 downto 0) := X"8c010001";
+    constant M2  : std_logic_vector(31 downto 0) := X"8c020002";
+    constant M3  : std_logic_vector(31 downto 0) := X"8c030003";
+    constant M4  : std_logic_vector(31 downto 0) := X"00222020";
+    constant M5  : std_logic_vector(31 downto 0) := X"00412822";
     constant M6  : std_logic_vector(31 downto 0) := X"08000002";
     constant M7  : std_logic_vector(31 downto 0) := X"04000000";
     constant M8  : std_logic_vector(31 downto 0) := X"014B5022";
@@ -31,8 +31,8 @@ architecture  rtl  of  im  is
 
 type mem_array is array (0 to 31) of std_logic_vector(31 downto 0);
 constant mem : mem_array := ( 
-                             M0,  M1,  M2,  M3,  M4,  M5,  M6,  M7,
-                             M8,  M9, M10, M11, M12, NOP, NOP, NOP,
+                             M0,  M1,  M2,  M3,  NOP, NOP,  NOP, nop,
+                             nop, nop, nop, M4, M5, NOP, NOP, NOP,
                              NOP, NOP, NOP, NOP, NOP, NOP, NOP, NOP,
                              NOP, NOP, NOP, NOP, NOP, NOP, NOP, NOP);
     

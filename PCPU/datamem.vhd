@@ -22,8 +22,11 @@ architecture rtl of datamem is
     
     process (clk, rst) begin
         if (rst = '0') then
-         for i in memarray'range loop
-            memdata(i) <= (others => '0');
+            memdata(0) <= x"11111111";
+            memdata(1) <= x"22222222";
+            memdata(2) <= x"00005555";
+            for i in 3 to 31 loop
+                memdata(i) <= (others => '0');
             end loop;
             outdata <= (others => '0');
         elsif (clk'event and clk = '1') then

@@ -21,7 +21,7 @@ entity  id_stage  is
 end id_stage;
 
 architecture  rtl  of  id_stage  is
-signal rs_rf, rt_rf, rd_R, stall_shamt : std_logic_vector(4 downto 0);
+signal rs_rf, rt_rf, rt_R, rd_R, stall_shamt : std_logic_vector(4 downto 0);
 signal stall_opcode, stall_funct : std_logic_vector(5 downto 0);
 signal stall_ex16 : std_logic_vector(15 downto 0);
 signal stall_ex26 : std_logic_vector(25 downto 0);
@@ -83,7 +83,7 @@ begin
 
     M1 : stall port map (inst, hactrl, rs_rf, rt_rf, rd_R, stall_shamt, stall_opcode, stall_funct, stall_ex16, stall_ex26);
     M2 : regfile port map (clk, rst, regwe, wad, rs_rf, rt_rf, wdata, rs, rt);
-    M3 : register_5 port map (clk, rst, rt_rf, rtad);
+    M3 : register_5 port map (clk, rst, rt_R, rtad);
     M4 : register_5 port map (clk, rst, rd_R, rdad);
     M5 : extend16 port map (clk, rst, stall_ex16, ex16_1, ex16_2);
     M6 : extend26 port map (clk, rst, stall_ex26, ex26);

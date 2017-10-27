@@ -9,9 +9,7 @@ use ieee.STD_LOGIC_UNSIGNED.all;
 entity  pcpu  is
     port(
         clk, rst : in std_logic;
-        outdata : out std_logic_vector(31 downto 0);
-        instout : out std_logic_vector(31 downto 0) --debug
-
+        outdata : out std_logic_vector(31 downto 0)
         );
 end pcpu;
 
@@ -73,6 +71,14 @@ component ma_stage
         );
 end component;
 
+component register_3
+    port(
+        clk, rst : in std_logic;
+        in3 : in std_logic_vector(2 downto 0);
+        out3 : out std_logic_vector(2 downto 0)
+    );
+end component;
+
 component register_5
     port(
         clk, rst : in std_logic;
@@ -100,10 +106,21 @@ end component;
 begin
 
     M1 : if_stage port map (clk, rst, adsel_ctrl, hactrl, ex16_1, ex26, inst_R);
-    M2 : id_stage port map (clk, rst, regwe, regwad, R_inst, regwdata, hactrl, rtad_R, rdad_R, shamt_R, ctrl_R, ex26, rs_R, rt_R, ex16_1, ex16_2_R);
-    M3 : ex_stage port map (rst, R_rtad, R_rdad, R_shamt, R_ctrl, R_rs, R_rt, R_ex16_2, adsel_ctrl, ctrlout_3_R, wad_R, aluout_R, rtdata_R);
-    M4 : ma_stage port map (clk, rst, R_wad, R_ctrlout_3, R_aluout, R_rtdata, regwe, regwad, regwdata);
+    M2 : register_32 port map (clk, rst, inst_R, R_inst);
+    M3 : id_stage port map (clk, rst, regwe, regwad, R_inst, regwdata, hactrl, rtad_R, rdad_R, shamt_R, ctrl_R, ex26, rs_R, rt_R, ex16_1, ex16_2_R);
+    M4 : register_32 port map (clk, rst, rs_R, R_rs);
+    M5 : register_32 port map (clk, rst, rt_R, R_rt);
+    M6 : register_32 port map (clk, rst, ex16_2_R, R_ex16_2);
+    M7 : register_5 port map (clk, rst, rtad_R, R_rtad);
+    M8 : register_5 port map (clk, rst, rdad_R, R_rdad);
+    M9 : register_5 port map (clk, rst, shamt_R, R_shamt);
+    M10 : register_9 port map (clk, rst, ctrl_R, R_ctrl);
+    M11 : ex_stage port map (rst, R_rtad, R_rdad, R_shamt, R_ctrl, R_rs, R_rt, R_ex16_2, adsel_ctrl, ctrlout_3_R, wad_R, aluout_R, rtdata_R);
+    M12 : register_32 port map (clk, rst, aluout_R, R_aluout);
+    M13 : register_32 port map (clk, rst, rtdata_R, R_rtdata);
+    M14 : register_5 port map (clk, rst, wad_R, wad_R);
+    M15 : register_3 port map (clk, rst, ctrlout_3_R, R_ctrlout_3);
+    M16 : ma_stage port map (clk, rst, R_wad, R_ctrlout_3, R_aluout, R_rtdata, regwe, regwad, regwdata);
 
 outdata <= regwdata;
-instout <= inst_R;
 end;

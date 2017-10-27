@@ -182,9 +182,37 @@ architecture rtl of stall is
                 brt := (others => '0');
                 brd := (others => '0');
                 bopcd := "000001";
+            else 
+                opcode <= "000001"; --nop
+                rs <= (others => '0');
+                rt <= (others => '0');
+                rd <= (others => '0');
+                shamt <= (others => '0');
+                funct <= (others => '0');
+                extend16 <= (others => '0');
+                extend26 <= (others => '0');
+                ctrltmp := "00";
+                flag := "00";
+                brt := (others => '0');
+                brd := (others => '0');
+                bopcd := "000001";
             end if;
         elsif (ctrltmp = "10") then
             if (flag = "01") then
+                opcode <= "000001"; --nop
+                rs <= (others => '0');
+                rt <= (others => '0');
+                rd <= (others => '0');
+                shamt <= (others => '0');
+                funct <= (others => '0');
+                extend16 <= (others => '0');
+                extend26 <= (others => '0');
+                ctrltmp := "00";
+                flag := "00";
+                brt := (others => '0');
+                brd := (others => '0');
+                bopcd := "000001";
+            else 
                 opcode <= "000001"; --nop
                 rs <= (others => '0');
                 rt <= (others => '0');
