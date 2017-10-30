@@ -118,7 +118,7 @@ begin
     M11 : ex_stage port map (rst, R_rtad, R_rdad, R_shamt, R_ctrl, R_rs, R_rt, R_ex16_2, adsel_ctrl, ctrlout_3_R, wad_R, aluout_R, rtdata_R);
     M12 : register_32 port map (clk, rst, aluout_R, R_aluout);
     M13 : register_32 port map (clk, rst, rtdata_R, R_rtdata);
-    M14 : register_5 port map (clk, rst, wad_R, wad_R);
+    M14 : register_5 port map (clk, rst, wad_R, R_wad);
     M15 : register_3 port map (clk, rst, ctrlout_3_R, R_ctrlout_3);
     M16 : ma_stage port map (clk, rst, R_wad, R_ctrlout_3, R_aluout, R_rtdata, regwe, regwad, regwdata);
 

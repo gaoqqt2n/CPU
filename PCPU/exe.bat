@@ -15,4 +15,4 @@ if "%2"=="1" (
 goto :eof  
 
 :error
-echo ˆø”‚ð‚Â‚¯‚Ä‹N“®‚µ‚Ä‚­‚¾‚³‚¢
+echo ˆø”‚ðŽw’è‚µ‚Ä‚­‚¾‚³‚¢

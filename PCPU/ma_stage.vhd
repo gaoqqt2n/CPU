@@ -20,7 +20,7 @@ end ma_stage;
 
 architecture  rtl  of  ma_stage  is
 signal R3_mux : std_logic;
-signal dm_mux, R1_mux : std_logic_vector(31 downto 0);
+signal dm_R, R_mux, R1_mux : std_logic_vector(31 downto 0);
 
 component datamem
     port(
@@ -64,11 +64,12 @@ end component;
 
 begin
 
-    M1 : datamem port map (clk, rst, ctrlout_3(2), aluout(4 downto 0), rtdata, dm_mux);
-    M2 : mux2_32 port map (R3_mux, dm_mux, R1_mux, outdata);
-    M3 : register_5 port map (clk, rst, wad, regwad);
-    M4 : register_32 port map (clk, rst, aluout, R1_mux);
-    M5 : register_1 port map (clk, rst, ctrlout_3(1), R3_mux);
-    M6 : register_1 port map (clk, rst, ctrlout_3(0), regwe);
+    M1 : datamem port map (clk, rst, ctrlout_3(2), aluout(4 downto 0), rtdata, dm_R);
+    M2 : register_32 port map (clk, rst, dm_R, R_mux);
+    M3 : mux2_32 port map (R3_mux, R_mux, R1_mux, outdata);
+    M4 : register_5 port map (clk, rst, wad, regwad);
+    M5 : register_32 port map (clk, rst, aluout, R1_mux);
+    M6 : register_1 port map (clk, rst, ctrlout_3(1), R3_mux);
+    M7 : register_1 port map (clk, rst, ctrlout_3(0), regwe);
 
 end;

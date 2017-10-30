@@ -23,8 +23,8 @@ begin
       case (opcode) is 
          when "000000" =>
          case (funct) is
-            when "000000" => ctrl <= "010000011"; --shift left logical
-            when "000001" => ctrl <= "010001011"; --shift right logical
+            when "000001" => ctrl <= "010000011"; --shift left logical
+            when "000010" => ctrl <= "010001011"; --shift right logical
             when "000011" => ctrl <= "010010011"; --shift right arithmetic
             when "100000" => ctrl <= "010100011"; --add
             when "100010" => ctrl <= "010101011"; --sub
@@ -39,7 +39,7 @@ begin
          when "101011" => ctrl <= "110100100"; --store
          when "000100" => ctrl <= "011101010"; --beq
          when "000010" => ctrl <= "011110000"; --jump
-         when "000001" => ctrl <= "010000000"; --nop
+         when "000001" => ctrl <= "000000000"; --nop
 
          when others => ctrl <= (others => '0');
       end case;

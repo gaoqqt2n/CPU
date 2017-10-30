@@ -31,7 +31,7 @@ architecture  rtl  of  im  is
 
 type mem_array is array (0 to 31) of std_logic_vector(31 downto 0);
 constant mem : mem_array := ( 
-                             M0,  M1,  M2,  M3,  NOP, NOP,  NOP, nop,
+                             nop, nop, M1,  M2,  M3,  nop,  NOP, nop,
                              nop, nop, nop, M4, M5, NOP, NOP, NOP,
                              NOP, NOP, NOP, NOP, NOP, NOP, NOP, NOP,
                              NOP, NOP, NOP, NOP, NOP, NOP, NOP, NOP);
