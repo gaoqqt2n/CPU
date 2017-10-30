@@ -24,6 +24,7 @@ signal adsel_ctrl, hactrl : std_logic_vector(1 downto 0);
 signal extend16 : std_logic_vector(31 downto 0);
 signal extend26  : std_logic_vector(27 downto 0);
 signal inst : std_logic_vector(31 downto 0) ;
+
 begin  
     dut : if_stage port map(clk, rst, adsel_ctrl, hactrl, extend16, extend26, inst) ; 
  

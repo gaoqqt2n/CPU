@@ -19,9 +19,9 @@ architecture  rtl  of  im  is
     constant M1  : std_logic_vector(31 downto 0) := X"8c010001";
     constant M2  : std_logic_vector(31 downto 0) := X"8c020002";
     constant M3  : std_logic_vector(31 downto 0) := X"8c030003";
-    constant M4  : std_logic_vector(31 downto 0) := X"00222020";
-    constant M5  : std_logic_vector(31 downto 0) := X"00412822";
-    constant M6  : std_logic_vector(31 downto 0) := X"08000002";
+    constant M4  : std_logic_vector(31 downto 0) := X"00011040";
+    constant M5  : std_logic_vector(31 downto 0) := X"00038082";
+    constant M6  : std_logic_vector(31 downto 0) := X"0005c103";
     constant M7  : std_logic_vector(31 downto 0) := X"04000000";
     constant M8  : std_logic_vector(31 downto 0) := X"014B5022";
     constant M9  : std_logic_vector(31 downto 0) := X"08000002";
@@ -32,7 +32,7 @@ architecture  rtl  of  im  is
 type mem_array is array (0 to 31) of std_logic_vector(31 downto 0);
 constant mem : mem_array := ( 
                              nop, nop, M1,  M2,  M3,  nop,  NOP, nop,
-                             nop, nop, nop, M4, M5, NOP, NOP, NOP,
+                             nop, nop, nop, M4, M5, M6, NOP, NOP,
                              NOP, NOP, NOP, NOP, NOP, NOP, NOP, NOP,
                              NOP, NOP, NOP, NOP, NOP, NOP, NOP, NOP);
     
