@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-int gyo=1;
+int gyo=0;
 int inst;
 char instchar[32][4];
 
@@ -63,19 +63,19 @@ void Reopcd(char *op){
   	calc(opcd);
   	return ;
   }else if(!strcmp(op,"or")){
-  	opcd=0x00000091;
+  	opcd=0x00000025;
   	calc(opcd);
   	return ;
   }else if(!strcmp(op,"nor")){
-  	opcd=0x00000092;
+  	opcd=0x00000026;
   	calc(opcd);
   	return ;
   }else if(!strcmp(op,"xor")){
-  	opcd=0x00000093;
+  	opcd=0x00000027;
   	calc(opcd);
   	return ;
   }else if(!strcmp(op,"slt")){
-    opcd=0x000000a2;
+    opcd=0x0000002a;
   	calc(opcd);
   	return ;
   }else if(!strcmp(op,"load")){
@@ -87,7 +87,7 @@ void Reopcd(char *op){
   	I(opcd);
   	return ;
   }else if(!strcmp(op,"beq")){
-  	opcd=0x00000000;
+  	opcd=0x10000000;
   	I(opcd);
   	return ;
   }else if(!strcmp(op,"sll")){
@@ -103,7 +103,7 @@ void Reopcd(char *op){
   	shift(opcd);
   	return ;
   }else if(!strcmp(op,"jump")){
-  	opcd=0x02000000;
+  	opcd=0x08000000;
   	J(opcd);
   	return ;
   }else if(!strcmp(op,"nop")){
@@ -119,7 +119,7 @@ void Reopcd(char *op){
 int main(void) {
   char op;
 
-  printf("constant M0 : std_logic_vector(31 downto 0) := x\"04000000\"; --nop\n");  
+  printf("constant nop : std_logic_vector(31 downto 0) := x\"04000000\"; --nop \n");  
   while (scanf("%s ",&op) != EOF) {
   inst = 0x00000000;
    instchar[gyo][0] = op;
