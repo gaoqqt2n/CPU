@@ -25,7 +25,8 @@ architecture rtl of datamem is
             memdata(0) <= x"11111111";
             memdata(1) <= x"22222222";
             memdata(2) <= x"00005555";
-            for i in 3 to 31 loop
+            memdata(3) <= x"88888888";
+            for i in 4 to 31 loop
                 memdata(i) <= (others => '0');
             end loop;
             outdata <= (others => '0');

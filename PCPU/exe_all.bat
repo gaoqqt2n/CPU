@@ -7,3 +7,6 @@ for /f %%a in (module.txt) do (
     ghdl -r --ieee=synopsys -fexplicit %%a_tb --vcd=%%a.vcd
     move /y %%a.vcd vcdfile
 )
+if "%1"=="1" (
+    start gtkwave vcdfile/pcpu.vcd
+)

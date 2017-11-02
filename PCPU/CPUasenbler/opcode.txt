@@ -1,0 +1,15 @@
+load 0 1 1
+load 0 2 2
+load 0 3 3
+store 0 1 4
+nop 
+nop
+nop
+nop
+nop
+load 0 5 4
+beq 1 2 2
+beq 0 0 1
+nop
+jump 2
+load 0 8 3
