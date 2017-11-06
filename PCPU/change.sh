@@ -1,6 +1,8 @@
 #!/bin/bash
 
 
+./assembler/assembler.exe < ./assembler/opcode.txt > ./assembler/opcode.result
+
 im_vhd_path="./im.vhd"
 
 
@@ -14,7 +16,7 @@ under=$((line-$(echo $pos|awk '{print $2}')+1))
 touch tmp.im.vhd
 
 head -n$top $im_vhd_path > tmp.im.vhd
-cat ${1:-/dev/stdin} >> tmp.im.vhd
+cat ./assembler/opcode.result >> tmp.im.vhd
 tail -n$under $im_vhd_path >> tmp.im.vhd
 
 cat < tmp.im.vhd > $im_vhd_path

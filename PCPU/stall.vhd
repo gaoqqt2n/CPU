@@ -112,17 +112,16 @@ architecture rtl of stall is
                     brd := inst(15 downto 11);
                     bopcd := inst(31 downto 26);
                 end if;
-            elsif ((inst(31 downto 26) = "000010") or (inst(31 downto 26) = "000100")) then --jump, beq
-                opcode <= inst(31 downto 26);
-                rs <= inst(25 downto 21);
-                rt <= inst(20 downto 16);
-                rd <= inst(15 downto 11);
-                shamt <= inst(10 downto 6);
-                funct <= inst(5 downto 0);
-                extend16 <= inst(15 downto 0);
-                extend26 <= inst(25 downto 0);
-                ctrltmp := "01";
-                flag := "01";
+            elsif (flag = "10") then
+                opcode <= "000001"; --nop
+                rs <= (others => '0');
+                rt <= (others => '0');
+                rd <= (others => '0');
+                shamt <= (others => '0');
+                funct <= (others => '0');
+                extend16 <= (others => '0');
+                extend26 <= (others => '0');
+                flag := "00";
                 brt := (others => '0');
                 brd := (others => '0');
                 bopcd := "000001";
@@ -136,6 +135,20 @@ architecture rtl of stall is
                 extend16 <= (others => '0');
                 extend26 <= (others => '0');
                 flag := "00";         
+                brt := (others => '0');
+                brd := (others => '0');
+                bopcd := "000001";
+            elsif ((inst(31 downto 26) = "000010") or (inst(31 downto 26) = "000100")) then --jump, beq
+                opcode <= inst(31 downto 26);
+                rs <= inst(25 downto 21);
+                rt <= inst(20 downto 16);
+                rd <= inst(15 downto 11);
+                shamt <= inst(10 downto 6);
+                funct <= inst(5 downto 0);
+                extend16 <= inst(15 downto 0);
+                extend26 <= inst(25 downto 0);
+                ctrltmp := "01";
+                flag := "01";
                 brt := (others => '0');
                 brd := (others => '0');
                 bopcd := "000001";
@@ -208,7 +221,7 @@ architecture rtl of stall is
                 extend16 <= (others => '0');
                 extend26 <= (others => '0');
                 ctrltmp := "00";
-                flag := "00";
+                flag := flag + 1;
                 brt := (others => '0');
                 brd := (others => '0');
                 bopcd := "000001";
