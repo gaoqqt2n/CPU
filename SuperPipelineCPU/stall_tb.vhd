@@ -6,14 +6,11 @@ end stall_tb;
  
 architecture stimulus of stall_tb is 
 component stall  
-port(
-    inst : in std_logic_vector(31 downto 0);
-    hactrl : out std_logic_vector(1 downto 0); --hold address control
-    rs, rt, rd, shamt : out std_logic_vector(4 downto 0);
-    opcode, funct : out std_logic_vector(5 downto 0);
-    extend16 : out std_logic_vector(15 downto 0);
-    extend26 : out std_logic_vector(25 downto 0)
-);
+    port(
+        inst : in std_logic_vector(31 downto 0);
+        hactrl : out std_logic_vector(1 downto 0); --hold address control
+        instout : out std_logic_vector(31 downto 0)
+    );
 end component; 
  
 constant cycle  : time := 200 ns; 
@@ -22,16 +19,13 @@ constant delay  : time := 20 ns;
  
 signal inst : std_logic_vector(31 downto 0);  
 signal hactrl : std_logic_vector(1 downto 0);  
-signal rs, rt, rd, shamt : std_logic_vector(4 downto 0);  
-signal opcode, funct : std_logic_vector(5 downto 0);  
-signal extend16 : std_logic_vector(15 downto 0);  
-signal extend26 : std_logic_vector(25 downto 0); 
+signal instout : std_logic_vector(31 downto 0);
 signal flagout : std_logic_vector(1 downto 0); --test 
 signal brtout, brdout : std_logic_vector(4 downto 0); --test
 signal bopcdout : std_logic_vector(5 downto 0); --test
  
 begin  
-    dut : stall port map(inst, hactrl, rs, rt, rd, shamt, opcode, funct, extend16, extend26); 
+    dut : stall port map(inst, hactrl, instout); 
  
      process begin  
         inst <= "00000000001000100001100000100000"; --

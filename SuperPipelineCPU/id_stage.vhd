@@ -11,7 +11,7 @@ entity  id_stage  is
         clk, rst : in std_logic;
         regwe : in std_logic;
         wad : in std_logic_vector(4 downto 0);
-        inst, wdata : in std_logic_vector(31 downto 0);
+        wdata : in std_logic_vector(31 downto 0);
         hactrl : out std_logic_vector(1 downto 0);
         rtad, rdad, shamt : out std_logic_vector(4 downto 0);
         ctrlout : out std_logic_vector(8 downto 0);
@@ -21,21 +21,6 @@ entity  id_stage  is
 end id_stage;
 
 architecture  rtl  of  id_stage  is
-signal rs_rf, rt_rf, rd_R, stall_shamt : std_logic_vector(4 downto 0);
-signal stall_opcode, stall_funct : std_logic_vector(5 downto 0);
-signal stall_ex16 : std_logic_vector(15 downto 0);
-signal stall_ex26 : std_logic_vector(25 downto 0);
-
-component stall 
-    port(
-        inst : in std_logic_vector(31 downto 0);
-        hactrl : out std_logic_vector(1 downto 0); --hold address control
-        rs, rt, rd, shamt : out std_logic_vector(4 downto 0);
-        opcode, funct : out std_logic_vector(5 downto 0);
-        extend16 : out std_logic_vector(15 downto 0);
-        extend26 : out std_logic_vector(25 downto 0)
-    );
-end component;
 
 component regfile
     port(
@@ -81,13 +66,12 @@ end component;
 
 begin
 
-    M1 : stall port map (inst, hactrl, rs_rf, rt_rf, rd_R, stall_shamt, stall_opcode, stall_funct, stall_ex16, stall_ex26);
-    M2 : regfile port map (clk, rst, regwe, wad, rs_rf, rt_rf, wdata, rs, rt);
-    M3 : register_5 port map (clk, rst, rt_rf, rtad);
-    M4 : register_5 port map (clk, rst, rd_R, rdad);
-    M5 : extend16 port map (clk, rst, stall_ex16, ex16_1, ex16_2);
-    M6 : extend26 port map (clk, rst, stall_ex26, ex26);
-    M7 : register_5 port map (clk, rst, stall_shamt, shamt);
-    M8 : ctrl port map (clk, rst, stall_opcode, stall_funct, ctrlout);
+    M1 : regfile port map (clk, rst, regwe, wad, stallout(25 downto 21), stallout(20 downto 16), wdata, rs, rt);
+    M2 : register_5 port map (clk, rst, stallout(20 downto 16), rtad);
+    M3 : register_5 port map (clk, rst, stallout(15 downto 11), rdad);
+    M4 : extend16 port map (clk, rst, stallout(15 downto 0), ex16_1, ex16_2);
+    M5 : extend26 port map (clk, rst, stallout(25 downto 0), ex26);
+    M6 : register_5 port map (clk, rst, stallout(10 downto 6), shamt);
+    M7 : ctrl port map (clk, rst, stallout(31 downto 26), stallout(5 downto 0), ctrlout);
 
 end;
