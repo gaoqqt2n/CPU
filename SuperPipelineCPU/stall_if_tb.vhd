@@ -1,14 +1,15 @@
 library IEEE; 
 use IEEE.std_logic_1164.all;  
  
-entity stall_tb is  
-end stall_tb;  
+entity stall_if_tb is  
+end stall_if_tb;  
  
-architecture stimulus of stall_tb is 
-component stall  
+architecture stimulus of stall_if_tb is 
+component stall_if  
     port(
         inst : in std_logic_vector(31 downto 0);
         hactrl : out std_logic_vector(1 downto 0); --hold address control
+        pout : out std_logic;
         instout : out std_logic_vector(31 downto 0)
     );
 end component; 
@@ -19,13 +20,14 @@ constant delay  : time := 20 ns;
  
 signal inst : std_logic_vector(31 downto 0);  
 signal hactrl : std_logic_vector(1 downto 0);  
-signal instout : std_logic_vector(31 downto 0);
+signal pout : std_logic;
+signal instout : std_logic_vector(31 downto 0); --test 
 signal flagout : std_logic_vector(1 downto 0); --test 
 signal brtout, brdout : std_logic_vector(4 downto 0); --test
 signal bopcdout : std_logic_vector(5 downto 0); --test
  
 begin  
-    dut : stall port map(inst, hactrl, instout); 
+    dut : stall_if port map(inst, hactrl, pout, instout); 
  
      process begin  
         inst <= "00000000001000100001100000100000"; --
@@ -55,8 +57,8 @@ begin
  
 end stimulus; 
  
-configuration cfg_stall_tb of stall_tb is  
+configuration cfg_stall_if_tb of stall_if_tb is  
     for stimulus  
     end for; 
-end cfg_stall_tb; 
+end cfg_stall_if_tb; 
  

@@ -21,6 +21,7 @@ entity  id_stage  is
 end id_stage;
 
 architecture  rtl  of  id_stage  is
+signal stallout : std_logic_vector(31 downto 0);
 
 component regfile
     port(
