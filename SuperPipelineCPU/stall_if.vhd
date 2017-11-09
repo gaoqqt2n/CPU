@@ -9,8 +9,7 @@ entity stall_if is
     port(
         inst : in std_logic_vector(31 downto 0);
         hactrl : out std_logic_vector(1 downto 0); --hold address control
-        pout : out std_logic;
-        instout : out std_logic_vector(31 downto 0)
+        pout : out std_logic
     );
 end stall_if;
 
@@ -92,7 +91,6 @@ architecture rtl of stall_if is
             flag := "00";
         end case;
         hactrl <= ctrltmp;
-        instout <= inst;
     end process;
     
 end;

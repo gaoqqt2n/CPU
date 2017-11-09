@@ -9,8 +9,7 @@ component stall_if
     port(
         inst : in std_logic_vector(31 downto 0);
         hactrl : out std_logic_vector(1 downto 0); --hold address control
-        pout : out std_logic;
-        instout : out std_logic_vector(31 downto 0)
+        pout : out std_logic
     );
 end component; 
  
@@ -27,7 +26,7 @@ signal brtout, brdout : std_logic_vector(4 downto 0); --test
 signal bopcdout : std_logic_vector(5 downto 0); --test
  
 begin  
-    dut : stall_if port map(inst, hactrl, pout, instout); 
+    dut : stall_if port map(inst, hactrl, pout); 
  
      process begin  
         inst <= "00000000001000100001100000100000"; --

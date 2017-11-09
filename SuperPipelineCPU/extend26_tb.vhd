@@ -9,7 +9,7 @@ component extend26
     port(
         clk, rst: in std_logic;
         in26 : in std_logic_vector(25 downto 0);
-        out32 : out std_logic_vector(27 downto 0)
+        out28 : out std_logic_vector(27 downto 0)
         );
 end component; 
  
@@ -18,10 +18,10 @@ constant delay  : time := 20 ns;
 
 signal clk, rst : std_logic;  
 signal in26 : std_logic_vector(25 downto 0);  
-signal out32 : std_logic_vector(27 downto 0);  
+signal out28 : std_logic_vector(27 downto 0);  
 
 begin  
-    dut : extend26 port map(clk, rst, in26, out32);
+    dut : extend26 port map(clk, rst, in26, out28);
  
     process begin    
  

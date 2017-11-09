@@ -9,7 +9,6 @@ entity stall_out is
     port(
         inst : in std_logic_vector(31 downto 0);
         pin : in std_logic;
-        hactrl : out std_logic_vector(1 downto 0); --hold address control
         instout : out std_logic_vector(31 downto 0)
     );
 end stall_out;
