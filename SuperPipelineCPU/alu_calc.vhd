@@ -5,7 +5,7 @@ use ieee.STD_LOGIC_ARITH.all;
 library ieee;
 use ieee.STD_LOGIC_UNSIGNED.all;
 
-entity alu is
+entity alu_calc is
     port(
         rst: in std_logic;
         aluctrl : in std_logic_vector(3 downto 0);
@@ -13,9 +13,9 @@ entity alu is
         in1, in2 : in std_logic_vector(31 downto 0);
         aluout : out std_logic_vector(31 downto 0)
     );
-end   alu;
+end   alu_calc;
 
-architecture rtl of alu is
+architecture rtl of alu_calc is
 begin
     
     process (rst, aluctrl, shamt, in1, in2) 

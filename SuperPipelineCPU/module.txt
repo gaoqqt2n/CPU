@@ -1,6 +1,7 @@
 adder
 adsel
-alu
+alu_calc
+alu_jump
 ctrl
 datamem
 extend16
@@ -13,11 +14,14 @@ regfile
 register_1
 register_3
 register_5
+register_7
 register_9
+register_28
 register_32
-stall
+stall_if
+stall_out
 if_stage
 id_stage
 ex_stage
 ma_stage
-pcpu
+spcpu

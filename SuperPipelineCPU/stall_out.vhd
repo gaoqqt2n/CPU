@@ -16,14 +16,12 @@ end stall_out;
 architecture rtl of stall_out is
     begin
         
-        process (inst) 
-        begin
-
-        case (pin) is
-            when '0' => instout <= x"04000000";
-            when '1' => instout <= inst;
-            when others => instout <= inst;
-        end case;
-    end process;
+        process (inst, pin) begin
+            case (pin) is
+                when '0' => instout <= x"04000000";
+                when '1' => instout <= inst;
+                when others => instout <= inst;
+            end case;
+        end process;
     
 end;
