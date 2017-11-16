@@ -1,11 +1,11 @@
 library IEEE; 
 use IEEE.std_logic_1164.all;  
  
-entity pcpu_tb is  
-end pcpu_tb;  
+entity spcpu_tb is  
+end spcpu_tb;  
  
-architecture stimulus of pcpu_tb is 
-component pcpu  
+architecture stimulus of spcpu_tb is 
+component spcpu  
     port(
         clk, rst : in std_logic;
         outdata : out std_logic_vector(31 downto 0)
@@ -20,7 +20,7 @@ signal clk, rst : std_logic;
 signal outdata : std_logic_vector(31 downto 0);  
  
 begin  
-    dut : pcpu port map(clk, rst, outdata); 
+    dut : spcpu port map(clk, rst, outdata);
  
     process begin    
  
@@ -32,7 +32,7 @@ begin
         end loop;  
         wait; 
     end process; 
- 
+
      process begin  
         rst <= '0';
         wait for delay; 
@@ -44,8 +44,8 @@ begin
  
 end stimulus; 
  
-configuration cfg_pcpu_tb of pcpu_tb is  
+configuration cfg_spcpu_tb of spcpu_tb is  
     for stimulus  
     end for; 
-end cfg_pcpu_tb; 
+end cfg_spcpu_tb; 
  

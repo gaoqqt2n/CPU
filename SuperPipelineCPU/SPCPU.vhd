@@ -6,14 +6,14 @@ library ieee;
 use ieee.STD_LOGIC_UNSIGNED.all;
 
 
-entity  pcpu  is
+entity  spcpu  is
     port(
         clk, rst : in std_logic;
         outdata : out std_logic_vector(31 downto 0)
         );
-end pcpu;
+end spcpu;
 
-architecture  rtl  of  pcpu  is
+architecture  rtl  of  spcpu  is
 signal regwe, stall_if_R, R_stall_out : std_logic;
 signal adsel_ctrl, hactrl : std_logic_vector(1 downto 0);
 signal exRma_ctrlout : std_logic_vector(2 downto 0);
