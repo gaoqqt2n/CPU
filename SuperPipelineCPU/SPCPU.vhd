@@ -15,7 +15,7 @@ end spcpu;
 
 architecture  rtl  of  spcpu  is
 signal regwe, stall_if_R, R_stall_out : std_logic;
-signal adsel_ctrl, hactrl : std_logic_vector(1 downto 0);
+signal adsel_ctrl, hactrl, stallflag : std_logic_vector(1 downto 0);
 signal exRma_ctrlout : std_logic_vector(2 downto 0);
 signal regwad, rtad_R, R_rtad, rdad_R, R_rdad, shamt_R, R_shamt, wad_R, R_wad, ex1_shamt_R, R_ex2_shamt : std_logic_vector(4 downto 0);
 signal R_alu_calc_shamt, R_alu_calc_wad, exRma_wad : std_logic_vector(4 downto 0);
@@ -39,9 +39,12 @@ end component;
 component stall_if
     port(
         inst : in std_logic_vector(31 downto 0);
-        hactrl : out std_logic_vector(1 downto 0); --hold address control
+        inhactrl : in std_logic_vector(1 downto 0); --hold address control
+        inflag : in std_logic_vector(1 downto 0);
+        outflag : out std_logic_vector(1 downto 0);
+        outhactrl : out std_logic_vector(1 downto 0); --hold address control
         pout : out std_logic
-        );
+    );
 end component;
 
 component stall_out
@@ -167,7 +170,7 @@ begin
 
     M1 : if_stage port map (clk, rst, adsel_ctrl, hactrl, ex16_1, R_ex26, inst_R);
     M2 : register_32 port map (clk, rst, inst_R, R_inst);
-    M3 : stall_if port map (R_inst, hactrl, stall_if_R);
+    M3 : stall_if port map (R_inst, hactrl, stallflag, stallflag, hactrl, stall_if_R);
     M4 : register_32 port map (clk, rst, R_inst, R2_inst);
     M5 : register_1 port map (clk, rst, stall_if_R, R_stall_out);
     M6 : stall_out port map (R2_inst, R_stall_out, instout);
