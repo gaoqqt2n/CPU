@@ -16,17 +16,27 @@ entity  id_stage  is
         rtad, rdad, shamt : out std_logic_vector(4 downto 0);
         ctrlout : out std_logic_vector(8 downto 0);
         ex26 : out std_logic_vector(27 downto 0);
-        rs, rt, ex16_1, ex16_2 : out std_logic_vector(31 downto 0)
+        rs, rt, ex16_1, ex16_2 : out std_logic_vector(31 downto 0);
+        stout : out std_logic_vector(31 downto 0) --debug
         );
 end id_stage;
 
 architecture  rtl  of  id_stage  is
+-- signal rs_rf, rt_rf, rd_R, stall_shamt : std_logic_vector(4 downto 0);
+-- signal stall_opcode, stall_funct : std_logic_vector(5 downto 0);
+-- signal stall_ex16 : std_logic_vector(15 downto 0);
+-- signal stall_ex26 : std_logic_vector(25 downto 0);
+signal hazard : std_logic_vector(1 downto 0);
+signal stallflag : std_logic_vector(1 downto 0);
 signal stallout : std_logic_vector(31 downto 0);
 
 component stall 
     port(
         inst : in std_logic_vector(31 downto 0);
-        hactrl : out std_logic_vector(1 downto 0); --hold address control
+        inhactrl : in std_logic_vector(1 downto 0); --hold address control
+        inflag : in std_logic_vector(1 downto 0); --
+        outflag : out std_logic_vector(1 downto 0); --
+        outhactrl : out std_logic_vector(1 downto 0); --hold address control
         instout : out std_logic_vector(31 downto 0)
     );
 end component;
@@ -75,7 +85,7 @@ end component;
 
 begin
 
-    M1 : stall port map (inst, hactrl, stallout);
+    M1 : stall port map (inst, hazard, stallflag, stallflag, hazard, stallout);
     M2 : regfile port map (clk, rst, regwe, wad, stallout(25 downto 21), stallout(20 downto 16), wdata, rs, rt);
     M3 : register_5 port map (clk, rst, stallout(20 downto 16), rtad);
     M4 : register_5 port map (clk, rst, stallout(15 downto 11), rdad);
@@ -83,5 +93,9 @@ begin
     M6 : extend26 port map (clk, rst, stallout(25 downto 0), ex26);
     M7 : register_5 port map (clk, rst, stallout(10 downto 6), shamt);
     M8 : ctrl port map (clk, rst, stallout(31 downto 26), stallout(5 downto 0), ctrlout);
+
+    -- stout <= stall_opcode & rs_rf & rt_rf & rd_R & stall_shamt & stall_funct;
+    stout <= stallout;
+    hactrl <= hazard;
 
 end;

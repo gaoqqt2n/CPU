@@ -28,7 +28,7 @@ architecture  rtl  of  adsel  is
         bpc := pc4 - 4;
         flag := "01";
       elsif (hactrl = "10") then
-        bbpc := pc4 - 8;
+        bbpc := pc4 - 12;
         flag := "10";
       end if;
 
