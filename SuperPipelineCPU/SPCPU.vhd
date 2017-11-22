@@ -15,14 +15,14 @@ end spcpu;
 
 architecture  rtl  of  spcpu  is
 signal regwe, stall_if_R, R_stall_out : std_logic;
-signal adsel_ctrl, hactrl, stallflag : std_logic_vector(1 downto 0);
-signal exRma_ctrlout : std_logic_vector(2 downto 0);
+signal adsel_ctrl, hactrl : std_logic_vector(1 downto 0);
+signal exRma_ctrlout, stallflag : std_logic_vector(2 downto 0);
 signal regwad, rtad_R, R_rtad, rdad_R, R_rdad, shamt_R, R_shamt, wad_R, R_wad, ex1_shamt_R, R_ex2_shamt : std_logic_vector(4 downto 0);
 signal R_alu_calc_shamt, R_alu_calc_wad, exRma_wad : std_logic_vector(4 downto 0);
 signal ctrlout_7_R, R_ctrlout_7, R_alu_calc_ctrlout : std_logic_vector(6 downto 0);
 signal ctrl_R, R_ctrl : std_logic_vector(8 downto 0);
 signal ex26_R, R_ex26 : std_logic_vector(27 downto 0);
-signal instout, inst_R2, R2_inst : std_logic_vector(31 downto 0);
+signal instout, R2_inst : std_logic_vector(31 downto 0);
 signal ex16_1, inst_R, R_inst, rs_R, R_rs, rt_R, R_rt, ex16_2_R, R_ex16_2, aluout_R, R_aluout, rsdata_R, R_rsdata, rtdata_R, R_rtdata, regwdata : std_logic_vector(31 downto 0);
 signal R_rtdata_R,  mux32out_R, R_mux32out, R_alu_calc_mux32, R_alu_calc_rsdata, exRma_rtdata : std_logic_vector(31 downto 0);
 
@@ -38,10 +38,11 @@ end component;
 
 component stall_if
     port(
+        clk, rst : in std_logic;
         inst : in std_logic_vector(31 downto 0);
-        inhactrl : in std_logic_vector(1 downto 0); --hold address control
-        inflag : in std_logic_vector(1 downto 0);
-        outflag : out std_logic_vector(1 downto 0);
+        inhactrl : in std_logic_vector(1 downto 0) := "00"; --hold address control
+        inflag : in std_logic_vector(2 downto 0) := "000"; 
+        outflag : out std_logic_vector(2 downto 0); 
         outhactrl : out std_logic_vector(1 downto 0); --hold address control
         pout : out std_logic
     );
@@ -170,7 +171,7 @@ begin
 
     M1 : if_stage port map (clk, rst, adsel_ctrl, hactrl, ex16_1, R_ex26, inst_R);
     M2 : register_32 port map (clk, rst, inst_R, R_inst);
-    M3 : stall_if port map (R_inst, hactrl, stallflag, stallflag, hactrl, stall_if_R);
+    M3 : stall_if port map (clk, rst, inst_R, hactrl, stallflag, stallflag, hactrl, stall_if_R);
     M4 : register_32 port map (clk, rst, R_inst, R2_inst);
     M5 : register_1 port map (clk, rst, stall_if_R, R_stall_out);
     M6 : stall_out port map (R2_inst, R_stall_out, instout);

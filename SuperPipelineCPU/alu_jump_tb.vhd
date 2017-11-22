@@ -24,43 +24,47 @@ signal aluctrl : std_logic_vector(3 downto 0);
 signal in1, in2 : std_logic_vector(31 downto 0);
  
 begin  
-    dut : alu port map(rst, aluctrl, in1, in2, adsel_ctrl); 
+    dut : alu_jump port map(rst, aluctrl, in1, in2, adsel_ctrl); 
  
     process begin  
-        rst <= '0'; aluctrl <= "0000"; shamt <= "00010"; in1 <= x"00000004"; in2 <= x"00000006";
+        rst <= '0'; aluctrl <= "0000"; in1 <= x"00000004"; in2 <= x"00000006";
         wait for delay; 
         wait for cycle; 
         rst <= '1';
         wait for cycle; 
-        aluctrl <= "0000"; shamt <= "00010"; in1 <= x"00000008"; in2 <= x"00000006"; --add
+        aluctrl <= "0000"; in1 <= x"00000008"; in2 <= x"00000006"; --add
         wait for cycle; 
-        aluctrl <= "0001"; shamt <= "00010"; in1 <= x"00000008"; in2 <= x"00000006"; --sub
+        aluctrl <= "0001"; in1 <= x"00000008"; in2 <= x"00000006"; --sub
         wait for cycle; 
-        aluctrl <= "0010"; shamt <= "00010"; in1 <= x"0000000c"; in2 <= x"0000000a"; --and
+        aluctrl <= "0010"; in1 <= x"0000000c"; in2 <= x"0000000a"; --and
         wait for cycle; 
-        aluctrl <= "0011"; shamt <= "00010"; in1 <= x"0000000c"; in2 <= x"0000000a"; --or
+        aluctrl <= "0011"; in1 <= x"0000000c"; in2 <= x"0000000a"; --or
         wait for cycle; 
-        aluctrl <= "0100"; shamt <= "00010"; in1 <= x"0000000c"; in2 <= x"0000000a"; --nor
+        aluctrl <= "0100"; in1 <= x"0000000c"; in2 <= x"0000000a"; --nor
         wait for cycle; 
-        aluctrl <= "0101"; shamt <= "00010"; in1 <= x"0000000c"; in2 <= x"0000000a"; --xor
+        aluctrl <= "0101"; in1 <= x"0000000c"; in2 <= x"0000000a"; --xor
         wait for cycle; 
-        aluctrl <= "1000"; shamt <= "00010"; in1 <= x"c000000d"; in2 <= x"00000006"; --sll
+        aluctrl <= "1000"; in1 <= x"c000000d"; in2 <= x"00000006"; --sll
         wait for cycle; 
-        aluctrl <= "1001"; shamt <= "00010"; in1 <= x"c000000d"; in2 <= x"00000006"; --srl
+        aluctrl <= "1001"; in1 <= x"c000000d"; in2 <= x"00000006"; --srl
         wait for cycle; 
-        aluctrl <= "1010"; shamt <= "00010"; in1 <= x"c000000d"; in2 <= x"0000000c"; --sra
+        aluctrl <= "1010"; in1 <= x"c000000d"; in2 <= x"0000000c"; --sra
         wait for cycle;
-        aluctrl <= "1100"; shamt <= "00010"; in1 <= x"00000005"; in2 <= x"00000002"; --set on less than
+        aluctrl <= "1100"; in1 <= x"00000005"; in2 <= x"00000002"; --set on less than
         wait for cycle;
-        aluctrl <= "1100"; shamt <= "00010"; in1 <= x"00000005"; in2 <= x"00000005"; --set on less than
+        aluctrl <= "1100"; in1 <= x"00000005"; in2 <= x"00000005"; --set on less than
         wait for cycle;
-        aluctrl <= "1100"; shamt <= "00010"; in1 <= x"00000005"; in2 <= x"0000000a"; --set on less than
+        aluctrl <= "1100"; in1 <= x"00000005"; in2 <= x"0000000a"; --set on less than
         wait for cycle;
-        aluctrl <= "1101"; shamt <= "00010"; in1 <= x"00000005"; in2 <= x"00000005"; --beq
+        aluctrl <= "1101"; in1 <= x"00000005"; in2 <= x"00000005"; --beq
         wait for cycle;
-        aluctrl <= "1101"; shamt <= "00010"; in1 <= x"00000005"; in2 <= x"0000000a"; --beq
+        aluctrl <= "1101"; in1 <= x"00000005"; in2 <= x"0000000a"; --beq
         wait for cycle;
-        aluctrl <= "0011"; shamt <= "00010"; in1 <= x"00000008"; in2 <= x"00000004"; --ld, st
+        aluctrl <= "0011"; in1 <= x"00000008"; in2 <= x"00000004"; --ld, st
+        wait for cycle;
+        aluctrl <= "1110"; in1 <= x"00000008"; in2 <= x"00000004"; --jump
+        wait for cycle;
+        aluctrl <= "0000"; in1 <= x"00000008"; in2 <= x"00000004"; --nop
         wait for cycle;
         wait; 
     end process;
