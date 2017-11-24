@@ -20,7 +20,7 @@ architecture  rtl  of  adsel  is
 
    begin
 
-   process (adsel_ctrl, hactrl, pc4, extend16, extend26)
+   process (pc4)
       variable pc, bpc, bbpc : std_logic_vector(31 downto 0) := x"00000000";
       variable flag : std_logic_vector(1 downto 0) := "00";
       begin

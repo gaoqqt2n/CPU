@@ -1,5 +1,9 @@
 library IEEE; 
 use IEEE.std_logic_1164.all;  
+
+use IEEE.std_logic_textio.all;
+library STD;
+use STD.textio.all;
  
 entity spcpu_tb is  
 end spcpu_tb;  
