@@ -16,8 +16,8 @@ entity  id_stage  is
         rtad, rdad, shamt : out std_logic_vector(4 downto 0);
         ctrlout : out std_logic_vector(8 downto 0);
         ex26 : out std_logic_vector(27 downto 0);
-        rs, rt, ex16_1, ex16_2 : out std_logic_vector(31 downto 0);
-        stout : out std_logic_vector(31 downto 0) --debug
+        rs, rt, ex16_1, ex16_2 : out std_logic_vector(31 downto 0)
+        -- stout : out std_logic_vector(31 downto 0) --debug
         );
 end id_stage;
 
@@ -95,7 +95,7 @@ begin
     M8 : ctrl port map (clk, rst, stallout(31 downto 26), stallout(5 downto 0), ctrlout);
 
     -- stout <= stall_opcode & rs_rf & rt_rf & rd_R & stall_shamt & stall_funct;
-    stout <= stallout;
+    -- stout <= stallout;
     hactrl <= hazard;
 
 end;
