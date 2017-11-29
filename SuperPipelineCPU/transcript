@@ -1,5 +1,5 @@
 # vsim spcpu_tb -do "add wave spcpu_tb/dut/* ; add wave spcpu_tb/dut/m1/* ; add wave spcpu_tb/dut/m3/* ; add wave spcpu_tb/dut/m6/* ; run -all" 
-# Start time: 13:37:38 on Nov 27,2017
+# Start time: 14:34:50 on Nov 28,2017
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
@@ -34,13 +34,12 @@
 # Loading work.register_3(rtl)
 # Loading work.ma_stage(rtl)
 # Loading work.datamem(rtl)
-# WARNING: No extended dataflow license exists
 # add wave spcpu_tb/dut/* 
 # ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
 #           File in use by: sldl77  Hostname: SLDL77-PC  ProcessID: 3204
-#           Attempting to use alternate WLF file "./wlfth7e8e1".
+#           Attempting to use alternate WLF file "./wlftszkbim".
 # ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlfth7e8e1
+#           Using alternate file: ./wlftszkbim
 #  add wave spcpu_tb/dut/m1/* 
 #  add wave spcpu_tb/dut/m3/* 
 #  add wave spcpu_tb/dut/m6/* 
@@ -65,5 +64,7 @@
 #    Time: 0 ps  Iteration: 1  Instance: /spcpu_tb/dut/M1/M4
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 #    Time: 0 ps  Iteration: 1  Instance: /spcpu_tb/dut/M1/M4
-# End time: 13:38:13 on Nov 27,2017, Elapsed time: 0:00:35
-# Errors: 0, Warnings: 13
+# WARNING: No extended dataflow license exists
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# End time: 14:36:34 on Nov 28,2017, Elapsed time: 0:01:44
+# Errors: 1, Warnings: 13

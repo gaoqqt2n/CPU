@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-./assembler/assembler.exe < ./assembler/datahazard.txt > ./assembler/opcode.result
+./assembler/assembler.exe < ./assembler/jump.txt > ./assembler/opcode.result
 
 im_vhd_path="./im.vhd"
 

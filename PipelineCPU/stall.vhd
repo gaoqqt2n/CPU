@@ -28,7 +28,7 @@ architecture rtl of stall is
 
         if (inhactrl = "00") then
             
-            if ((bopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "100011") or (inst(31 downto 26) = "101011"))) then --R
+            if ((bopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "100011") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100"))) then --R
                 if ((brd /= "00000") and ((brd = inst(25 downto 21)) or (brd = inst(20 downto 16)))) then --happned datahazard
                     instout <= x"04000000"; --nop
                     outhactrl <= "10";
@@ -42,7 +42,7 @@ architecture rtl of stall is
                     brd <= inst(15 downto 11);
                     bopcd <= inst(31 downto 26);
                 end if;
-            elsif ((bopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "100011") or (inst(31 downto 26) = "101011"))) then --lw
+            elsif ((bopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "100011") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100"))) then --lw
                 if ((brt /= "00000") and ((brt = inst(25 downto 21)) or (brt = inst(20 downto 16)))) then 
                     instout <= x"04000000"; --nop
                     outhactrl <= "10";

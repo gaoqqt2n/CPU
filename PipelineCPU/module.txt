@@ -14,6 +14,7 @@ register_1
 register_3
 register_5
 register_9
+register_28
 register_32
 stall
 if_stage

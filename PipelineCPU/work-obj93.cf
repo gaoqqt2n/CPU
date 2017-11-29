@@ -1,200 +1,200 @@
 v 3
-file . "datamem_tb.vhd" "20171027053744.000" "20171127185543.951":
-  entity datamem_tb at 1( 0) + 0 on 15354;
-  architecture stimulus of datamem_tb at 7( 97) + 0 on 15355;
-  configuration cfg_datamem_tb at 64( 2017) + 0 on 15356;
-file . "ma_stage_tb.vhd" "20171030085454.000" "20171127185545.826":
-  entity ma_stage_tb at 1( 0) + 0 on 15428;
-  architecture stimulus of ma_stage_tb at 7( 99) + 0 on 15429;
-  configuration cfg_ma_stage_tb at 67( 2397) + 0 on 15430;
-file . "ex_stage_tb.vhd" "20171030085406.000" "20171127185545.660":
-  entity ex_stage_tb at 1( 0) + 0 on 15423;
-  architecture stimulus of ex_stage_tb at 7( 99) + 0 on 15424;
-  configuration cfg_ex_stage_tb at 54( 2362) + 0 on 15425;
-file . "register_3.vhd" "20171027025502.000" "20171127185544.951":
-  entity register_3 at 1( 0) + 0 on 15395;
-  architecture rtl of register_3 at 16( 333) + 0 on 15396;
-file . "pcpu.vhd" "20171106072934.000" "20171127185545.929":
-  entity pcpu at 1( 0) + 0 on 15431;
-  architecture rtl of pcpu at 16( 285) + 0 on 15432;
-file . "mux2_32_tb.vhd" "20171027095412.000" "20171127185544.519":
-  entity mux2_32_tb at 1( 0) + 0 on 15378;
-  architecture stimulus of mux2_32_tb at 7( 89) + 0 on 15379;
-file . "mux2_32.vhd" "20171018060210.000" "20171127185544.478":
-  entity mux2_32 at 13( 280) + 0 on 15376;
-  architecture rtl of mux2_32 at 28( 600) + 0 on 15377;
-file . "if_stage_tb.vhd" "20171030085430.000" "20171127185545.394":
-  entity if_stage_tb at 1( 0) + 0 on 15413;
-  architecture stimulus of if_stage_tb at 7( 99) + 0 on 15414;
-  configuration cfg_if_stage_tb at 71( 2742) + 0 on 15415;
-file . "register_5_tb.vhd" "20171020074952.000" "20171127185545.063":
-  entity register_5_tb at 1( 0) + 0 on 15399;
-  architecture stimulus of register_5_tb at 7( 103) + 0 on 15400;
-  configuration cfg_register_5_tb at 52( 1194) + 0 on 15401;
-file . "register_5.vhd" "20171027025404.000" "20171127185545.030":
-  entity register_5 at 1( 0) + 0 on 15397;
-  architecture rtl of register_5 at 16( 333) + 0 on 15398;
-file . "id_stage.vhd" "20171127065622.000" "20171127185545.482":
-  entity id_stage at 1( 0) + 0 on 15416;
-  architecture rtl of id_stage at 24( 725) + 0 on 15417;
-file . "ex_stage.vhd" "20171030085240.000" "20171127185545.633":
-  entity ex_stage at 1( 0) + 0 on 15421;
-  architecture rtl of ex_stage at 22( 641) + 0 on 15422;
-file . "mux2_5.vhd" "20171018060404.000" "20171127185544.369":
-  entity mux2_5 at 1( 0) + 0 on 15372;
-  architecture rtl of mux2_5 at 16( 331) + 0 on 15373;
-file . "stall_tb.vhd" "20171117023300.000" "20171127185545.305":
-  entity stall_tb at 1( 0) + 0 on 15408;
-  architecture stimulus of stall_tb at 7( 93) + 0 on 15409;
-  configuration cfg_stall_tb at 66( 2423) + 0 on 15410;
-file . "stall.vhd" "20171117062524.000" "20171127185545.287":
-  entity stall at 1( 0) + 0 on 15406;
-  architecture rtl of stall at 19( 559) + 0 on 15407;
-file . "adsel_tb.vhd" "20171011030626.000" "20171127185543.590":
-  entity adsel_tb at 1( 0) + 0 on 15339;
-  architecture stimulus of adsel_tb at 7( 92) + 0 on 15340;
-  configuration cfg_adsel_tb at 74( 3501) + 0 on 15341;
-file . "aaa_tb.vhd" "20170914084018.000" "20170915111623.802":
-  entity aaa_tb at 1( 0) + 0 on 1626;
-  architecture stimulus of aaa_tb at 7( 89) + 0 on 1627;
-  configuration cfg_aaa_tb at 48( 1495) + 0 on 1628;
-file . "aaa.vhd" "20170914081550.000" "20170914174025.691":
-  entity aaa at 1( 0) + 0 on 1608;
-  architecture rtl of aaa at 19( 421) + 0 on 1609;
-file . "ctrl_tb.vhd" "20171018045008.000" "20171127185543.843":
-  entity ctrl_tb at 1( 0) + 0 on 15349;
-  architecture stimulus of ctrl_tb at 7( 91) + 0 on 15350;
-  configuration cfg_ctrl_tb at 84( 2589) + 0 on 15351;
-file . "ctrl.vhd" "20171031042616.000" "20171127185543.825":
-  entity ctrl at 1( 0) + 0 on 15347;
-  architecture rtl of ctrl at 16( 372) + 0 on 15348;
-file . "regfile.vhd" "20171024090248.000" "20171127185544.738":
-  entity regfile at 1( 0) + 0 on 15385;
-  architecture rtl of regfile at 17( 402) + 0 on 15386;
-file . "alu.vhd" "20171106081434.000" "20171127185543.705":
-  entity alu at 1( 0) + 0 on 15342;
-  architecture rtl of alu at 19( 482) + 0 on 15343;
-file . "shifter_tb.vhd" "20170907080502.000" "20170907170509.761":
-  entity shifter_tb at 1( 0) + 0 on 1179;
-  architecture stimulus of shifter_tb at 7( 97) + 0 on 1180;
-  configuration cfg_shifter_tb at 41( 1083) + 0 on 1181;
-file . "shifter.vhd" "20170907080414.000" "20170907170509.615":
-  entity shifter at 1( 0) + 0 on 1177;
-  architecture rtl of shifter at 17( 381) + 0 on 1178;
-file . "im_tb.vhd" "20170904060016.000" "20171127185544.282":
-  entity im_tb at 1( 0) + 0 on 15369;
-  architecture stimulus of im_tb at 7( 87) + 0 on 15370;
-  configuration cfg_im_tb at 63( 1481) + 0 on 15371;
-file . "im.vhd" "20171127095524.000" "20171127185544.254":
-  entity im at 1( 0) + 0 on 15367;
-  architecture rtl of im at 16( 279) + 0 on 15368;
-file . "extend26.vhd" "20170914054836.000" "20171127185544.151":
-  entity extend26 at 1( 0) + 0 on 15362;
-  architecture rtl of extend26 at 17( 336) + 0 on 15363;
-file . "mux3_tb.vhd" "20170831052656.000" "20170831142659.808":
-  entity mux3_tb at 1( 0) + 0 on 444;
-  architecture stimulus of mux3_tb at 7( 83) + 0 on 445;
-file . "mux2_tb.vhd" "20170831050440.000" "20170831140450.703":
-  entity mux2_tb at 1( 0) + 0 on 420;
-  architecture stimulus of mux2_tb at 7( 83) + 0 on 421;
-file . "mux2.vhd" "20170830084956.000" "20170831140450.595":
-  entity mux2 at 13( 280) + 0 on 418;
-  architecture rtl of mux2 at 28( 594) + 0 on 419;
-file . "counter_tb.vhd" "20170830050716.000" "20170830142156.139":
-  entity counter_tb at 1( 0) + 0 on 399;
-  architecture sim of counter_tb at 8( 119) + 0 on 400;
-  configuration counter_test at 45( 940) + 0 on 401;
-file . "pc_tb.vhd" "20171011025744.000" "20171127185544.652":
-  entity pc_tb at 1( 0) + 0 on 15382;
-  architecture stimulus of pc_tb at 7( 79) + 0 on 15383;
-  configuration cfg_pc_tb at 58( 1544) + 0 on 15384;
-file . "pc.vhd" "20171011025314.000" "20171127185544.631":
-  entity pc at 13( 280) + 0 on 15380;
-  architecture rtl of pc at 28( 596) + 0 on 15381;
-file . "adder.vhd" "20171010093252.000" "20171127185543.449":
-  entity adder at 2( 1) + 0 on 15333;
-  architecture rtl of adder at 13( 260) + 0 on 15334;
-file . "adder_tb.vhd" "20171010093338.000" "20171127185543.476":
-  entity adder_tb at 1( 0) + 0 on 15335;
-  architecture stimulus of adder_tb at 7( 85) + 0 on 15336;
-file . "counter.vhd" "20170830050220.000" "20170830142156.013":
-  entity counter at 1( 0) + 0 on 397;
-  architecture rtl of counter at 14( 256) + 0 on 398;
-file . "mux3.vhd" "20170831051800.000" "20170831142659.704":
-  entity mux3 at 13( 280) + 0 on 442;
-  architecture rtl of mux3 at 28( 618) + 0 on 443;
-file . "extend16.vhd" "20171010050718.000" "20171127185544.047":
-  entity extend16 at 1( 0) + 0 on 15357;
-  architecture rtl of extend16 at 18( 400) + 0 on 15358;
-file . "extend16_tb.vhd" "20170915095220.000" "20171127185544.064":
-  entity extend16_tb at 1( 0) + 0 on 15359;
-  architecture stimulus of extend16_tb at 7( 99) + 0 on 15360;
-  configuration cfg_extend16_tb at 52( 1372) + 0 on 15361;
-file . "extend26_tb.vhd" "20170914054914.000" "20171127185544.173":
-  entity extend26_tb at 1( 0) + 0 on 15364;
-  architecture stimulus of extend26_tb at 7( 99) + 0 on 15365;
-  configuration cfg_extend26_tb at 49( 1254) + 0 on 15366;
-file . "register_1_tb.vhd" "20170904074304.000" "20171127185544.868":
-  entity register_1_tb at 1( 0) + 0 on 15392;
-  architecture stimulus of register_1_tb at 7( 103) + 0 on 15393;
-  configuration cfg_register_1_tb at 50( 1058) + 0 on 15394;
-file . "alu_tb.vhd" "20171010050106.000" "20171127185543.723":
-  entity alu_tb at 1( 0) + 0 on 15344;
-  architecture stimulus of alu_tb at 7( 89) + 0 on 15345;
-  configuration cfg_alu_tb at 73( 2960) + 0 on 15346;
-file . "regfile_tb.vhd" "20171024090300.000" "20171127185544.757":
-  entity regfile_tb at 1( 0) + 0 on 15387;
-  architecture stimulus of regfile_tb at 7( 97) + 0 on 15388;
-  configuration cfg_regfile_tb at 64( 2244) + 0 on 15389;
-file . "instconv.vhd" "20170913061624.000" "20170913151759.623":
-  entity instconv at 1( 0) + 0 on 1291;
-  architecture rtl of instconv at 19( 547) + 0 on 1292;
-file . "adsel.vhd" "20171117062856.000" "20171127185543.572":
-  entity adsel at 1( 0) + 0 on 15337;
-  architecture rtl of adsel at 19( 441) + 0 on 15338;
-file . "datamem.vhd" "20171106114504.000" "20171127185543.920":
-  entity datamem at 1( 0) + 0 on 15352;
-  architecture rtl of datamem at 17( 391) + 0 on 15353;
-file . "register_9.vhd" "20171018075822.000" "20171127185545.155":
-  entity register_9 at 1( 0) + 0 on 15402;
-  architecture rtl of register_9 at 16( 333) + 0 on 15403;
-file . "id_stage_tb.vhd" "20171025053414.000" "20171127185545.518":
-  entity id_stage_tb at 1( 0) + 0 on 15418;
-  architecture stimulus of id_stage_tb at 7( 99) + 0 on 15419;
-  configuration cfg_id_stage_tb at 81( 3252) + 0 on 15420;
-file . "if_stage.vhd" "20171030085306.000" "20171127185545.376":
-  entity if_stage at 1( 0) + 0 on 15411;
-  architecture rtl of if_stage at 19( 462) + 0 on 15412;
-file . "ma_stage.vhd" "20171102023110.000" "20171127185545.806":
-  entity ma_stage at 1( 0) + 0 on 15426;
-  architecture rtl of ma_stage at 21( 582) + 0 on 15427;
-file . "register_1.vhd" "20170904073004.000" "20171127185544.850":
-  entity register_1 at 1( 0) + 0 on 15390;
-  architecture rtl of register_1 at 15( 271) + 0 on 15391;
-file . "register_32.vhd" "20171018025656.000" "20171127185545.222":
-  entity register_32 at 1( 0) + 0 on 15404;
-  architecture rtl of register_32 at 16( 339) + 0 on 15405;
+file . "register_28_tb.vhd" "20171127091334.000" "20171129174333.434":
+  entity register_28_tb at 1( 0) + 0 on 16641;
+  architecture stimulus of register_28_tb at 7( 105) + 0 on 16642;
+  configuration cfg_register_28_tb at 52( 1225) + 0 on 16643;
+file . "register_28.vhd" "20171127070326.000" "20171129174333.415":
+  entity register_28 at 1( 0) + 0 on 16639;
+  architecture rtl of register_28 at 16( 339) + 0 on 16640;
+file . "mux2_5_tb.vhd" "20171027095934.000" "20171129174332.464":
+  entity mux2_5_tb at 1( 0) + 0 on 16609;
+  architecture stimulus of mux2_5_tb at 7( 87) + 0 on 16610;
+file . "pcpu_tb.vhd" "20171106114406.000" "20171129174334.404":
+  entity pcpu_tb at 1( 0) + 0 on 16673;
+  architecture stimulus of pcpu_tb at 7( 91) + 0 on 16674;
+  configuration cfg_pcpu_tb at 47( 1003) + 0 on 16675;
+file . "mux_3_tb.vhd" "20171020151332.000" "20171025195419.227":
+  entity mux3_32_tb at 1( 0) + 0 on 4030;
+  architecture stimulus of mux3_32_tb at 7( 89) + 0 on 4031;
+file . "mux_3.vhd" "20171020151332.000" "20171025195419.227":
+  entity mux3_32 at 13( 292) + 0 on 4028;
+  architecture rtl of mux3_32 at 28( 651) + 0 on 4029;
 file . "memo_tb.vhd" "20171011063208.000" "20171025195419.225":
   entity memo_tb at 1( 0) + 0 on 4019;
   architecture stimulus of memo_tb at 7( 91) + 0 on 4020;
   configuration cfg_memo_tb at 46( 1095) + 0 on 4021;
-file . "mux_3.vhd" "20171020151332.000" "20171025195419.227":
-  entity mux3_32 at 13( 292) + 0 on 4028;
-  architecture rtl of mux3_32 at 28( 651) + 0 on 4029;
-file . "mux_3_tb.vhd" "20171020151332.000" "20171025195419.227":
-  entity mux3_32_tb at 1( 0) + 0 on 4030;
-  architecture stimulus of mux3_32_tb at 7( 89) + 0 on 4031;
-file . "pcpu_tb.vhd" "20171106114406.000" "20171127185545.947":
-  entity pcpu_tb at 1( 0) + 0 on 15433;
-  architecture stimulus of pcpu_tb at 7( 91) + 0 on 15434;
-  configuration cfg_pcpu_tb at 47( 1003) + 0 on 15435;
-file . "mux2_5_tb.vhd" "20171027095934.000" "20171127185544.389":
-  entity mux2_5_tb at 1( 0) + 0 on 15374;
-  architecture stimulus of mux2_5_tb at 7( 87) + 0 on 15375;
-file . "register_28.vhd" "20171127070326.000" "20171127181355.066":
-  entity register_28 at 1( 0) + 0 on 15122;
-  architecture rtl of register_28 at 16( 339) + 0 on 15123;
-file . "register_28_tb.vhd" "20171127091334.000" "20171127181355.088":
-  entity register_28_tb at 1( 0) + 0 on 15124;
-  architecture stimulus of register_28_tb at 7( 105) + 0 on 15125;
-  configuration cfg_register_28_tb at 52( 1225) + 0 on 15126;
+file . "register_32.vhd" "20171018025656.000" "20171129174333.546":
+  entity register_32 at 1( 0) + 0 on 16644;
+  architecture rtl of register_32 at 16( 339) + 0 on 16645;
+file . "register_1.vhd" "20170904073004.000" "20171129174332.973":
+  entity register_1 at 1( 0) + 0 on 16625;
+  architecture rtl of register_1 at 15( 271) + 0 on 16626;
+file . "ma_stage.vhd" "20171102023110.000" "20171129174334.251":
+  entity ma_stage at 1( 0) + 0 on 16666;
+  architecture rtl of ma_stage at 21( 582) + 0 on 16667;
+file . "if_stage.vhd" "20171030085306.000" "20171129174333.767":
+  entity if_stage at 1( 0) + 0 on 16651;
+  architecture rtl of if_stage at 19( 462) + 0 on 16652;
+file . "id_stage_tb.vhd" "20171025053414.000" "20171129174333.948":
+  entity id_stage_tb at 1( 0) + 0 on 16658;
+  architecture stimulus of id_stage_tb at 7( 99) + 0 on 16659;
+  configuration cfg_id_stage_tb at 81( 3252) + 0 on 16660;
+file . "register_9.vhd" "20171018075822.000" "20171129174333.346":
+  entity register_9 at 1( 0) + 0 on 16637;
+  architecture rtl of register_9 at 16( 333) + 0 on 16638;
+file . "datamem.vhd" "20171106114504.000" "20171129174331.979":
+  entity datamem at 1( 0) + 0 on 16587;
+  architecture rtl of datamem at 17( 391) + 0 on 16588;
+file . "adsel.vhd" "20171129082136.000" "20171129174331.630":
+  entity adsel at 1( 0) + 0 on 16572;
+  architecture rtl of adsel at 19( 441) + 0 on 16573;
+file . "instconv.vhd" "20170913061624.000" "20170913151759.623":
+  entity instconv at 1( 0) + 0 on 1291;
+  architecture rtl of instconv at 19( 547) + 0 on 1292;
+file . "regfile_tb.vhd" "20171024090300.000" "20171129174332.875":
+  entity regfile_tb at 1( 0) + 0 on 16622;
+  architecture stimulus of regfile_tb at 7( 97) + 0 on 16623;
+  configuration cfg_regfile_tb at 64( 2244) + 0 on 16624;
+file . "alu_tb.vhd" "20171010050106.000" "20171129174331.781":
+  entity alu_tb at 1( 0) + 0 on 16579;
+  architecture stimulus of alu_tb at 7( 89) + 0 on 16580;
+  configuration cfg_alu_tb at 73( 2960) + 0 on 16581;
+file . "register_1_tb.vhd" "20170904074304.000" "20171129174332.992":
+  entity register_1_tb at 1( 0) + 0 on 16627;
+  architecture stimulus of register_1_tb at 7( 103) + 0 on 16628;
+  configuration cfg_register_1_tb at 50( 1058) + 0 on 16629;
+file . "extend26_tb.vhd" "20170914054914.000" "20171129174332.238":
+  entity extend26_tb at 1( 0) + 0 on 16599;
+  architecture stimulus of extend26_tb at 7( 99) + 0 on 16600;
+  configuration cfg_extend26_tb at 49( 1254) + 0 on 16601;
+file . "extend16_tb.vhd" "20170915095220.000" "20171129174332.123":
+  entity extend16_tb at 1( 0) + 0 on 16594;
+  architecture stimulus of extend16_tb at 7( 99) + 0 on 16595;
+  configuration cfg_extend16_tb at 52( 1372) + 0 on 16596;
+file . "extend16.vhd" "20171010050718.000" "20171129174332.104":
+  entity extend16 at 1( 0) + 0 on 16592;
+  architecture rtl of extend16 at 18( 400) + 0 on 16593;
+file . "mux3.vhd" "20170831051800.000" "20170831142659.704":
+  entity mux3 at 13( 280) + 0 on 442;
+  architecture rtl of mux3 at 28( 618) + 0 on 443;
+file . "counter.vhd" "20170830050220.000" "20170830142156.013":
+  entity counter at 1( 0) + 0 on 397;
+  architecture rtl of counter at 14( 256) + 0 on 398;
+file . "adder_tb.vhd" "20171010093338.000" "20171129174331.543":
+  entity adder_tb at 1( 0) + 0 on 16570;
+  architecture stimulus of adder_tb at 7( 85) + 0 on 16571;
+file . "adder.vhd" "20171010093252.000" "20171129174331.523":
+  entity adder at 2( 1) + 0 on 16568;
+  architecture rtl of adder at 13( 260) + 0 on 16569;
+file . "pc.vhd" "20171011025314.000" "20171129174332.730":
+  entity pc at 13( 280) + 0 on 16615;
+  architecture rtl of pc at 28( 596) + 0 on 16616;
+file . "pc_tb.vhd" "20171011025744.000" "20171129174332.762":
+  entity pc_tb at 1( 0) + 0 on 16617;
+  architecture stimulus of pc_tb at 7( 79) + 0 on 16618;
+  configuration cfg_pc_tb at 58( 1544) + 0 on 16619;
+file . "counter_tb.vhd" "20170830050716.000" "20170830142156.139":
+  entity counter_tb at 1( 0) + 0 on 399;
+  architecture sim of counter_tb at 8( 119) + 0 on 400;
+  configuration counter_test at 45( 940) + 0 on 401;
+file . "mux2.vhd" "20170830084956.000" "20170831140450.595":
+  entity mux2 at 13( 280) + 0 on 418;
+  architecture rtl of mux2 at 28( 594) + 0 on 419;
+file . "mux2_tb.vhd" "20170831050440.000" "20170831140450.703":
+  entity mux2_tb at 1( 0) + 0 on 420;
+  architecture stimulus of mux2_tb at 7( 83) + 0 on 421;
+file . "mux3_tb.vhd" "20170831052656.000" "20170831142659.808":
+  entity mux3_tb at 1( 0) + 0 on 444;
+  architecture stimulus of mux3_tb at 7( 83) + 0 on 445;
+file . "extend26.vhd" "20170914054836.000" "20171129174332.212":
+  entity extend26 at 1( 0) + 0 on 16597;
+  architecture rtl of extend26 at 17( 336) + 0 on 16598;
+file . "im.vhd" "20171129083016.000" "20171129174332.330":
+  entity im at 1( 0) + 0 on 16602;
+  architecture rtl of im at 16( 279) + 0 on 16603;
+file . "im_tb.vhd" "20170904060016.000" "20171129174332.349":
+  entity im_tb at 1( 0) + 0 on 16604;
+  architecture stimulus of im_tb at 7( 87) + 0 on 16605;
+  configuration cfg_im_tb at 63( 1481) + 0 on 16606;
+file . "shifter.vhd" "20170907080414.000" "20170907170509.615":
+  entity shifter at 1( 0) + 0 on 1177;
+  architecture rtl of shifter at 17( 381) + 0 on 1178;
+file . "shifter_tb.vhd" "20170907080502.000" "20170907170509.761":
+  entity shifter_tb at 1( 0) + 0 on 1179;
+  architecture stimulus of shifter_tb at 7( 97) + 0 on 1180;
+  configuration cfg_shifter_tb at 41( 1083) + 0 on 1181;
+file . "alu.vhd" "20171106081434.000" "20171129174331.761":
+  entity alu at 1( 0) + 0 on 16577;
+  architecture rtl of alu at 19( 482) + 0 on 16578;
+file . "regfile.vhd" "20171024090248.000" "20171129174332.849":
+  entity regfile at 1( 0) + 0 on 16620;
+  architecture rtl of regfile at 17( 402) + 0 on 16621;
+file . "ctrl.vhd" "20171031042616.000" "20171129174331.865":
+  entity ctrl at 1( 0) + 0 on 16582;
+  architecture rtl of ctrl at 16( 372) + 0 on 16583;
+file . "ctrl_tb.vhd" "20171018045008.000" "20171129174331.895":
+  entity ctrl_tb at 1( 0) + 0 on 16584;
+  architecture stimulus of ctrl_tb at 7( 91) + 0 on 16585;
+  configuration cfg_ctrl_tb at 84( 2589) + 0 on 16586;
+file . "aaa.vhd" "20170914081550.000" "20170914174025.691":
+  entity aaa at 1( 0) + 0 on 1608;
+  architecture rtl of aaa at 19( 421) + 0 on 1609;
+file . "aaa_tb.vhd" "20170914084018.000" "20170915111623.802":
+  entity aaa_tb at 1( 0) + 0 on 1626;
+  architecture stimulus of aaa_tb at 7( 89) + 0 on 1627;
+  configuration cfg_aaa_tb at 48( 1495) + 0 on 1628;
+file . "adsel_tb.vhd" "20171011030626.000" "20171129174331.661":
+  entity adsel_tb at 1( 0) + 0 on 16574;
+  architecture stimulus of adsel_tb at 7( 92) + 0 on 16575;
+  configuration cfg_adsel_tb at 74( 3501) + 0 on 16576;
+file . "stall.vhd" "20171128094836.000" "20171129174333.640":
+  entity stall at 1( 0) + 0 on 16646;
+  architecture rtl of stall at 19( 559) + 0 on 16647;
+file . "stall_tb.vhd" "20171117023300.000" "20171129174333.665":
+  entity stall_tb at 1( 0) + 0 on 16648;
+  architecture stimulus of stall_tb at 7( 93) + 0 on 16649;
+  configuration cfg_stall_tb at 66( 2423) + 0 on 16650;
+file . "mux2_5.vhd" "20171018060404.000" "20171129174332.431":
+  entity mux2_5 at 1( 0) + 0 on 16607;
+  architecture rtl of mux2_5 at 16( 331) + 0 on 16608;
+file . "ex_stage.vhd" "20171030085240.000" "20171129174334.099":
+  entity ex_stage at 1( 0) + 0 on 16661;
+  architecture rtl of ex_stage at 22( 641) + 0 on 16662;
+file . "id_stage.vhd" "20171127065622.000" "20171129174333.923":
+  entity id_stage at 1( 0) + 0 on 16656;
+  architecture rtl of id_stage at 24( 725) + 0 on 16657;
+file . "register_5.vhd" "20171027025404.000" "20171129174333.229":
+  entity register_5 at 1( 0) + 0 on 16632;
+  architecture rtl of register_5 at 16( 333) + 0 on 16633;
+file . "register_5_tb.vhd" "20171020074952.000" "20171129174333.252":
+  entity register_5_tb at 1( 0) + 0 on 16634;
+  architecture stimulus of register_5_tb at 7( 103) + 0 on 16635;
+  configuration cfg_register_5_tb at 52( 1194) + 0 on 16636;
+file . "if_stage_tb.vhd" "20171030085430.000" "20171129174333.797":
+  entity if_stage_tb at 1( 0) + 0 on 16653;
+  architecture stimulus of if_stage_tb at 7( 99) + 0 on 16654;
+  configuration cfg_if_stage_tb at 71( 2742) + 0 on 16655;
+file . "mux2_32.vhd" "20171018060210.000" "20171129174332.547":
+  entity mux2_32 at 13( 280) + 0 on 16611;
+  architecture rtl of mux2_32 at 28( 600) + 0 on 16612;
+file . "mux2_32_tb.vhd" "20171027095412.000" "20171129174332.579":
+  entity mux2_32_tb at 1( 0) + 0 on 16613;
+  architecture stimulus of mux2_32_tb at 7( 89) + 0 on 16614;
+file . "pcpu.vhd" "20171129083038.000" "20171129174334.384":
+  entity pcpu at 1( 0) + 0 on 16671;
+  architecture rtl of pcpu at 16( 285) + 0 on 16672;
+file . "register_3.vhd" "20171027025502.000" "20171129174333.079":
+  entity register_3 at 1( 0) + 0 on 16630;
+  architecture rtl of register_3 at 16( 333) + 0 on 16631;
+file . "ex_stage_tb.vhd" "20171030085406.000" "20171129174334.119":
+  entity ex_stage_tb at 1( 0) + 0 on 16663;
+  architecture stimulus of ex_stage_tb at 7( 99) + 0 on 16664;
+  configuration cfg_ex_stage_tb at 54( 2362) + 0 on 16665;
+file . "ma_stage_tb.vhd" "20171030085454.000" "20171129174334.272":
+  entity ma_stage_tb at 1( 0) + 0 on 16668;
+  architecture stimulus of ma_stage_tb at 7( 99) + 0 on 16669;
+  configuration cfg_ma_stage_tb at 67( 2397) + 0 on 16670;
+file . "datamem_tb.vhd" "20171027053744.000" "20171129174332.009":
+  entity datamem_tb at 1( 0) + 0 on 16589;
+  architecture stimulus of datamem_tb at 7( 97) + 0 on 16590;
+  configuration cfg_datamem_tb at 64( 2017) + 0 on 16591;
