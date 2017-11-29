@@ -1,5 +1,5 @@
 # vsim spcpu_tb -do "add wave spcpu_tb/dut/* ; add wave spcpu_tb/dut/m1/* ; add wave spcpu_tb/dut/m3/* ; add wave spcpu_tb/dut/m6/* ; run -all" 
-# Start time: 14:34:50 on Nov 28,2017
+# Start time: 18:27:11 on Nov 29,2017
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
@@ -37,17 +37,17 @@
 # add wave spcpu_tb/dut/* 
 # ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
 #           File in use by: sldl77  Hostname: SLDL77-PC  ProcessID: 3204
-#           Attempting to use alternate WLF file "./wlftszkbim".
+#           Attempting to use alternate WLF file "./wlft2m05w9".
 # ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlftszkbim
+#           Using alternate file: ./wlft2m05w9
 #  add wave spcpu_tb/dut/m1/* 
 #  add wave spcpu_tb/dut/m3/* 
 #  add wave spcpu_tb/dut/m6/* 
 #  run -all
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /spcpu_tb/dut/M23
+#    Time: 0 ps  Iteration: 0  Instance: /spcpu_tb/dut/M24
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /spcpu_tb/dut/M23
+#    Time: 0 ps  Iteration: 0  Instance: /spcpu_tb/dut/M24
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 #    Time: 0 ps  Iteration: 0  Instance: /spcpu_tb/dut/M1/M4
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
@@ -64,7 +64,5 @@
 #    Time: 0 ps  Iteration: 1  Instance: /spcpu_tb/dut/M1/M4
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 #    Time: 0 ps  Iteration: 1  Instance: /spcpu_tb/dut/M1/M4
-# WARNING: No extended dataflow license exists
-# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
-# End time: 14:36:34 on Nov 28,2017, Elapsed time: 0:01:44
-# Errors: 1, Warnings: 13
+# End time: 19:02:31 on Nov 29,2017, Elapsed time: 0:35:20
+# Errors: 0, Warnings: 12
