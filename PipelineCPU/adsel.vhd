@@ -27,9 +27,7 @@ architecture  rtl  of  adsel  is
       if (hactrl = "01") then
         bpc := pc4 - 12;
         flag := "01";
-      elsif (hactrl = "10") then
-        bbpc := pc4 - 12;
-        flag := "10";
+
       end if;
 
       case (adsel_ctrl) is 
@@ -38,12 +36,13 @@ architecture  rtl  of  adsel  is
                 if (flag = "01") then 
                     next_address <= bpc;
                     flag := "00";
-                elsif (flag = "10") then
-                    next_address <= bbpc;
-                    flag := "00";
+
                 else
                     next_address <= pc4;
                 end if;
+            elsif (hactrl = "10") then
+                next_address <= pc4 - 8;
+                flag := "00";
             else 
                 next_address <= pc4;
             end if;
@@ -55,7 +54,7 @@ architecture  rtl  of  adsel  is
             flag := "00";
          when others => next_address <= pc4; 
       end case;
-
+      
    end process;
 
 end;

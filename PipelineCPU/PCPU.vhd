@@ -16,11 +16,11 @@ end pcpu;
 architecture  rtl  of  pcpu  is
 signal regwe : std_logic;
 signal adsel_ctrl, hactrl : std_logic_vector(1 downto 0);
-signal ctrlout_3_R, R_ctrlout_3 : std_logic_vector(2 downto 0);
-signal regwad, rtad_R, R_rtad, rdad_R, R_rdad, shamt_R, R_shamt, wad_R, R_wad : std_logic_vector(4 downto 0);
+signal ctrlout_3_ma : std_logic_vector(2 downto 0);
+signal regwad, rtad_R, R_rtad, rdad_R, R_rdad, shamt_R, R_shamt, wad_ma : std_logic_vector(4 downto 0);
 signal ctrl_R, R_ctrl : std_logic_vector(8 downto 0);
 signal ex26_R, R_ex26 : std_logic_vector(27 downto 0);
-signal ex16_1_R, R_ex16_1, inst_R, R_inst, rs_R, R_rs, rt_R, R_rt, ex16_2_R, R_ex16_2, aluout_R, R_aluout, rtdata_R, R_rtdata, regwdata : std_logic_vector(31 downto 0);
+signal ex16_1_R, R_ex16_1, inst_R, R_inst, rs_R, R_rs, rt_R, R_rt, ex16_2_R, R_ex16_2, aluout_ma, rtdata_ma, regwdata : std_logic_vector(31 downto 0);
 
 component if_stage
     port(
@@ -125,12 +125,8 @@ begin
     M10 : register_5 port map (clk, rst, rdad_R, R_rdad);
     M11 : register_5 port map (clk, rst, shamt_R, R_shamt);
     M12 : register_9 port map (clk, rst, ctrl_R, R_ctrl);
-    M13 : ex_stage port map (rst, R_rtad, R_rdad, R_shamt, R_ctrl, R_rs, R_rt, R_ex16_2, adsel_ctrl, ctrlout_3_R, wad_R, aluout_R, rtdata_R);
-    M14 : register_32 port map (clk, rst, aluout_R, R_aluout);
-    M15 : register_32 port map (clk, rst, rtdata_R, R_rtdata);
-    M16 : register_5 port map (clk, rst, wad_R, R_wad);
-    M17 : register_3 port map (clk, rst, ctrlout_3_R, R_ctrlout_3);
-    M18 : ma_stage port map (clk, rst, R_wad, R_ctrlout_3, R_aluout, R_rtdata, regwe, regwad, regwdata);
+    M13 : ex_stage port map (rst, R_rtad, R_rdad, R_shamt, R_ctrl, R_rs, R_rt, R_ex16_2, adsel_ctrl, ctrlout_3_ma, wad_ma, aluout_ma, rtdata_ma);
+    M18 : ma_stage port map (clk, rst, wad_ma, ctrlout_3_ma, aluout_ma, rtdata_ma, regwe, regwad, regwdata);
 
 outdata <= regwdata;
 end;

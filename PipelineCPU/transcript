@@ -1,5 +1,5 @@
 # vsim pcpu_tb -do "add wave pcpu_tb/dut/* ; run -all" 
-# Start time: 17:34:42 on Nov 29,2017
+# Start time: 17:48:52 on Dec 01,2017
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
@@ -26,16 +26,15 @@
 # Loading work.alu(rtl)
 # Loading work.mux2_32(rtl)
 # Loading work.mux2_5(rtl)
-# Loading work.register_3(rtl)
 # Loading work.ma_stage(rtl)
 # Loading work.datamem(rtl)
 # Loading work.register_1(rtl)
 # add wave pcpu_tb/dut/* 
 # ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
 #           File in use by: sldl77  Hostname: SLDL77-PC  ProcessID: 23316
-#           Attempting to use alternate WLF file "./wlftjmss42".
+#           Attempting to use alternate WLF file "./wlftt7etyy".
 # ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlftjmss42
+#           Using alternate file: ./wlftt7etyy
 #  run -all
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 #    Time: 0 ps  Iteration: 0  Instance: /pcpu_tb/dut/M13/M1
@@ -54,8 +53,6 @@
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 #    Time: 0 ps  Iteration: 0  Instance: /pcpu_tb/dut/M1/M4
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /pcpu_tb/dut/M1/M4
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 #    Time: 0 ps  Iteration: 0  Instance: /pcpu_tb/dut/M1/M3
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 #    Time: 0 ps  Iteration: 0  Instance: /pcpu_tb/dut/M1/M2
@@ -77,51 +74,11 @@
 #    Time: 0 ps  Iteration: 2  Instance: /pcpu_tb/dut/M3/M1
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 #    Time: 0 ps  Iteration: 2  Instance: /pcpu_tb/dut/M3/M1
-restart
-add wave pcpu_tb/dut/m3/*
-run -all
-# GetModuleFileName: 指定されたモジュールが見つかりません。
-# 
-# 
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /pcpu_tb/dut/M13/M1
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 0 ps  Iteration: 0  Instance: /pcpu_tb/dut/M13/M1
+#    Time: 300 ns  Iteration: 2  Instance: /pcpu_tb/dut/M3/M1
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /pcpu_tb/dut/M13/M1
+#    Time: 300 ns  Iteration: 2  Instance: /pcpu_tb/dut/M3/M1
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /pcpu_tb/dut/M13/M1
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /pcpu_tb/dut/M3/M1
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /pcpu_tb/dut/M3/M1
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /pcpu_tb/dut/M3/M1
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /pcpu_tb/dut/M1/M4
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /pcpu_tb/dut/M1/M4
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /pcpu_tb/dut/M1/M3
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /pcpu_tb/dut/M1/M2
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 0 ps  Iteration: 0  Instance: /pcpu_tb/dut/M1/M2
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 1  Instance: /pcpu_tb/dut/M13/M1
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 0 ps  Iteration: 1  Instance: /pcpu_tb/dut/M13/M1
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 1  Instance: /pcpu_tb/dut/M1/M4
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 1  Instance: /pcpu_tb/dut/M1/M4
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 1  Instance: /pcpu_tb/dut/M1/M4
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 2  Instance: /pcpu_tb/dut/M3/M1
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 2  Instance: /pcpu_tb/dut/M3/M1
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 2  Instance: /pcpu_tb/dut/M3/M1
-# End time: 17:43:27 on Nov 29,2017, Elapsed time: 0:08:45
-# Errors: 0, Warnings: 42
+#    Time: 300 ns  Iteration: 2  Instance: /pcpu_tb/dut/M3/M1
+# End time: 17:49:23 on Dec 01,2017, Elapsed time: 0:00:31
+# Errors: 0, Warnings: 24
