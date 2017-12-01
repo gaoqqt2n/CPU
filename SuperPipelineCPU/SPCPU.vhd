@@ -16,15 +16,15 @@ end spcpu;
 architecture  rtl  of  spcpu  is
 signal regwe, stall_if_R, R_stall_out : std_logic;
 signal adsel_ctrl, hactrl : std_logic_vector(1 downto 0);
-signal exRma_ctrlout, stallflag : std_logic_vector(2 downto 0);
+signal stallflag : std_logic_vector(2 downto 0);
 signal regwad, rtad_R, R_rtad, rdad_R, R_rdad, shamt_R, R_shamt, wad_R, R_wad, ex1_shamt_R, R_ex2_shamt : std_logic_vector(4 downto 0);
-signal R_alu_calc_shamt, R_alu_calc_wad, exRma_wad : std_logic_vector(4 downto 0);
+signal R_alu_calc_shamt, R_alu_calc_wad_ma : std_logic_vector(4 downto 0);
 signal ctrlout_7_R, R_ctrlout_7, R_alu_calc_ctrlout : std_logic_vector(6 downto 0);
 signal ctrl_R, R_ctrl : std_logic_vector(8 downto 0);
 signal ex26_R, R_ex26, ex26 : std_logic_vector(27 downto 0);
 signal instout, R2_inst : std_logic_vector(31 downto 0);
-signal ex16_1_R, R_ex16_1, ex16_1, inst_R, R_inst, rs_R, R_rs, rt_R, R_rt, ex16_2_R, R_ex16_2, aluout_R, R_aluout, rsdata_R, R_rsdata, rtdata_R, R_rtdata, regwdata : std_logic_vector(31 downto 0);
-signal R_rtdata_R,  mux32out_R, R_mux32out, R_alu_calc_mux32, R_alu_calc_rsdata, exRma_rtdata : std_logic_vector(31 downto 0);
+signal ex16_1_R, R_ex16_1, ex16_1, inst_R, R_inst, rs_R, R_rs, rt_R, R_rt, ex16_2_R, R_ex16_2, aluout_ma, rsdata_R, R_rsdata, rtdata_R, R_rtdata, regwdata : std_logic_vector(31 downto 0);
+signal mux32out_R, R_mux32out, R_alu_calc_mux32, R_alu_calc_rsdata, exRma_rtdata : std_logic_vector(31 downto 0);
 
 component if_stage
     port(
@@ -197,16 +197,16 @@ begin
     M26 : alu_jump port map (rst, R_ctrlout_7(6 downto 3), R_rsdata, R_mux32out, adsel_ctrl);
     M27 : register_7 port map (clk, rst, R_ctrlout_7, R_alu_calc_ctrlout);
     M28 : register_5 port map (clk, rst, R_ex2_shamt, R_alu_calc_shamt);
-    M29 : register_5 port map (clk, rst, R_wad, R_alu_calc_wad);
+    M29 : register_5 port map (clk, rst, R_wad, R_alu_calc_wad_ma);
     M30 : register_32 port map (clk, rst, R_rsdata, R_alu_calc_rsdata);
     M31 : register_32 port map (clk, rst, R_mux32out, R_alu_calc_mux32);
-    M32 : register_32 port map (clk, rst, R_rtdata, R_rtdata_R);
-    M33 : alu_calc port map (rst, R_alu_calc_ctrlout(6 downto 3), R_alu_calc_shamt, R_alu_calc_rsdata, R_alu_calc_mux32, aluout_R);
-    M34 : register_32 port map (clk, rst, aluout_R, R_aluout);
-    M35 : register_32 port map (clk, rst, R_rtdata_R, exRma_rtdata);
-    M36 : register_5 port map (clk, rst, R_alu_calc_wad, exRma_wad);
-    M37 : register_3 port map (clk, rst, R_alu_calc_ctrlout(2 downto 0), exRma_ctrlout);
-    M38 : ma_stage port map (clk, rst, exRma_wad, exRma_ctrlout, R_aluout, exRma_rtdata, regwe, regwad, regwdata);
+    M32 : register_32 port map (clk, rst, R_rtdata, exRma_rtdata);
+    M33 : alu_calc port map (rst, R_alu_calc_ctrlout(6 downto 3), R_alu_calc_shamt, R_alu_calc_rsdata, R_alu_calc_mux32, aluout_ma);
+    -- M34 : register_32 port map (clk, rst, aluout_R, R_aluout);
+    -- M35 : register_32 port map (clk, rst, R_rtdata_R, exRma_rtdata);
+    -- M36 : register_5 port map (clk, rst, R_alu_calc_wad_ma, R_alu_calc_wad_ma);
+    -- M37 : register_3 port map (clk, rst, R_alu_calc_ctrlout(2 downto 0), exRma_ctrlout);
+    M38 : ma_stage port map (clk, rst, R_alu_calc_wad_ma, R_alu_calc_ctrlout(2 downto 0), aluout_ma, exRma_rtdata, regwe, regwad, regwdata);
 
 outdata <= regwdata;
 end;
