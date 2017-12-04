@@ -78,13 +78,13 @@ architecture rtl of stall_if is
                         brd := inst(15 downto 11);
                         bopcd := inst(31 downto 26);
                     end if;
-                elsif (inflag = "100") then --happened datahazard after 5clock
+                elsif (inflag = "011") then --happened datahazard after 5clock
                     pout <= '0';
                     outflag <= "000";
                     brt := (others => '0');
                     brd := (others => '0');
                     bopcd := "000001";
-                elsif (inflag = "101") then --jump, beq after 6clock
+                elsif (inflag = "100") then --jump, beq after 6clock
                     pout <= '0';
                     outflag <= "000";
                     brt := (others => '0');
@@ -105,13 +105,13 @@ architecture rtl of stall_if is
                 end if;
 
             when "01" => 
-                if ((inflag = "001") or (inflag = "010") or (inflag = "011")) then 
+                if ((inflag = "001") or (inflag = "010")) then 
                     pout <= '0';
                     outflag <= inflag + 1;
                     brt := (others => '0');
                     brd := (others => '0');
                     bopcd := "000001";
-                elsif (inflag = "100") then
+                elsif (inflag = "011") then
                     pout <= '0';
                     outhactrl <= "00";
                     outflag <= inflag + 1;
@@ -127,13 +127,13 @@ architecture rtl of stall_if is
                     bopcd := inst(31 downto 26);
                 end if;
             when "10" => 
-                if ((inflag = "001") or (inflag = "010")) then
+                if (inflag = "001") then
                     pout <= '0';
                     outflag <= inflag + 1;
                     brt := (others => '0');
                     brd := (others => '0');
                     bopcd := "000001";
-                elsif ((inflag = "011")) then
+                elsif ((inflag = "010")) then
                     pout <= '0';
                     outhactrl <= "00";
                     outflag <= inflag + 1;

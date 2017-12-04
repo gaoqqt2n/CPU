@@ -10,7 +10,6 @@ entity  im  is
     port(
          address : in std_logic_vector(4 downto 0);
          inst : out std_logic_vector(31 downto 0));
-    
 end im;
 
 architecture  rtl  of  im  is
