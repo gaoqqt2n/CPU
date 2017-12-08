@@ -15,7 +15,7 @@ end spcpu;
 
 architecture  rtl  of  spcpu  is
 signal regwe, stall_if_R, R_stall_out : std_logic;
-signal adsel_ctrl, hactrl : std_logic_vector(1 downto 0);
+signal adsel_ctrl, hactrl, R1_hactrl, R2_hactrl, hactrl_adsel : std_logic_vector(1 downto 0);
 signal stallflag : std_logic_vector(2 downto 0);
 signal regwad, rtad_R, R_rtad, rdad_R, R_rdad, shamt_R, R_shamt, wad_R, R_wad, ex1_shamt_R, R_ex2_shamt : std_logic_vector(4 downto 0);
 signal R_alu_calc_shamt, R_alu_calc_wad_ma : std_logic_vector(4 downto 0);
@@ -119,6 +119,14 @@ component register_1
     );
 end component;
 
+component register_2 is
+    port(
+        clk, rst : in std_logic;
+        in2 : in std_logic_vector(1 downto 0);
+        out2 : out std_logic_vector(1 downto 0)
+    );
+end component;
+
 component register_3
     port(
         clk, rst : in std_logic;
@@ -169,16 +177,19 @@ end component;
 
 begin
 
-    M1 : if_stage port map (clk, rst, adsel_ctrl, hactrl, ex16_1, ex26, inst_R);
+    M1 : if_stage port map (clk, rst, adsel_ctrl, hactrl_adsel, ex16_1, ex26, inst_R);
     M2 : register_32 port map (clk, rst, inst_R, R_inst);
     M3 : stall_if port map (clk, rst, inst_R, hactrl, stallflag, stallflag, hactrl, stall_if_R);
+    M39 : register_2 port map (clk, rst, hactrl, R1_hactrl);
+    M40 : register_2 port map (clk, rst, R1_hactrl, R2_hactrl);
+    M41 : register_2 port map (clk, rst, R2_hactrl, hactrl_adsel);
     M4 : register_32 port map (clk, rst, R_inst, R2_inst);
     M5 : register_1 port map (clk, rst, stall_if_R, R_stall_out);
     M6 : stall_out port map (R2_inst, R_stall_out, instout);
-    M7 : id_stage port map (clk, rst, regwe, regwad, instout, regwdata, rtad_R, rdad_R, shamt_R, ctrl_R, ex26_R, rs_R, rt_R, ex16_1_R, ex16_2_R);
-    M8 : register_32 port map (clk, rst, ex16_1_R, R_ex16_1);
+    M7 : id_stage port map (clk, rst, regwe, regwad, instout, regwdata, rtad_R, rdad_R, shamt_R, ctrl_R, R_ex26, rs_R, rt_R, R_ex16_1, ex16_2_R);
+    -- M8 : register_32 port map (clk, rst, ex16_1_R, R_ex16_1);
     M9 : register_32 port map (clk, rst, R_ex16_1, ex16_1);
-    M10 : register_28 port map (clk, rst, ex26_R, R_ex26);
+    -- M10 : register_28 port map (clk, rst, ex26_R, R_ex26);
     M11 : register_28 port map (clk, rst, R_ex26, ex26);
     M12 : register_32 port map (clk, rst, rs_R, R_rs);
     M13 : register_32 port map (clk, rst, rt_R, R_rt);
@@ -187,13 +198,13 @@ begin
     M16 : register_5 port map (clk, rst, rdad_R, R_rdad);
     M17 : register_5 port map (clk, rst, shamt_R, R_shamt);
     M18 : register_9 port map (clk, rst, ctrl_R, R_ctrl);
-    M19 : ex_stage port map (rst, R_rtad, R_rdad, R_shamt, R_ctrl, R_rs, R_rt, R_ex16_2, wad_R, ex1_shamt_R, ctrlout_7_R, rsdata_R, mux32out_R, rtdata_R);
-    M20 : register_32 port map (clk, rst, rsdata_R, R_rsdata);
-    M21 : register_32 port map (clk, rst, mux32out_R, R_mux32out);
-    M22 : register_32 port map (clk, rst, rtdata_R, R_rtdata);
-    M23 : register_5 port map (clk, rst, wad_R, R_wad);
-    M24 : register_5 port map (clk, rst, ex1_shamt_R, R_ex2_shamt);
-    M25 : register_7 port map (clk, rst, ctrlout_7_R, R_ctrlout_7);
+    M19 : ex_stage port map (rst, R_rtad, R_rdad, R_shamt, R_ctrl, R_rs, R_rt, R_ex16_2, R_wad, R_ex2_shamt, R_ctrlout_7, R_rsdata, R_mux32out, R_rtdata);
+    -- M20 : register_32 port map (clk, rst, rsdata_R, R_rsdata);
+    -- M21 : register_32 port map (clk, rst, mux32out_R, R_mux32out);
+    -- M22 : register_32 port map (clk, rst, rtdata_R, R_rtdata);
+    -- M23 : register_5 port map (clk, rst, wad_R, R_wad);
+    -- M24 : register_5 port map (clk, rst, ex1_shamt_R, R_ex2_shamt);
+    -- M25 : register_7 port map (clk, rst, ctrlout_7_R, R_ctrlout_7);
     M26 : alu_jump port map (rst, R_ctrlout_7(6 downto 3), R_rsdata, R_mux32out, adsel_ctrl);
     M27 : register_7 port map (clk, rst, R_ctrlout_7, R_alu_calc_ctrlout);
     M28 : register_5 port map (clk, rst, R_ex2_shamt, R_alu_calc_shamt);

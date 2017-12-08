@@ -18,7 +18,7 @@ end if_stage;
 
 architecture  rtl  of  if_stage  is
 signal pc_im, adder_adsel, adsel_pc : std_logic_vector(31 downto 0);
--- signal flagout : std_logic_vector(1 downto 0);--debug
+signal passout : std_logic_vector(7 downto 0);--debug
 -- signal adselflag : std_logic_vector(1 downto 0);--debug
 -- signal bbpcout : std_logic_vector(31 downto 0);--debug
 component pc 
@@ -45,12 +45,11 @@ end component;
 
 component adsel
     port(
+        clk, rst : in std_logic;
         adsel_ctrl, hactrl : in std_logic_vector(1 downto 0);
         extend26 : in std_logic_vector(27 downto 0); 
         pc4, extend16 : in std_logic_vector(31 downto 0);
-        -- outflag : out std_logic_vector(1 downto 0); --debug
-        -- bbpcout : out std_logic_vector(31 downto 0);--debug
-        -- flagflag : out std_logic_vector(1 downto 0);--debug
+        ifdebugout : out std_logic_vector(7 downto 0);
         next_address : out std_logic_vector(31 downto 0)
         );
 end component;
@@ -60,7 +59,7 @@ begin
     M2 : im port map (pc_im(6 downto 2), inst);
     M3 : adder port map (pc_im, adder_adsel);
     -- M4 : adsel port map (adsel_ctrl, hactrl, adselflag, extend26, adder_adsel, extend16, adselflag, bbpcout, flagout, adsel_pc); --debug
-    M4 : adsel port map (adsel_ctrl, hactrl, extend26, adder_adsel, extend16, adsel_pc);
+    M4 : adsel port map (clk, rst, adsel_ctrl, hactrl, extend26, adder_adsel, extend16, passout, adsel_pc);
 
 
 end;

@@ -1,5 +1,5 @@
-# vsim spcpu_tb -do "add wave spcpu_tb/dut/* ; add wave spcpu_tb/dut/m1/* ; add wave spcpu_tb/dut/m3/* ; add wave spcpu_tb/dut/m6/* ; run -all" 
-# Start time: 18:27:11 on Nov 29,2017
+# vsim spcpu_tb -do "add wave -HEX spcpu_tb/dut/clk ; add wave -HEX spcpu_tb/dut/rst ; add wave -HEX spcpu_tb/dut/outdata ; add wave -HEX spcpu_tb/dut/regwe ; add wave -HEX spcpu_tb/dut/regwad ; add wave -HEX spcpu_tb/dut/regwdata ; add wave -HEX spcpu_tb/dut/m1/m4/* ; add wave -HEX spcpu_tb/dut/m3/inst ; add wave -HEX spcpu_tb/dut/R_inst ; add wave -HEX spcpu_tb/dut/m6/inst ; add wave -HEX spcpu_tb/dut/m6/instout ; run -all" 
+# Start time: 17:31:58 on Dec 08,2017
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
@@ -15,6 +15,7 @@
 # Loading work.adsel(rtl)
 # Loading work.register_32(rtl)
 # Loading work.stall_if(rtl)
+# Loading work.register_2(rtl)
 # Loading work.register_1(rtl)
 # Loading work.stall_out(rtl)
 # Loading work.id_stage(rtl)
@@ -28,30 +29,32 @@
 # Loading work.ex_stage(rtl)
 # Loading work.mux2_32(rtl)
 # Loading work.mux2_5(rtl)
-# Loading work.register_7(rtl)
 # Loading work.alu_jump(rtl)
+# Loading work.register_7(rtl)
 # Loading work.alu_calc(rtl)
-# Loading work.register_3(rtl)
 # Loading work.ma_stage(rtl)
 # Loading work.datamem(rtl)
-# add wave spcpu_tb/dut/* 
+# add wave -HEX spcpu_tb/dut/clk 
 # ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
 #           File in use by: sldl77  Hostname: SLDL77-PC  ProcessID: 3204
-#           Attempting to use alternate WLF file "./wlft2m05w9".
+#           Attempting to use alternate WLF file "./wlft9waxi0".
 # ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlft2m05w9
-#  add wave spcpu_tb/dut/m1/* 
-#  add wave spcpu_tb/dut/m3/* 
-#  add wave spcpu_tb/dut/m6/* 
+#           Using alternate file: ./wlft9waxi0
+#  add wave -HEX spcpu_tb/dut/rst 
+#  add wave -HEX spcpu_tb/dut/outdata 
+#  add wave -HEX spcpu_tb/dut/regwe 
+#  add wave -HEX spcpu_tb/dut/regwad 
+#  add wave -HEX spcpu_tb/dut/regwdata 
+#  add wave -HEX spcpu_tb/dut/m1/m4/* 
+#  add wave -HEX spcpu_tb/dut/m3/inst 
+#  add wave -HEX spcpu_tb/dut/R_inst 
+#  add wave -HEX spcpu_tb/dut/m6/inst 
+#  add wave -HEX spcpu_tb/dut/m6/instout 
 #  run -all
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /spcpu_tb/dut/M24
+#    Time: 0 ps  Iteration: 0  Instance: /spcpu_tb/dut/M26
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /spcpu_tb/dut/M24
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /spcpu_tb/dut/M1/M4
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /spcpu_tb/dut/M1/M4
+#    Time: 0 ps  Iteration: 0  Instance: /spcpu_tb/dut/M26
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 #    Time: 0 ps  Iteration: 0  Instance: /spcpu_tb/dut/M1/M3
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
@@ -62,7 +65,3 @@
 #    Time: 0 ps  Iteration: 1  Instance: /spcpu_tb/dut/M1/M4
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 #    Time: 0 ps  Iteration: 1  Instance: /spcpu_tb/dut/M1/M4
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 1  Instance: /spcpu_tb/dut/M1/M4
-# End time: 19:02:31 on Nov 29,2017, Elapsed time: 0:35:20
-# Errors: 0, Warnings: 12
