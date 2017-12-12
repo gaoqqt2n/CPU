@@ -1,5 +1,5 @@
 # vsim spcpu_tb -do "add wave -HEX spcpu_tb/dut/clk ; add wave -HEX spcpu_tb/dut/rst ; add wave -HEX spcpu_tb/dut/outdata ; add wave -HEX spcpu_tb/dut/regwe ; add wave -HEX spcpu_tb/dut/regwad ; add wave -HEX spcpu_tb/dut/regwdata ; add wave -HEX spcpu_tb/dut/m1/m4/* ; add wave -HEX spcpu_tb/dut/m3/inst ; add wave -HEX spcpu_tb/dut/R_inst ; add wave -HEX spcpu_tb/dut/m6/inst ; add wave -HEX spcpu_tb/dut/m6/instout ; run -all" 
-# Start time: 17:31:58 on Dec 08,2017
+# Start time: 14:21:38 on Dec 12,2017
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
@@ -37,9 +37,9 @@
 # add wave -HEX spcpu_tb/dut/clk 
 # ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
 #           File in use by: sldl77  Hostname: SLDL77-PC  ProcessID: 3204
-#           Attempting to use alternate WLF file "./wlft9waxi0".
+#           Attempting to use alternate WLF file "./wlftweftka".
 # ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlft9waxi0
+#           Using alternate file: ./wlftweftka
 #  add wave -HEX spcpu_tb/dut/rst 
 #  add wave -HEX spcpu_tb/dut/outdata 
 #  add wave -HEX spcpu_tb/dut/regwe 
@@ -56,6 +56,20 @@
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 #    Time: 0 ps  Iteration: 0  Instance: /spcpu_tb/dut/M26
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 0  Instance: /spcpu_tb/dut/M1/M4
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 0  Instance: /spcpu_tb/dut/M1/M4
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 0  Instance: /spcpu_tb/dut/M1/M4
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 0  Instance: /spcpu_tb/dut/M1/M4
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 0  Instance: /spcpu_tb/dut/M1/M4
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 0  Instance: /spcpu_tb/dut/M1/M4
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 0  Instance: /spcpu_tb/dut/M1/M4
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 #    Time: 0 ps  Iteration: 0  Instance: /spcpu_tb/dut/M1/M3
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 #    Time: 0 ps  Iteration: 0  Instance: /spcpu_tb/dut/M1/M2
@@ -65,3 +79,17 @@
 #    Time: 0 ps  Iteration: 1  Instance: /spcpu_tb/dut/M1/M4
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 #    Time: 0 ps  Iteration: 1  Instance: /spcpu_tb/dut/M1/M4
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 1  Instance: /spcpu_tb/dut/M1/M4
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 1  Instance: /spcpu_tb/dut/M1/M4
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 1  Instance: /spcpu_tb/dut/M1/M4
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 1  Instance: /spcpu_tb/dut/M1/M4
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 1  Instance: /spcpu_tb/dut/M1/M4
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 1  Instance: /spcpu_tb/dut/M1/M4
+# End time: 14:21:48 on Dec 12,2017, Elapsed time: 0:23:48
+# Errors: 0, Warnings: 22

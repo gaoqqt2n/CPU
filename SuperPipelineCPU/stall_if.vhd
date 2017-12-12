@@ -125,7 +125,16 @@ architecture rtl of stall_if is
                     bopcd <= "000001";    
                 elsif (inflag = "010") then --happened datahazard after 5clock
                     pout <= '0';
-                    outflag <= "000";
+                    outflag <= inflag + 1;
+                    bbrt := brt;
+                    bbrd := brd;
+                    bbopcd := bopcd;
+                    brt <= (others => '0');
+                    brd <= (others => '0');
+                    bopcd <= "000001";
+                elsif (inflag = "011") then --happened datahazard after 5clock
+                    pout <= '0';
+                    outflag <= inflag + 1;
                     bbrt := brt;
                     bbrd := brd;
                     bbopcd := bopcd;
@@ -171,16 +180,17 @@ architecture rtl of stall_if is
                 end if;
 
             when "01" => 
-                if (inflag = "001" or inflag = "010") then 
-                    pout <= '0';
-                    outflag <= inflag + 1;
-                    bbrt := brt;
-                    bbrd := brd;
-                    bbopcd := bopcd;
-                    brt <= (others => '0');
-                    brd <= (others => '0');
-                    bopcd <= "000001";
-                elsif (inflag = "011") then
+                -- if (inflag = "001" or inflag = "010") then 
+                --     pout <= '0';
+                --     outflag <= inflag + 1;
+                --     bbrt := brt;
+                --     bbrd := brd;
+                --     bbopcd := bopcd;
+                --     brt <= (others => '0');
+                --     brd <= (others => '0');
+                --     bopcd <= "000001";
+                -- elsif (inflag = "011") then
+                if (inflag = "001") then
                     pout <= '0';
                     outhactrl <= "00";
                     outflag <= inflag + 1;
