@@ -46,7 +46,43 @@ architecture rtl of stall_if is
             case(inhactrl) is
                 when "00" =>
                 
-            if (((bopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "100011") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100"))) and --R
+                if (inflag = "010") then --happened datahazard after 5clock
+                    pout <= '0';
+                    outflag <= inflag + 1;
+                    bbbrt := bbrt;
+                    bbbrd := bbrd;
+                    bbbopcd := bbopcd;
+                    bbrt := brt;
+                    bbrd := brd;
+                    bbopcd := bopcd;
+                    brt <= (others => '0');
+                    brd <= (others => '0');
+                    bopcd <= "000001";
+                elsif (inflag = "011") then --happened datahazard after 5clock
+                    pout <= '0';
+                    outflag <= inflag + 1;
+                    bbbrt := bbrt;
+                    bbbrd := bbrd;
+                    bbbopcd := bbopcd;
+                    bbrt := brt;
+                    bbrd := brd;
+                    bbopcd := bopcd;
+                    brt <= (others => '0');
+                    brd <= (others => '0');
+                    bopcd <= "000001";
+                elsif (inflag = "100") then --jump, beq after 6clock
+                    pout <= '0';
+                    outflag <= "000";
+                    bbbrt := bbrt;
+                    bbbrd := bbrd;
+                    bbbopcd := bbopcd;
+                    bbrt := brt;
+                    bbrd := brd;
+                    bbopcd := bopcd;
+                    brt <= (others => '0');
+                    brd <= (others => '0');
+                    bopcd <= "000001";
+                elsif (((bopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "100011") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100"))) and --R
                     ((brd /= "00000") and ((brd = inst(25 downto 21)) or (brd = inst(20 downto 16))))) then --happned datahazard
                         pout <= '0';
                         outhactrl <= "10";
@@ -69,7 +105,7 @@ architecture rtl of stall_if is
                     --     bbrd := brd;
                     --     bbopcd := bopcd;
                     -- end if;
-            elsif (((bopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "100011") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100"))) and --lw
+                elsif (((bopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "100011") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100"))) and --lw
                     ((brt /= "00000") and ((brt = inst(25 downto 21)) or (brt = inst(20 downto 16))))) then 
                         pout <= '0';
                         outhactrl <= "10";
@@ -171,42 +207,6 @@ architecture rtl of stall_if is
                     brt <= (others => '0');
                     brd <= (others => '0');
                     bopcd <= "000001";    
-                elsif (inflag = "010") then --happened datahazard after 5clock
-                    pout <= '0';
-                    outflag <= inflag + 1;
-                    bbbrt := bbrt;
-                    bbbrd := bbrd;
-                    bbbopcd := bbopcd;
-                    bbrt := brt;
-                    bbrd := brd;
-                    bbopcd := bopcd;
-                    brt <= (others => '0');
-                    brd <= (others => '0');
-                    bopcd <= "000001";
-                elsif (inflag = "011") then --happened datahazard after 5clock
-                    pout <= '0';
-                    outflag <= inflag + 1;
-                    bbbrt := bbrt;
-                    bbbrd := bbrd;
-                    bbbopcd := bbopcd;
-                    bbrt := brt;
-                    bbrd := brd;
-                    bbopcd := bopcd;
-                    brt <= (others => '0');
-                    brd <= (others => '0');
-                    bopcd <= "000001";
-                elsif (inflag = "100") then --jump, beq after 6clock
-                    pout <= '0';
-                    outflag <= "000";
-                    bbbrt := bbrt;
-                    bbbrd := bbrd;
-                    bbbopcd := bbopcd;
-                    bbrt := brt;
-                    bbrd := brd;
-                    bbopcd := bopcd;
-                    brt <= (others => '0');
-                    brd <= (others => '0');
-                    bopcd <= "000001";
                 -- elsif (inflag = "011") then --jump, beq after 6clock
                 --     pout <= '0';
                 --     outflag <= "000";
