@@ -1,0 +1,1 @@
+stall_ifから６bitの制御線を出し、3：3に分けて2つのforwarderを制御する？

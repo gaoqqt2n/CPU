@@ -21,7 +21,7 @@ begin
    begin
        
       case (ctrl) is
-         when "000" => 
+         when "000" =>
             out1 <= in1;
             out2 <= in2;
          when "001" =>
@@ -39,7 +39,13 @@ begin
          when "101"=>
             out1 <= exoutdata;
             out2 <= maoutdata;
-         when others => 
+         when "110"=>
+            out1 <= exoutdata;
+            out2 <= exoutdata;
+         when "111"=>
+            out1 <= maoutdata;
+            out2 <= maoutdata;
+         when others =>
             out1 <= (others => '0');
             out2 <= (others => '0');
       end case;
