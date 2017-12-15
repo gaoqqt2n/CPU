@@ -36,9 +36,9 @@ architecture rtl of stall_if is
             bbrt := "00000";
             bbrd := "00000";
             bbopcd := "111111";
-            bbrt := "00000";
-            bbrd := "00000";
-            bbopcd := "111111";
+            bbbrt := "00000";
+            bbbrd := "00000";
+            bbbopcd := "111111";
             pout <= '0';
             outhactrl <= "00";
             outflag <= "000";

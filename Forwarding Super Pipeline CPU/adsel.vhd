@@ -93,7 +93,8 @@ architecture  rtl  of  adsel  is
         end case;
     -- end if;
     
-    if (adsel_ctrl = "01" or adsel_ctrl = "10" or (hactrl = "01" and adsel_ctrl = "00") or (hactrl = "10" and adsel_ctrl = "00") or (adsel_ctrl = "00" and hactrl = "00" and (flag = "01" or flag = "10"))) then 
+    if (adsel_ctrl = "01" or adsel_ctrl = "10" or (hactrl = "01" and adsel_ctrl = "00") or (hactrl = "10" and adsel_ctrl = "00") or 
+        (adsel_ctrl = "00" and hactrl = "00" and (flag = "01" or flag = "10"))) then 
         next_address <= jump_address;
     else 
         next_address <= next_pc4;

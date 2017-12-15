@@ -6,17 +6,18 @@ library ieee;
 use ieee.STD_LOGIC_UNSIGNED.all;
 
 
-entity  spcpu  is
+entity  fspcpu  is
     port(
         clk, rst : in std_logic;
         outdata : out std_logic_vector(31 downto 0)
         );
-end spcpu;
+end fspcpu;
 
-architecture  rtl  of  spcpu  is
+architecture  rtl  of  fspcpu  is
 signal regwe, stall_if_R, R_stall_out : std_logic;
 signal adsel_ctrl, hactrl, R1_hactrl, R2_hactrl, hactrl_adsel : std_logic_vector(1 downto 0);
 signal stallflag : std_logic_vector(2 downto 0);
+signal stall_if_forward, stall_out_forward, ID_forward, ex1_forward, in_forwarder2 : std_logic_vector(3 downto 0);
 signal regwad, rtad_R, R_rtad, rdad_R, R_rdad, shamt_R, R_shamt, wad_R, R_wad, ex1_shamt_R, R_ex2_shamt : std_logic_vector(4 downto 0);
 signal R_alu_calc_shamt, R_alu_calc_wad_ma : std_logic_vector(4 downto 0);
 signal ctrlout_7_R, R_ctrlout_7, R_alu_calc_ctrlout : std_logic_vector(6 downto 0);
@@ -44,6 +45,7 @@ component stall_if
         inflag : in std_logic_vector(2 downto 0) := "000"; 
         outflag : out std_logic_vector(2 downto 0); 
         outhactrl : out std_logic_vector(1 downto 0); --hold address control
+        forwarding_ctrl : out std_logic_vector(3 downto 0);
         pout : out std_logic
     );
 end component;
@@ -90,6 +92,15 @@ component alu_jump
     );
 end component;
 
+component forwarder is
+    port(
+        ctrl : in std_logic_vector(3 downto 0);
+        in1, in2 : in std_logic_vector(31 downto 0);
+        exoutdata, maoutdata : in std_logic_vector(31 downto 0);
+        out1, out2 : out std_logic_vector(31 downto 0)
+    );
+end component;
+
 component alu_calc
     port(
         rst: in std_logic;
@@ -127,11 +138,11 @@ component register_2 is
     );
 end component;
 
-component register_3
+component register_4 
     port(
         clk, rst : in std_logic;
-        in3 : in std_logic_vector(2 downto 0);
-        out3 : out std_logic_vector(2 downto 0)
+        in4 : in std_logic_vector(3 downto 0);
+        out4 : out std_logic_vector(3 downto 0)
     );
 end component;
 
@@ -179,13 +190,15 @@ begin
 
     M1 : if_stage port map (clk, rst, adsel_ctrl, hactrl_adsel, ex16_1, ex26, inst_R);
     M2 : register_32 port map (clk, rst, inst_R, R_inst);
-    M3 : stall_if port map (clk, rst, inst_R, hactrl, stall_if_R);
+    M3 : stall_if port map (clk, rst, inst_R, hactrl, stallflag, stallflag, hactrl, stall_if_forward, stall_if_R);
     M39 : register_2 port map (clk, rst, hactrl, R1_hactrl);
     M40 : register_2 port map (clk, rst, R1_hactrl, R2_hactrl);
     M41 : register_2 port map (clk, rst, R2_hactrl, hactrl_adsel);
     M4 : register_32 port map (clk, rst, R_inst, R2_inst);
     M5 : register_1 port map (clk, rst, stall_if_R, R_stall_out);
+    M44 : register_4 port map (clk, rst, stall_if_forward, stall_out_forward);
     M6 : stall_out port map (R2_inst, R_stall_out, instout);
+    M45 : register_4 port map (clk, rst, stall_out_forward, ID_forward);
     M7 : id_stage port map (clk, rst, regwe, regwad, instout, regwdata, rtad_R, rdad_R, shamt_R, ctrl_R, R_ex26, rs_R, rt_R, R_ex16_1, ex16_2_R);
     -- M8 : register_32 port map (clk, rst, ex16_1_R, R_ex16_1);
     M9 : register_32 port map (clk, rst, R_ex16_1, ex16_1);
@@ -198,6 +211,7 @@ begin
     M16 : register_5 port map (clk, rst, rdad_R, R_rdad);
     M17 : register_5 port map (clk, rst, shamt_R, R_shamt);
     M18 : register_9 port map (clk, rst, ctrl_R, R_ctrl);
+    M46 : register_4 port map (clk, rst, ID_forward, ex1_forward);
     M19 : ex_stage port map (rst, R_rtad, R_rdad, R_shamt, R_ctrl, R_rs, R_rt, R_ex16_2, R_wad, R_ex2_shamt, R_ctrlout_7, R_rsdata, R_mux32out, R_rtdata);
     -- M20 : register_32 port map (clk, rst, rsdata_R, R_rsdata);
     -- M21 : register_32 port map (clk, rst, mux32out_R, R_mux32out);
@@ -205,18 +219,20 @@ begin
     -- M23 : register_5 port map (clk, rst, wad_R, R_wad);
     -- M24 : register_5 port map (clk, rst, ex1_shamt_R, R_ex2_shamt);
     -- M25 : register_7 port map (clk, rst, ctrlout_7_R, R_ctrlout_7);
+    M42 : forwarder port map (ex1_forward, R_rsdata, R_mux32out, aluout_ma, regwdata);
     M26 : alu_jump port map (rst, R_ctrlout_7(6 downto 3), R_rsdata, R_mux32out, adsel_ctrl);
+    M47 : register_4 port map (clk, rst, ex1_forward, in_forwarder2);
     M27 : register_7 port map (clk, rst, R_ctrlout_7, R_alu_calc_ctrlout);
     M28 : register_5 port map (clk, rst, R_ex2_shamt, R_alu_calc_shamt);
     M29 : register_5 port map (clk, rst, R_wad, R_alu_calc_wad_ma);
     M30 : register_32 port map (clk, rst, R_rsdata, R_alu_calc_rsdata);
     M31 : register_32 port map (clk, rst, R_mux32out, R_alu_calc_mux32);
     M32 : register_32 port map (clk, rst, R_rtdata, exRma_rtdata);
+    M43 : forwarder port map (in_forwarder2, R_alu_calc_rsdata, exRma_rtdata, aluout_ma, regwdata);
     M33 : alu_calc port map (rst, R_alu_calc_ctrlout(6 downto 3), R_alu_calc_shamt, R_alu_calc_rsdata, R_alu_calc_mux32, aluout_ma);
     -- M34 : register_32 port map (clk, rst, aluout_R, R_aluout);
     -- M35 : register_32 port map (clk, rst, R_rtdata_R, exRma_rtdata);
     -- M36 : register_5 port map (clk, rst, R_alu_calc_wad_ma, R_alu_calc_wad_ma);
-    -- M37 : register_3 port map (clk, rst, R_alu_calc_ctrlout(2 downto 0), exRma_ctrlout);
     M38 : ma_stage port map (clk, rst, R_alu_calc_wad_ma, R_alu_calc_ctrlout(2 downto 0), aluout_ma, exRma_rtdata, regwe, regwad, regwdata);
 
 outdata <= regwdata;

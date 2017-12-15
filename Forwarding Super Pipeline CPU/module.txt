@@ -14,7 +14,7 @@ pc
 regfile
 register_1
 register_2
-register_3
+register_4
 register_5
 register_7
 register_9

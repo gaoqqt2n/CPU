@@ -5,22 +5,22 @@ use ieee.STD_LOGIC_ARITH.all;
 library ieee;
 use ieee.STD_LOGIC_UNSIGNED.all;
 
-entity register_3 is
+entity register_4 is
     port(
         clk, rst : in std_logic;
-        in3 : in std_logic_vector(2 downto 0);
-        out3 : out std_logic_vector(2 downto 0)
+        in4 : in std_logic_vector(3 downto 0);
+        out4 : out std_logic_vector(3 downto 0)
     );
-end register_3;
+end register_4;
 
-architecture rtl of register_3 is
+architecture rtl of register_4 is
 begin
     
     process (clk, rst) begin
         if (rst = '0') then
-            out3 <= (others => '0');
+            out4 <= (others => '0');
         elsif (clk'event and clk = '1') then
-            out3 <= in3;
+            out4 <= in4;
         end if;
     end process;
 

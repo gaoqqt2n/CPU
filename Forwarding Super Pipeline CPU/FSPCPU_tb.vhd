@@ -5,11 +5,11 @@ use IEEE.std_logic_textio.all;
 library STD;
 use STD.textio.all;
  
-entity spcpu_tb is  
-end spcpu_tb;  
+entity fspcpu_tb is  
+end fspcpu_tb;  
  
-architecture stimulus of spcpu_tb is 
-component spcpu  
+architecture stimulus of fspcpu_tb is 
+component fspcpu  
     port(
         clk, rst : in std_logic;
         outdata : out std_logic_vector(31 downto 0)
@@ -24,7 +24,7 @@ signal clk, rst : std_logic;
 signal outdata : std_logic_vector(31 downto 0);  
  
 begin  
-    dut : spcpu port map(clk, rst, outdata);
+    dut : fspcpu port map(clk, rst, outdata);
  
     process begin    
  
@@ -48,8 +48,8 @@ begin
  
 end stimulus; 
  
-configuration cfg_spcpu_tb of spcpu_tb is  
+configuration cfg_fspcpu_tb of fspcpu_tb is  
     for stimulus  
     end for; 
-end cfg_spcpu_tb; 
+end cfg_fspcpu_tb; 
  

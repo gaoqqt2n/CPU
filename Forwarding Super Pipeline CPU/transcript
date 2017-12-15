@@ -1,13 +1,13 @@
-# vsim spcpu_tb -do "add wave -HEX spcpu_tb/dut/clk ; add wave -HEX spcpu_tb/dut/rst ; add wave -HEX spcpu_tb/dut/outdata ; add wave -HEX spcpu_tb/dut/regwe ; add wave -HEX spcpu_tb/dut/regwad ; add wave -HEX spcpu_tb/dut/regwdata ; add wave -HEX spcpu_tb/dut/m1/m4/* ; add wave -HEX spcpu_tb/dut/m3/inst ; add wave -HEX spcpu_tb/dut/R_inst ; add wave -HEX spcpu_tb/dut/m6/inst ; add wave -HEX spcpu_tb/dut/m6/instout ; run -all" 
-# Start time: 18:54:37 on Dec 12,2017
+# vsim fspcpu_tb -do "add wave -HEX fspcpu_tb/dut/clk ; add wave -HEX fspcpu_tb/dut/rst ; add wave -HEX fspcpu_tb/dut/outdata ; add wave -HEX fspcpu_tb/dut/regwe ; add wave -HEX fspcpu_tb/dut/regwad ; add wave -HEX fspcpu_tb/dut/regwdata ; add wave -HEX fspcpu_tb/dut/m1/m4/* ; add wave -HEX fspcpu_tb/dut/m3/inst ; add wave -HEX fspcpu_tb/dut/R_inst ; add wave -HEX fspcpu_tb/dut/m3/forwarding_ctrl ; add wave -HEX fspcpu_tb/dut/m43/* ; add wave -HEX fspcpu_tb/dut/m33/aluout ; add wave -HEX fspcpu_tb/dut/m6/inst ; add wave -HEX fspcpu_tb/dut/m6/instout ; run -all" 
+# Start time: 20:27:26 on Dec 15,2017
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
 # Loading ieee.std_logic_textio(body)
-# Loading work.spcpu_tb(stimulus)
+# Loading work.fspcpu_tb(stimulus)
 # Loading ieee.std_logic_arith(body)
 # Loading ieee.std_logic_unsigned(body)
-# Loading work.spcpu(rtl)
+# Loading work.fspcpu(rtl)
 # Loading work.if_stage(rtl)
 # Loading work.pc(rtl)
 # Loading work.im(rtl)
@@ -17,6 +17,7 @@
 # Loading work.stall_if(rtl)
 # Loading work.register_2(rtl)
 # Loading work.register_1(rtl)
+# Loading work.register_4(rtl)
 # Loading work.stall_out(rtl)
 # Loading work.id_stage(rtl)
 # Loading work.regfile(rtl)
@@ -29,67 +30,69 @@
 # Loading work.ex_stage(rtl)
 # Loading work.mux2_32(rtl)
 # Loading work.mux2_5(rtl)
+# Loading work.forwarder(rtl)
 # Loading work.alu_jump(rtl)
 # Loading work.register_7(rtl)
 # Loading work.alu_calc(rtl)
 # Loading work.ma_stage(rtl)
 # Loading work.datamem(rtl)
-# add wave -HEX spcpu_tb/dut/clk 
+# add wave -HEX fspcpu_tb/dut/clk 
 # ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
 #           File in use by: sldl77  Hostname: SLDL77-PC  ProcessID: 3204
-#           Attempting to use alternate WLF file "./wlftc2bn98".
+#           Attempting to use alternate WLF file "./wlfta5xfne".
 # ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlftc2bn98
-#  add wave -HEX spcpu_tb/dut/rst 
-#  add wave -HEX spcpu_tb/dut/outdata 
-#  add wave -HEX spcpu_tb/dut/regwe 
-#  add wave -HEX spcpu_tb/dut/regwad 
-#  add wave -HEX spcpu_tb/dut/regwdata 
-#  add wave -HEX spcpu_tb/dut/m1/m4/* 
-#  add wave -HEX spcpu_tb/dut/m3/inst 
-#  add wave -HEX spcpu_tb/dut/R_inst 
-#  add wave -HEX spcpu_tb/dut/m6/inst 
-#  add wave -HEX spcpu_tb/dut/m6/instout 
+#           Using alternate file: ./wlfta5xfne
+#  add wave -HEX fspcpu_tb/dut/rst 
+#  add wave -HEX fspcpu_tb/dut/outdata 
+#  add wave -HEX fspcpu_tb/dut/regwe 
+#  add wave -HEX fspcpu_tb/dut/regwad 
+#  add wave -HEX fspcpu_tb/dut/regwdata 
+#  add wave -HEX fspcpu_tb/dut/m1/m4/* 
+#  add wave -HEX fspcpu_tb/dut/m3/inst 
+#  add wave -HEX fspcpu_tb/dut/R_inst 
+#  add wave -HEX fspcpu_tb/dut/m3/forwarding_ctrl 
+#  add wave -HEX fspcpu_tb/dut/m43/* 
+#  add wave -HEX fspcpu_tb/dut/m33/aluout 
+#  add wave -HEX fspcpu_tb/dut/m6/inst 
+#  add wave -HEX fspcpu_tb/dut/m6/instout 
 #  run -all
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /spcpu_tb/dut/M26
+#    Time: 0 ps  Iteration: 0  Instance: /fspcpu_tb/dut/M26
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /spcpu_tb/dut/M26
+#    Time: 0 ps  Iteration: 0  Instance: /fspcpu_tb/dut/M26
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /spcpu_tb/dut/M1/M4
+#    Time: 0 ps  Iteration: 0  Instance: /fspcpu_tb/dut/M1/M4
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /spcpu_tb/dut/M1/M4
+#    Time: 0 ps  Iteration: 0  Instance: /fspcpu_tb/dut/M1/M4
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /spcpu_tb/dut/M1/M4
+#    Time: 0 ps  Iteration: 0  Instance: /fspcpu_tb/dut/M1/M4
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /spcpu_tb/dut/M1/M4
+#    Time: 0 ps  Iteration: 0  Instance: /fspcpu_tb/dut/M1/M4
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /spcpu_tb/dut/M1/M4
+#    Time: 0 ps  Iteration: 0  Instance: /fspcpu_tb/dut/M1/M4
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /spcpu_tb/dut/M1/M4
+#    Time: 0 ps  Iteration: 0  Instance: /fspcpu_tb/dut/M1/M4
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /spcpu_tb/dut/M1/M4
+#    Time: 0 ps  Iteration: 0  Instance: /fspcpu_tb/dut/M1/M4
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /spcpu_tb/dut/M1/M3
+#    Time: 0 ps  Iteration: 0  Instance: /fspcpu_tb/dut/M1/M3
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /spcpu_tb/dut/M1/M2
+#    Time: 0 ps  Iteration: 0  Instance: /fspcpu_tb/dut/M1/M2
 # ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 0 ps  Iteration: 0  Instance: /spcpu_tb/dut/M1/M2
+#    Time: 0 ps  Iteration: 0  Instance: /fspcpu_tb/dut/M1/M2
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 1  Instance: /spcpu_tb/dut/M1/M4
+#    Time: 0 ps  Iteration: 1  Instance: /fspcpu_tb/dut/M1/M4
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 1  Instance: /spcpu_tb/dut/M1/M4
+#    Time: 0 ps  Iteration: 1  Instance: /fspcpu_tb/dut/M1/M4
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 1  Instance: /spcpu_tb/dut/M1/M4
+#    Time: 0 ps  Iteration: 1  Instance: /fspcpu_tb/dut/M1/M4
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 1  Instance: /spcpu_tb/dut/M1/M4
+#    Time: 0 ps  Iteration: 1  Instance: /fspcpu_tb/dut/M1/M4
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 1  Instance: /spcpu_tb/dut/M1/M4
+#    Time: 0 ps  Iteration: 1  Instance: /fspcpu_tb/dut/M1/M4
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 1  Instance: /spcpu_tb/dut/M1/M4
+#    Time: 0 ps  Iteration: 1  Instance: /fspcpu_tb/dut/M1/M4
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 1  Instance: /spcpu_tb/dut/M1/M4
+#    Time: 0 ps  Iteration: 1  Instance: /fspcpu_tb/dut/M1/M4
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 1  Instance: /spcpu_tb/dut/M1/M4
-# End time: 18:55:23 on Dec 12,2017, Elapsed time: 0:00:46
-# Errors: 0, Warnings: 22
+#    Time: 0 ps  Iteration: 1  Instance: /fspcpu_tb/dut/M1/M4
