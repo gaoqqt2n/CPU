@@ -14,7 +14,7 @@ end im;
 
 architecture  rtl  of  im  is
 constant nop : std_logic_vector(31 downto 0) := x"04000000"; --nop 
-constant M0 : std_logic_vector(31 downto 0) := x"8c010001"; --load 0 1 1
+constant M0 : std_logic_vector(31 downto 0) := x"8c010001"; --load 0 1 2
 constant M1 : std_logic_vector(31 downto 0) := x"8c020002"; --load 0 2 2
 constant M2 : std_logic_vector(31 downto 0) := x"8c030003"; --load 0 3 3
 constant M3 : std_logic_vector(31 downto 0) := x"8c040004"; --load 0 4 4
@@ -27,8 +27,8 @@ constant M9 : std_logic_vector(31 downto 0) := x"04000000"; --nop
 constant M10 : std_logic_vector(31 downto 0) := x"04000000"; --nop
 constant M11 : std_logic_vector(31 downto 0) := x"04000000"; --nop
 constant M12 : std_logic_vector(31 downto 0) := x"04000000"; --nop
-constant M13 : std_logic_vector(31 downto 0) := x"00221820"; --add 1 2 3
-constant M14 : std_logic_vector(31 downto 0) := x"00643020"; --add 3 4 6
+constant M13 : std_logic_vector(31 downto 0) := x"00221820"; --add 1 2 3  4
+constant M14 : std_logic_vector(31 downto 0) := x"00643020"; --add 3 4 6  8
 constant M15 : std_logic_vector(31 downto 0) := x"8cc70001"; --load 6 7 1
 constant M16 : std_logic_vector(31 downto 0) := x"00a74020"; --add 5 7 8
 constant M17 : std_logic_vector(31 downto 0) := x"00681020"; --add 3 8 2

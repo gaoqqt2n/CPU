@@ -6,7 +6,8 @@ ctrl
 datamem
 extend16
 extend26
-forwarder
+forwarder1
+forwarder2
 im
 mux2_5
 mux2_32

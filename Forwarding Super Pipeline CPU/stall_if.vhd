@@ -94,7 +94,7 @@ architecture rtl of stall_if is
                             brt <= inst(20 downto 16);
                             brd <= inst(15 downto 11);
                             bopcd <= inst(31 downto 26);
-                            forwarding_ctrl <= "0111";
+                            forwarding_ctrl <= "0100";
                         end if;
                     elsif (brd = inst(20 downto 16)) then --r-b-rt
                         if (((bbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100"))) and 
@@ -170,7 +170,7 @@ architecture rtl of stall_if is
                             bopcd <= inst(31 downto 26);
                             forwarding_ctrl <= "0100";
                         end if;
-                    elsif (brd = inst(20 downto 16)) then --lw-b-rt
+                    elsif (brt = inst(20 downto 16)) then --lw-b-rt
                         if (((bbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100"))) and 
                             ((bbrd /= "00000") and (bbrd = inst(25 downto 21)))) then --lw-bb-rs
                             pout <= '1';

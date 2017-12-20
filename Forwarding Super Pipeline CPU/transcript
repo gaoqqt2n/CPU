@@ -1,5 +1,5 @@
 # vsim fspcpu_tb -do "add wave -HEX fspcpu_tb/dut/clk ; add wave -HEX fspcpu_tb/dut/rst ; add wave -HEX fspcpu_tb/dut/outdata ; add wave -HEX fspcpu_tb/dut/regwe ; add wave -HEX fspcpu_tb/dut/regwad ; add wave -HEX fspcpu_tb/dut/regwdata ; add wave -HEX fspcpu_tb/dut/m1/m4/* ; add wave -HEX fspcpu_tb/dut/m3/inst ; add wave -HEX fspcpu_tb/dut/R_inst ; add wave -HEX fspcpu_tb/dut/m3/forwarding_ctrl ; add wave -HEX fspcpu_tb/dut/m43/* ; add wave -HEX fspcpu_tb/dut/m33/aluout ; add wave -HEX fspcpu_tb/dut/m6/inst ; add wave -HEX fspcpu_tb/dut/m6/instout ; run -all" 
-# Start time: 20:27:26 on Dec 15,2017
+# Start time: 19:27:32 on Dec 20,2017
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
@@ -30,18 +30,19 @@
 # Loading work.ex_stage(rtl)
 # Loading work.mux2_32(rtl)
 # Loading work.mux2_5(rtl)
-# Loading work.forwarder(rtl)
+# Loading work.forwarder1(rtl)
 # Loading work.alu_jump(rtl)
 # Loading work.register_7(rtl)
+# Loading work.forwarder2(rtl)
 # Loading work.alu_calc(rtl)
 # Loading work.ma_stage(rtl)
 # Loading work.datamem(rtl)
 # add wave -HEX fspcpu_tb/dut/clk 
 # ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
 #           File in use by: sldl77  Hostname: SLDL77-PC  ProcessID: 3204
-#           Attempting to use alternate WLF file "./wlfta5xfne".
+#           Attempting to use alternate WLF file "./wlft5kybns".
 # ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlfta5xfne
+#           Using alternate file: ./wlft5kybns
 #  add wave -HEX fspcpu_tb/dut/rst 
 #  add wave -HEX fspcpu_tb/dut/outdata 
 #  add wave -HEX fspcpu_tb/dut/regwe 
@@ -96,3 +97,5 @@
 #    Time: 0 ps  Iteration: 1  Instance: /fspcpu_tb/dut/M1/M4
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 #    Time: 0 ps  Iteration: 1  Instance: /fspcpu_tb/dut/M1/M4
+# End time: 19:28:40 on Dec 20,2017, Elapsed time: 0:01:08
+# Errors: 0, Warnings: 22
