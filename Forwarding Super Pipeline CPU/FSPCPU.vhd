@@ -103,11 +103,11 @@ end component;
 
 component forwarder2 is
     port(
-        clk, rst : std_logic;
+        clk, rst : in std_logic;
         ctrl : in std_logic_vector(3 downto 0);
-        in1, in2 : in std_logic_vector(31 downto 0);
+        in1, in2, rtdata : in std_logic_vector(31 downto 0);
         exoutdata, maoutdata : in std_logic_vector(31 downto 0);
-        out1, out2 : out std_logic_vector(31 downto 0)
+        out1, out2, outdatamem : out std_logic_vector(31 downto 0)
     );
 end component;
 
@@ -238,10 +238,10 @@ begin
     M29 : register_5 port map (clk, rst, R_wad, R_alu_calc_wad_ma);
     -- M30 : register_32 port map (clk, rst, R_rsdata, R_alu_calc_rsdata);
     -- M31 : register_32 port map (clk, rst, R_mux32out, R_alu_calc_mux32);
-    M32 : register_32 port map (clk, rst, R_rtdata, exRma_rtdata);
+    -- M32 : register_32 port map (clk, rst, R_rtdata, exRma_rtdata);
 
     -- M43 : forwarder port map (clk, rst, in_forwarder2, R_alu_calc_rsdata, R_alu_calc_mux32, aluout_ma, regwdata, alu_calc_in1, alu_calc_in2);
-    M43 : forwarder2 port map (clk, rst, ex1_forward, R_rsdata, R_mux32out, aluout_ma, regwdata, alu_calc_in1, alu_calc_in2);
+    M43 : forwarder2 port map (clk, rst, ex1_forward, R_rsdata, R_mux32out, R_rtdata, aluout_ma, regwdata, alu_calc_in1, alu_calc_in2, exRma_rtdata);
     -- M43 : forwarder port map (in_forwarder2, R_alu_calc_rsdata, R_alu_calc_mux32, aluout_ma, regwdata, alu_calc_in1, alu_calc_in2);
 
     M33 : alu_calc port map (rst, R_alu_calc_ctrlout(6 downto 3), R_alu_calc_shamt, alu_calc_in1, alu_calc_in2, aluout_ma);

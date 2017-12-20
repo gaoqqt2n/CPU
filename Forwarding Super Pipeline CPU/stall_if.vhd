@@ -76,7 +76,7 @@ architecture rtl of stall_if is
                     forwarding_ctrl <= "0001";
                 elsif (((bopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100"))) and (brd /= "00000")) then
                     if (brd = inst(25 downto 21)) then --r-b-rs
-                        if (((bbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100"))) and 
+                        if (((bbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "000100"))) and 
                             ((bbrd /= "00000") and (bbrd = inst(20 downto 15)))) then --r-bb-rt
                             pout <= '1';
                             bbrt := brt;
@@ -86,6 +86,16 @@ architecture rtl of stall_if is
                             brd <= inst(15 downto 11);
                             bopcd <= inst(31 downto 26);
                             forwarding_ctrl <= "0110";
+                        elsif (((bbopcd = "000000") and (inst(31 downto 26) = "101011")) and 
+                            ((bbrd /= "00000") and (bbrd = inst(20 downto 15)))) then --r-bbst-rt
+                            pout <= '1';
+                            bbrt := brt;
+                            bbrd := brd;
+                            bbopcd := bopcd;
+                            brt <= inst(20 downto 16);
+                            brd <= inst(15 downto 11);
+                            bopcd <= inst(31 downto 26);
+                            forwarding_ctrl <= "1100";
                         else 
                             pout <= '1';
                             bbrt := brt;
@@ -95,6 +105,27 @@ architecture rtl of stall_if is
                             brd <= inst(15 downto 11);
                             bopcd <= inst(31 downto 26);
                             forwarding_ctrl <= "0100";
+                        end if;
+                    elsif (brd = inst(20 downto 16) and (inst(31 downto 26) = "101011")) then --r-bst-rt
+                        if (((bbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100"))) and 
+                            ((bbrd /= "00000") and (bbrd = inst(25 downto 21)))) then --r-bb-rs
+                            pout <= '1';
+                            bbrt := brt;
+                            bbrd := brd;
+                            bbopcd := bopcd;
+                            brt <= inst(20 downto 16);
+                            brd <= inst(15 downto 11);
+                            bopcd <= inst(31 downto 26);
+                            forwarding_ctrl <= "1101";
+                        else
+                            pout <= '1';
+                            bbrt := brt;
+                            bbrd := brd;
+                            bbopcd := bopcd;
+                            brt <= inst(20 downto 16);
+                            brd <= inst(15 downto 11);
+                            bopcd <= inst(31 downto 26);
+                            forwarding_ctrl <= "1010";
                         end if;
                     elsif (brd = inst(20 downto 16)) then --r-b-rt
                         if (((bbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100"))) and 
@@ -147,6 +178,16 @@ architecture rtl of stall_if is
                     brd <= inst(15 downto 11);
                     bopcd <= inst(31 downto 26);
                     forwarding_ctrl <= "0011";
+                elsif (((bbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100"))) and 
+                    ((bbrd /= "00000") and (bbrd = inst(20 downto 16)))) then --r-bbrs-rt
+                    pout <= '1';
+                    bbrt := brt;
+                    bbrd := brd;
+                    bbopcd := bopcd;
+                    brt <= inst(20 downto 16);
+                    brd <= inst(15 downto 11);
+                    bopcd <= inst(31 downto 26);
+                    forwarding_ctrl <= "1011";
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                 elsif (((bopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100"))) and (brt /= "00000")) then
                     if (brt = inst(25 downto 21)) then --lw-b-rs
@@ -160,6 +201,16 @@ architecture rtl of stall_if is
                             brd <= inst(15 downto 11);
                             bopcd <= inst(31 downto 26);
                             forwarding_ctrl <= "0110";
+                        elsif (((bbopcd = "100011") and (inst(31 downto 26) = "101011")) and 
+                            ((bbrt /= "00000") and (bbrt = inst(20 downto 15)))) then --lw-bbst-rt
+                            pout <= '1';
+                            bbrt := brt;
+                            bbrd := brd;
+                            bbopcd := bopcd;
+                            brt <= inst(20 downto 16);
+                            brd <= inst(15 downto 11);
+                            bopcd <= inst(31 downto 26);
+                            forwarding_ctrl <= "1100";
                         else 
                             pout <= '1';
                             bbrt := brt;
@@ -169,6 +220,27 @@ architecture rtl of stall_if is
                             brd <= inst(15 downto 11);
                             bopcd <= inst(31 downto 26);
                             forwarding_ctrl <= "0100";
+                        end if;
+                    elsif (brt = inst(20 downto 16) and (inst(31 downto 26) = "101011")) then --lw-bst-rt
+                        if (((bbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100"))) and 
+                            ((bbrt /= "00000") and (bbrt = inst(25 downto 21)))) then --lw-bb-rs
+                            pout <= '1';
+                            bbrt := brt;
+                            bbrd := brd;
+                            bbopcd := bopcd;
+                            brt <= inst(20 downto 16);
+                            brd <= inst(15 downto 11);
+                            bopcd <= inst(31 downto 26);
+                            forwarding_ctrl <= "1101";
+                        else
+                            pout <= '1';
+                            bbrt := brt;
+                            bbrd := brd;
+                            bbopcd := bopcd;
+                            brt <= inst(20 downto 16);
+                            brd <= inst(15 downto 11);
+                            bopcd <= inst(31 downto 26);
+                            forwarding_ctrl <= "1010";
                         end if;
                     elsif (brt = inst(20 downto 16)) then --lw-b-rt
                         if (((bbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100"))) and 
@@ -202,7 +274,7 @@ architecture rtl of stall_if is
                         forwarding_ctrl <= "0001";
                     end if;
                 elsif (((bbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100"))) and 
-                    ((bbrd /= "00000") and (bbrd = inst(25 downto 21)))) then --r-bb-rs
+                    ((bbrt /= "00000") and (bbrt = inst(25 downto 21)))) then --lw-bb-rs
                     pout <= '1';
                     bbrt := brt;
                     bbrd := brd;
@@ -212,7 +284,7 @@ architecture rtl of stall_if is
                     bopcd <= inst(31 downto 26);
                     forwarding_ctrl <= "0111";
                 elsif (((bbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100"))) and 
-                    ((bbrd /= "00000") and (bbrd = inst(20 downto 16)))) then --r-bb-rt
+                    ((bbrt /= "00000") and (bbrt = inst(20 downto 16)))) then --lw-bb-rt
                     pout <= '1';
                     bbrt := brt;
                     bbrd := brd;
@@ -221,6 +293,16 @@ architecture rtl of stall_if is
                     brd <= inst(15 downto 11);
                     bopcd <= inst(31 downto 26);
                     forwarding_ctrl <= "0011";
+                elsif (((bbopcd = "100011") and (inst(31 downto 26) = "101011")) and 
+                    ((bbrt /= "00000") and (bbrt = inst(20 downto 16)))) then --lw-bbst-rt
+                    pout <= '1';
+                    bbrt := brt;
+                    bbrd := brd;
+                    bbopcd := bopcd;
+                    brt <= inst(20 downto 16);
+                    brd <= inst(15 downto 11);
+                    bopcd <= inst(31 downto 26);
+                    forwarding_ctrl <= "1011";
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                 elsif (((bopcd = "000000") and (inst(31 downto 26) = "100011")) and --r
                         ((brd /= "00000") and (brd = inst(25 downto 21)))) then --r-blw-rs

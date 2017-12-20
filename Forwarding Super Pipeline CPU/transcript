@@ -1,5 +1,5 @@
 # vsim fspcpu_tb -do "add wave -HEX fspcpu_tb/dut/clk ; add wave -HEX fspcpu_tb/dut/rst ; add wave -HEX fspcpu_tb/dut/outdata ; add wave -HEX fspcpu_tb/dut/regwe ; add wave -HEX fspcpu_tb/dut/regwad ; add wave -HEX fspcpu_tb/dut/regwdata ; add wave -HEX fspcpu_tb/dut/m1/m4/* ; add wave -HEX fspcpu_tb/dut/m3/inst ; add wave -HEX fspcpu_tb/dut/R_inst ; add wave -HEX fspcpu_tb/dut/m3/forwarding_ctrl ; add wave -HEX fspcpu_tb/dut/m43/* ; add wave -HEX fspcpu_tb/dut/m33/aluout ; add wave -HEX fspcpu_tb/dut/m6/inst ; add wave -HEX fspcpu_tb/dut/m6/instout ; run -all" 
-# Start time: 19:27:32 on Dec 20,2017
+# Start time: 21:18:35 on Dec 20,2017
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
@@ -40,9 +40,9 @@
 # add wave -HEX fspcpu_tb/dut/clk 
 # ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
 #           File in use by: sldl77  Hostname: SLDL77-PC  ProcessID: 3204
-#           Attempting to use alternate WLF file "./wlft5kybns".
+#           Attempting to use alternate WLF file "./wlftdmam7i".
 # ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlft5kybns
+#           Using alternate file: ./wlftdmam7i
 #  add wave -HEX fspcpu_tb/dut/rst 
 #  add wave -HEX fspcpu_tb/dut/outdata 
 #  add wave -HEX fspcpu_tb/dut/regwe 
@@ -97,5 +97,3 @@
 #    Time: 0 ps  Iteration: 1  Instance: /fspcpu_tb/dut/M1/M4
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 #    Time: 0 ps  Iteration: 1  Instance: /fspcpu_tb/dut/M1/M4
-# End time: 19:28:40 on Dec 20,2017, Elapsed time: 0:01:08
-# Errors: 0, Warnings: 22
