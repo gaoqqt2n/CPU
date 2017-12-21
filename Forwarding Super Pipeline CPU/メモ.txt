@@ -1,12 +1,1 @@
-stallのjump,beqの                    
-      brt <= (others => '0');
-      brd <= (others => '0');
-      bopcd <= "000001";
-部分は
-      brt <= inst(20 downto 16);
-      brd <= inst(15 downto 11);
-      bopcd <= inst(31 downto 26);
-かもしれない（というか多分そう）
-バグってないからとりあえずそのままにする
-
 rsとrtが同じレジスタを参照する場合のハザードの対処をしていない
