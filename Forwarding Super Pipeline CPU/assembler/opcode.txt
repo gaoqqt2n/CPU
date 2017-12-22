@@ -20,11 +20,11 @@ store 2 1 4
 load 1 7 4
 load 7 8 1
 store 8 1 10
+load 8 15 1
 add 1 2 3
 store 1 3 13
 load 4 5 10
 store 6 5 10
-nop
 nop
 nop
 nop

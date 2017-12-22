@@ -1,5 +1,5 @@
-# vsim fspcpu_tb -do "add wave -HEX fspcpu_tb/dut/clk ; add wave -HEX fspcpu_tb/dut/rst ; add wave -HEX fspcpu_tb/dut/outdata ; add wave -HEX fspcpu_tb/dut/regwe ; add wave -HEX fspcpu_tb/dut/regwad ; add wave -HEX fspcpu_tb/dut/regwdata ; add wave -HEX fspcpu_tb/dut/m1/m4/* ; add wave -HEX fspcpu_tb/dut/m3/inst ; add wave -HEX fspcpu_tb/dut/R_inst ; add wave -HEX fspcpu_tb/dut/m3/forwarding_ctrl ; add wave -HEX fspcpu_tb/dut/m43/* ; add wave -HEX fspcpu_tb/dut/m33/aluout ; add wave -HEX fspcpu_tb/dut/m6/inst ; add wave -HEX fspcpu_tb/dut/m6/instout ; run -all" 
-# Start time: 15:07:12 on Dec 21,2017
+# vsim fspcpu_tb -do "add wave -HEX fspcpu_tb/dut/clk ; add wave -HEX fspcpu_tb/dut/rst ; add wave -HEX fspcpu_tb/dut/outdata ; add wave -HEX fspcpu_tb/dut/regwe ; add wave -HEX fspcpu_tb/dut/regwad ; add wave -HEX fspcpu_tb/dut/regwdata ; add wave -HEX fspcpu_tb/dut/m1/m4/* ; add wave -HEX fspcpu_tb/dut/m3/inst ; add wave -HEX fspcpu_tb/dut/R_inst ; add wave -HEX fspcpu_tb/dut/m3/forwarding_ctrl ; add wave -HEX fspcpu_tb/dut/m43/* ; add wave -HEX fspcpu_tb/dut/m33/aluout ; add wave -HEX fspcpu_tb/dut/m6/inst ; add wave -HEX fspcpu_tb/dut/m6/instout ; add wave -HEX fspcpu_tb/dut/m3/*; run -all" 
+# Start time: 21:24:26 on Dec 22,2017
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
@@ -17,11 +17,10 @@
 # Loading work.stall_if(rtl)
 # Loading work.register_2(rtl)
 # Loading work.register_1(rtl)
-# Loading work.register_4(rtl)
+# Loading work.register_5(rtl)
 # Loading work.stall_out(rtl)
 # Loading work.id_stage(rtl)
 # Loading work.regfile(rtl)
-# Loading work.register_5(rtl)
 # Loading work.extend16(rtl)
 # Loading work.extend26(rtl)
 # Loading work.ctrl(rtl)
@@ -40,9 +39,9 @@
 # add wave -HEX fspcpu_tb/dut/clk 
 # ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
 #           File in use by: sldl77  Hostname: SLDL77-PC  ProcessID: 3204
-#           Attempting to use alternate WLF file "./wlft8ii7z4".
+#           Attempting to use alternate WLF file "./wlft5yw7gy".
 # ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlft8ii7z4
+#           Using alternate file: ./wlft5yw7gy
 #  add wave -HEX fspcpu_tb/dut/rst 
 #  add wave -HEX fspcpu_tb/dut/outdata 
 #  add wave -HEX fspcpu_tb/dut/regwe 
@@ -56,53 +55,8 @@
 #  add wave -HEX fspcpu_tb/dut/m33/aluout 
 #  add wave -HEX fspcpu_tb/dut/m6/inst 
 #  add wave -HEX fspcpu_tb/dut/m6/instout 
+#  add wave -HEX fspcpu_tb/dut/m3/*
 #  run -all
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /fspcpu_tb/dut/M26
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /fspcpu_tb/dut/M26
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /fspcpu_tb/dut/M1/M4
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /fspcpu_tb/dut/M1/M4
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /fspcpu_tb/dut/M1/M4
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /fspcpu_tb/dut/M1/M4
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /fspcpu_tb/dut/M1/M4
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /fspcpu_tb/dut/M1/M4
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /fspcpu_tb/dut/M1/M4
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /fspcpu_tb/dut/M1/M3
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 0  Instance: /fspcpu_tb/dut/M1/M2
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 0 ps  Iteration: 0  Instance: /fspcpu_tb/dut/M1/M2
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 1  Instance: /fspcpu_tb/dut/M1/M4
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 1  Instance: /fspcpu_tb/dut/M1/M4
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 1  Instance: /fspcpu_tb/dut/M1/M4
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 1  Instance: /fspcpu_tb/dut/M1/M4
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 1  Instance: /fspcpu_tb/dut/M1/M4
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 1  Instance: /fspcpu_tb/dut/M1/M4
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 1  Instance: /fspcpu_tb/dut/M1/M4
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ps  Iteration: 1  Instance: /fspcpu_tb/dut/M1/M4
-restart
- add wave -HEX fspcpu_tb/dut/m7/m1/*
-run -all
-# GetModuleFileName: 指定されたモジュールが見つかりません。
-# 
-# 
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 #    Time: 0 ps  Iteration: 0  Instance: /fspcpu_tb/dut/M26
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).

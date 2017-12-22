@@ -7,7 +7,7 @@ use ieee.STD_LOGIC_UNSIGNED.all;
 
 entity forwarder1 is
     port(
-        ctrl : in std_logic_vector(3 downto 0);
+        ctrl : in std_logic_vector(4 downto 0);
         in1, in2 : in std_logic_vector(31 downto 0);
         exoutdata, maoutdata : in std_logic_vector(31 downto 0);
         out1, out2 : out std_logic_vector(31 downto 0)
@@ -18,43 +18,35 @@ architecture rtl of forwarder1 is
 begin
     
     process (ctrl, in1, in2, exoutdata, maoutdata) 
-    -- variable tmp1, tmp2 : std_logic_vector(31 downto 0) := x"00000000";
+    variable bbbdata : std_logic_vector(31 downto 0) := x"00000000";
     begin
         
-
-
-        case (ctrl) is
-            when "0001" =>
+        case (ctrl(4 downto 3)) is
+            when "00" =>
                 out1 <= in1;
-                out2 <= in2;
-            when "0010" =>
-                out1 <= in1;
-                out2 <= exoutdata;
-            when "0011" =>
-                out1 <= in1;
-                out2 <= maoutdata;
-            when "0100"=>
+            when "01" =>
                 out1 <= exoutdata;
-                out2 <= in2;
-            when "0101"=>
-                out1 <= exoutdata;
-                out2 <= exoutdata;
-            when "0110"=>
-                out1 <= exoutdata;
-                out2 <= maoutdata;
-            when "0111"=>
+            when "10" =>
                 out1 <= maoutdata;
-                out2 <= in2;
-            when "1000"=>
-                out1 <= maoutdata;
-                out2 <= exoutdata;
-            when "1001"=>
-                out1 <= maoutdata;
-                out2 <= maoutdata;
+            when "11"=>
+                out1 <= bbbdata;
             when others =>
-                out1 <= (others => '0');
-                out2 <= (others => '0');
+                out1 <= in1;
         end case;
+        
+        case (ctrl(1 downto 0)) is
+            when "00"=>
+                out2 <= in2;
+            when "01"=>
+                out2 <= exoutdata;
+            when "10"=>
+                out2 <= maoutdata;
+            when "11"=>
+                out2 <= bbbdata;
+            when others =>
+                out2 <= in2;
+        end case;
+        bbbdata := maoutdata;
     end process;
 
 end;

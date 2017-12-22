@@ -7,7 +7,7 @@ end forwarder1_tb;
 architecture stimulus of forwarder1_tb is 
 component forwarder1  
     port(
-        ctrl : in std_logic_vector(3 downto 0);
+        ctrl : in std_logic_vector(4 downto 0);
         in1, in2 : in std_logic_vector(31 downto 0);
         exoutdata, maoutdata : in std_logic_vector(31 downto 0);
         out1, out2 : out std_logic_vector(31 downto 0)
@@ -18,7 +18,7 @@ constant cycle  : time := 200 ns;
 constant half_cycle  : time := 100 ns; 
 constant delay  : time := 20 ns; 
  
-signal ctrl : std_logic_vector(3 downto 0);
+signal ctrl : std_logic_vector(4 downto 0);
 signal in1, in2 : std_logic_vector(31 downto 0);
 signal exoutdata, maoutdata : std_logic_vector(31 downto 0);
 signal out1, out2 : std_logic_vector(31 downto 0);
@@ -27,28 +27,42 @@ begin
     dut : forwarder1 port map(ctrl, in1, in2, exoutdata, maoutdata, out1, out2); 
  
      process begin  
-        ctrl <= "0001"; in1 <= x"00000001"; in2 <= x"00000002"; exoutdata <= x"00000003"; maoutdata <= x"00000004";
+        ctrl <= "00000"; in1 <= x"00000001"; in2 <= x"00000002"; exoutdata <= x"00000003"; maoutdata <= x"00000004";
         wait for delay; 
         wait for cycle; 
-        ctrl <= "0001"; in1 <= x"00000001"; in2 <= x"00000002"; exoutdata <= x"00000003"; maoutdata <= x"00000004";
+        ctrl <= "00000"; in1 <= x"00000001"; in2 <= x"00000002"; exoutdata <= x"00000003"; maoutdata <= x"00000004";
         wait for cycle; 
-        ctrl <= "0010"; in1 <= x"00000001"; in2 <= x"00000002"; exoutdata <= x"00000003"; maoutdata <= x"00000004";
+        ctrl <= "01000"; in1 <= x"00000001"; in2 <= x"00000002"; exoutdata <= x"00000003"; maoutdata <= x"00000004";
         wait for cycle; 
-        ctrl <= "0011"; in1 <= x"00000001"; in2 <= x"00000002"; exoutdata <= x"00000003"; maoutdata <= x"00000004";
+        ctrl <= "10000"; in1 <= x"00000001"; in2 <= x"00000002"; exoutdata <= x"00000003"; maoutdata <= x"00000004";
         wait for cycle; 
-        ctrl <= "0100"; in1 <= x"00000001"; in2 <= x"00000002"; exoutdata <= x"00000003"; maoutdata <= x"00000004";
+        ctrl <= "11000"; in1 <= x"00000001"; in2 <= x"00000002"; exoutdata <= x"00000003"; maoutdata <= x"00000004";
         wait for cycle; 
-        ctrl <= "0101"; in1 <= x"00000001"; in2 <= x"00000002"; exoutdata <= x"00000003"; maoutdata <= x"00000004";
+        ctrl <= "00001"; in1 <= x"00000001"; in2 <= x"00000002"; exoutdata <= x"00000003"; maoutdata <= x"00000004";
         wait for cycle; 
-        ctrl <= "0110"; in1 <= x"00000001"; in2 <= x"00000002"; exoutdata <= x"00000003"; maoutdata <= x"00000004";
+        ctrl <= "01001"; in1 <= x"00000001"; in2 <= x"00000002"; exoutdata <= x"00000003"; maoutdata <= x"00000004";
         wait for cycle; 
-        ctrl <= "0111"; in1 <= x"00000001"; in2 <= x"00000002"; exoutdata <= x"00000003"; maoutdata <= x"00000004";
+        ctrl <= "10001"; in1 <= x"00000001"; in2 <= x"00000002"; exoutdata <= x"00000003"; maoutdata <= x"00000004";
         wait for cycle; 
-        ctrl <= "1000"; in1 <= x"00000001"; in2 <= x"00000002"; exoutdata <= x"00000003"; maoutdata <= x"00000004";
+        ctrl <= "11001"; in1 <= x"00000001"; in2 <= x"00000002"; exoutdata <= x"00000003"; maoutdata <= x"00000004";
         wait for cycle; 
-        ctrl <= "1001"; in1 <= x"00000001"; in2 <= x"00000002"; exoutdata <= x"00000003"; maoutdata <= x"00000004";
+        ctrl <= "00010"; in1 <= x"00000001"; in2 <= x"00000002"; exoutdata <= x"00000003"; maoutdata <= x"00000004";
         wait for cycle; 
-        ctrl <= "1010"; in1 <= x"00000001"; in2 <= x"00000002"; exoutdata <= x"00000003"; maoutdata <= x"00000004";
+        ctrl <= "01010"; in1 <= x"00000001"; in2 <= x"00000002"; exoutdata <= x"00000003"; maoutdata <= x"00000004";
+        wait for cycle; 
+        ctrl <= "10010"; in1 <= x"00000001"; in2 <= x"00000002"; exoutdata <= x"00000003"; maoutdata <= x"00000004";
+        wait for cycle; 
+        ctrl <= "11010"; in1 <= x"00000001"; in2 <= x"00000002"; exoutdata <= x"00000003"; maoutdata <= x"00000004";
+        wait for cycle; 
+        ctrl <= "00011"; in1 <= x"00000001"; in2 <= x"00000002"; exoutdata <= x"00000003"; maoutdata <= x"00000004";
+        wait for cycle; 
+        ctrl <= "01011"; in1 <= x"00000001"; in2 <= x"00000002"; exoutdata <= x"00000003"; maoutdata <= x"00000004";
+        wait for cycle; 
+        ctrl <= "10011"; in1 <= x"00000001"; in2 <= x"00000002"; exoutdata <= x"00000003"; maoutdata <= x"00000004";
+        wait for cycle; 
+        ctrl <= "11011"; in1 <= x"00000001"; in2 <= x"00000002"; exoutdata <= x"00000003"; maoutdata <= x"00000004";
+        wait for cycle; 
+        ctrl <= "11111"; in1 <= x"00000001"; in2 <= x"00000002"; exoutdata <= x"00000003"; maoutdata <= x"00000004";
         wait for cycle; 
         wait; 
      end process;     

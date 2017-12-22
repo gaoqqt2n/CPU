@@ -17,7 +17,7 @@ architecture  rtl  of  fspcpu  is
 signal regwe, stall_if_R, R_stall_out : std_logic;
 signal adsel_ctrl, hactrl, R1_hactrl, R2_hactrl, hactrl_adsel : std_logic_vector(1 downto 0);
 signal stallflag : std_logic_vector(2 downto 0);
-signal stall_if_forward, stall_out_forward, ID_forward, ex1_forward, in_forwarder2 : std_logic_vector(3 downto 0);
+signal stall_if_forward, stall_out_forward, ID_forward, ex1_forward, in_forwarder2 : std_logic_vector(4 downto 0);
 signal regwad, rtad_R, R_rtad, rdad_R, R_rdad, shamt_R, R_shamt, wad_R, R_wad, ex1_shamt_R, R_ex2_shamt : std_logic_vector(4 downto 0);
 signal R_alu_calc_shamt, R_alu_calc_wad_ma : std_logic_vector(4 downto 0);
 signal ctrlout_7_R, R_ctrlout_7, R_alu_calc_ctrlout : std_logic_vector(6 downto 0);
@@ -45,7 +45,7 @@ component stall_if
         inflag : in std_logic_vector(2 downto 0) := "000"; 
         outflag : out std_logic_vector(2 downto 0); 
         outhactrl : out std_logic_vector(1 downto 0); --hold address control
-        forwarding_ctrl : out std_logic_vector(3 downto 0);
+        forwarding_ctrl : out std_logic_vector(4 downto 0);
         pout : out std_logic
     );
 end component;
@@ -94,7 +94,7 @@ end component;
 
 component forwarder1 is
     port(
-        ctrl : in std_logic_vector(3 downto 0);
+        ctrl : in std_logic_vector(4 downto 0);
         in1, in2 : in std_logic_vector(31 downto 0);
         exoutdata, maoutdata : in std_logic_vector(31 downto 0);
         out1, out2 : out std_logic_vector(31 downto 0)
@@ -104,7 +104,7 @@ end component;
 component forwarder2 is
     port(
         clk, rst : in std_logic;
-        ctrl : in std_logic_vector(3 downto 0);
+        ctrl : in std_logic_vector(4 downto 0);
         in1, in2, rtdata : in std_logic_vector(31 downto 0);
         exoutdata, maoutdata : in std_logic_vector(31 downto 0);
         out1, out2, outdatamem : out std_logic_vector(31 downto 0)
@@ -207,10 +207,10 @@ begin
     M41 : register_2 port map (clk, rst, R2_hactrl, hactrl_adsel);
     M4 : register_32 port map (clk, rst, R_inst, R2_inst);
     M5 : register_1 port map (clk, rst, stall_if_R, R_stall_out);
-    M44 : register_4 port map (clk, rst, stall_if_forward, stall_out_forward);
+    M44 : register_5 port map (clk, rst, stall_if_forward, stall_out_forward);
 
     M6 : stall_out port map (R2_inst, R_stall_out, instout);
-    M45 : register_4 port map (clk, rst, stall_out_forward, ID_forward);
+    M45 : register_5 port map (clk, rst, stall_out_forward, ID_forward);
 
     M7 : id_stage port map (clk, rst, regwe, regwad, instout, regwdata, rtad_R, rdad_R, shamt_R, ctrl_R, R_ex26, rs_R, rt_R, R_ex16_1, ex16_2_R);
 
@@ -224,7 +224,7 @@ begin
     M16 : register_5 port map (clk, rst, rdad_R, R_rdad);
     M17 : register_5 port map (clk, rst, shamt_R, R_shamt);
     M18 : register_9 port map (clk, rst, ctrl_R, R_ctrl);
-    M46 : register_4 port map (clk, rst, ID_forward, ex1_forward);
+    M46 : register_5 port map (clk, rst, ID_forward, ex1_forward);
 
     M19 : ex_stage port map (rst, R_rtad, R_rdad, R_shamt, R_ctrl, R_rs, R_rt, R_ex16_2, R_wad, R_ex2_shamt, R_ctrlout_7, R_rsdata, R_mux32out, R_rtdata);
 
