@@ -58,23 +58,59 @@ architecture rtl of stall_if is
                     outflag <= inflag + 1;
                     fdctrl1 := "00";
                     fdctrl2 := "00";
+                    bbbrt := bbrt;
+                    bbbrd := bbrd;
+                    bbbopcd := bbopcd;
+                    bbrt := brt;
+                    bbrd := brd;
+                    bbopcd := bopcd;
+                    brt <= (others => '0');
+                    brd <= (others => '0');
+                    bopcd <= "000001";
                 elsif (inflag = "100") then --happened datahazard after 4clock
                     pouttmp := '0';
                     outflag <= "000";
                     fdctrl1 := "00";
                     fdctrl2 := "00";
+                    bbbrt := bbrt;
+                    bbbrd := bbrd;
+                    bbbopcd := bbopcd;
+                    bbrt := brt;
+                    bbrd := brd;
+                    bbopcd := bopcd;
+                    brt <= (others => '0');
+                    brd <= (others => '0');
+                    bopcd <= "000001";
                 elsif (((bopcd = "100011") and (inst(31 downto 26) = "000100")) and ((brt /= "00000") and (brt = inst(25 downto 21)))) then --load - beq --nop
-                    pouttmp := '1';
+                    pouttmp := '0';
                     outhactrl <= "10";
                     outflag <= "001";
                     fdctrl1 := "00";
                     fdctrl2 := "00";
-                elsif ((inst(31 downto 26) = "000010") or (inst(31 downto 26) = "000100")) then --jump, beq
+                    bbbrt := bbrt;
+                    bbbrd := bbrd;
+                    bbbopcd := bbopcd;
+                    bbrt := brt;
+                    bbrd := brd;
+                    bbopcd := bopcd;
+                    brt <= (others => '0');
+                    brd <= (others => '0');
+                    bopcd <= "000001";
+                elsif (inst(31 downto 26) = "000010") then --jump
                     pouttmp := '1';
                     outhactrl <= "01";
                     outflag <= "001";
                     fdctrl1 := "00";
                     fdctrl2 := "00";
+                    bbbrt := bbrt;
+                    bbbrd := bbrd;
+                    bbbopcd := bbopcd;
+                    bbrt := brt;
+                    bbrd := brd;
+                    bbopcd := bopcd;
+                    brt <= inst(20 downto 16);
+                    brd <= inst(15 downto 11);
+                    bopcd <= inst(31 downto 26);
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                 elsif (((bopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011")))
                     and (brd /= "00000")and (brd = inst(25 downto 21))) then --r-b-rs
@@ -108,7 +144,7 @@ architecture rtl of stall_if is
                         elsif (((bbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
                             and (bbrd /= "00000") and (bbrd = inst(20 downto 16))) then --r-bb-rt
                                 pouttmp := '1';
-                                fdctrl2 := "01";
+                                fdctrl2 := "10";
                                 bbbrt := bbrt;
                                 bbbrd := bbrd;
                                 bbbopcd := bbopcd;
@@ -121,7 +157,7 @@ architecture rtl of stall_if is
                         elsif (((bbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
                             and (bbrt /= "00000") and (bbrt = inst(20 downto 16))) then --lw-bb-rt
                                 pouttmp := '1';
-                                fdctrl2 := "01";
+                                fdctrl2 := "10";
                                 bbbrt := bbrt;
                                 bbbrd := bbrd;
                                 bbbopcd := bbopcd;
@@ -134,7 +170,7 @@ architecture rtl of stall_if is
                         elsif (((bbbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
                             and (bbbrd /= "00000") and (bbbrd = inst(20 downto 16))) then --r-bbb-rt
                                 pouttmp := '1';
-                                fdctrl2 := "01";
+                                fdctrl2 := "11";
                                 bbbrt := bbrt;
                                 bbbrd := bbrd;
                                 bbbopcd := bbopcd;
@@ -147,7 +183,7 @@ architecture rtl of stall_if is
                         elsif (((bbbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
                             and (bbbrt /= "00000") and (bbbrt = inst(20 downto 16))) then --lw-bbb-rt
                                 pouttmp := '1';
-                                fdctrl2 := "01";
+                                fdctrl2 := "11";
                                 bbbrt := bbrt;
                                 bbbrd := bbrd;
                                 bbbopcd := bbopcd;
@@ -159,7 +195,7 @@ architecture rtl of stall_if is
                                 bopcd <= inst(31 downto 26);
                         else
                             pouttmp := '1';
-                            fdctrl2 := "01";
+                            fdctrl2 := "00";
                             bbbrt := bbrt;
                             bbbrd := bbrd;
                             bbbopcd := bbopcd;
@@ -170,6 +206,10 @@ architecture rtl of stall_if is
                             brd <= inst(15 downto 11);
                             bopcd <= inst(31 downto 26);
                         end if;
+                        if (inst(31 downto 26) = "000100") then 
+                            outhactrl <= "01";
+                            outflag <= "001";
+                        end if;           
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                 elsif (((bopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011")))
                     and (brt /= "00000")and (brt = inst(25 downto 21))) then --lw-b-rs
@@ -203,7 +243,7 @@ architecture rtl of stall_if is
                         elsif (((bbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
                             and (bbrd /= "00000") and (bbrd = inst(20 downto 16))) then --r-bb-rt
                                 pouttmp := '1';
-                                fdctrl2 := "01";
+                                fdctrl2 := "10";
                                 bbbrt := bbrt;
                                 bbbrd := bbrd;
                                 bbbopcd := bbopcd;
@@ -216,7 +256,7 @@ architecture rtl of stall_if is
                         elsif (((bbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
                             and (bbrt /= "00000") and (bbrt = inst(20 downto 16))) then --lw-bb-rt
                                 pouttmp := '1';
-                                fdctrl2 := "01";
+                                fdctrl2 := "10";
                                 bbbrt := bbrt;
                                 bbbrd := bbrd;
                                 bbbopcd := bbopcd;
@@ -229,7 +269,7 @@ architecture rtl of stall_if is
                         elsif (((bbbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
                             and (bbbrd /= "00000") and (bbbrd = inst(20 downto 16))) then --r-bbb-rt
                                 pouttmp := '1';
-                                fdctrl2 := "01";
+                                fdctrl2 := "11";
                                 bbbrt := bbrt;
                                 bbbrd := bbrd;
                                 bbbopcd := bbopcd;
@@ -242,7 +282,7 @@ architecture rtl of stall_if is
                         elsif (((bbbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
                             and (bbbrt /= "00000") and (bbbrt = inst(20 downto 16))) then --lw-bbb-rt
                                 pouttmp := '1';
-                                fdctrl2 := "01";
+                                fdctrl2 := "11";
                                 bbbrt := bbrt;
                                 bbbrd := bbrd;
                                 bbbopcd := bbopcd;
@@ -254,7 +294,7 @@ architecture rtl of stall_if is
                                 bopcd <= inst(31 downto 26);
                         else
                             pouttmp := '1';
-                            fdctrl2 := "01";
+                            fdctrl2 := "00";
                             bbbrt := bbrt;
                             bbbrd := bbrd;
                             bbbopcd := bbopcd;
@@ -265,10 +305,14 @@ architecture rtl of stall_if is
                             brd <= inst(15 downto 11);
                             bopcd <= inst(31 downto 26);
                         end if;
+                        if (inst(31 downto 26) = "000100") then 
+                            outhactrl <= "01";
+                            outflag <= "001";
+                        end if;           
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                 elsif (((bbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011")))
                     and (bbrd /= "00000")and (bbrd = inst(25 downto 21))) then --r-bb-rs
-                        fdctrl1 := "01";
+                        fdctrl1 := "10";
                         if (((bopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
                             and (brd /= "00000") and (brd = inst(20 downto 16))) then --r-b-rt
                                 pouttmp := '1';
@@ -298,7 +342,7 @@ architecture rtl of stall_if is
                         elsif (((bbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
                             and (bbrd /= "00000") and (bbrd = inst(20 downto 16))) then --r-bb-rt
                                 pouttmp := '1';
-                                fdctrl2 := "01";
+                                fdctrl2 := "10";
                                 bbbrt := bbrt;
                                 bbbrd := bbrd;
                                 bbbopcd := bbopcd;
@@ -311,7 +355,7 @@ architecture rtl of stall_if is
                         elsif (((bbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
                             and (bbrt /= "00000") and (bbrt = inst(20 downto 16))) then --lw-bb-rt
                                 pouttmp := '1';
-                                fdctrl2 := "01";
+                                fdctrl2 := "10";
                                 bbbrt := bbrt;
                                 bbbrd := bbrd;
                                 bbbopcd := bbopcd;
@@ -324,7 +368,7 @@ architecture rtl of stall_if is
                         elsif (((bbbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
                             and (bbbrd /= "00000") and (bbbrd = inst(20 downto 16))) then --r-bbb-rt
                                 pouttmp := '1';
-                                fdctrl2 := "01";
+                                fdctrl2 := "11";
                                 bbbrt := bbrt;
                                 bbbrd := bbrd;
                                 bbbopcd := bbopcd;
@@ -337,7 +381,7 @@ architecture rtl of stall_if is
                         elsif (((bbbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
                             and (bbbrt /= "00000") and (bbbrt = inst(20 downto 16))) then --lw-bbb-rt
                                 pouttmp := '1';
-                                fdctrl2 := "01";
+                                fdctrl2 := "11";
                                 bbbrt := bbrt;
                                 bbbrd := bbrd;
                                 bbbopcd := bbopcd;
@@ -349,7 +393,7 @@ architecture rtl of stall_if is
                                 bopcd <= inst(31 downto 26);
                         else
                             pouttmp := '1';
-                            fdctrl2 := "01";
+                            fdctrl2 := "00";
                             bbbrt := bbrt;
                             bbbrd := bbrd;
                             bbbopcd := bbopcd;
@@ -360,10 +404,14 @@ architecture rtl of stall_if is
                             brd <= inst(15 downto 11);
                             bopcd <= inst(31 downto 26);
                         end if;
+                        if (inst(31 downto 26) = "000100") then 
+                            outhactrl <= "01";
+                            outflag <= "001";
+                        end if;           
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                 elsif (((bbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011")))
                     and (bbrt /= "00000")and (bbrt = inst(25 downto 21))) then --lw-bb-rs
-                        fdctrl1 := "01";
+                        fdctrl1 := "10";
                         if (((bopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
                             and (brd /= "00000") and (brd = inst(20 downto 16))) then --r-b-rt
                                 pouttmp := '1';
@@ -393,7 +441,7 @@ architecture rtl of stall_if is
                         elsif (((bbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
                             and (bbrd /= "00000") and (bbrd = inst(20 downto 16))) then --r-bb-rt
                                 pouttmp := '1';
-                                fdctrl2 := "01";
+                                fdctrl2 := "10";
                                 bbbrt := bbrt;
                                 bbbrd := bbrd;
                                 bbbopcd := bbopcd;
@@ -406,7 +454,7 @@ architecture rtl of stall_if is
                         elsif (((bbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
                             and (bbrt /= "00000") and (bbrt = inst(20 downto 16))) then --lw-bb-rt
                                 pouttmp := '1';
-                                fdctrl2 := "01";
+                                fdctrl2 := "10";
                                 bbbrt := bbrt;
                                 bbbrd := bbrd;
                                 bbbopcd := bbopcd;
@@ -419,7 +467,7 @@ architecture rtl of stall_if is
                         elsif (((bbbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
                             and (bbbrd /= "00000") and (bbbrd = inst(20 downto 16))) then --r-bbb-rt
                                 pouttmp := '1';
-                                fdctrl2 := "01";
+                                fdctrl2 := "11";
                                 bbbrt := bbrt;
                                 bbbrd := bbrd;
                                 bbbopcd := bbopcd;
@@ -432,7 +480,7 @@ architecture rtl of stall_if is
                         elsif (((bbbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
                             and (bbbrt /= "00000") and (bbbrt = inst(20 downto 16))) then --lw-bbb-rt
                                 pouttmp := '1';
-                                fdctrl2 := "01";
+                                fdctrl2 := "11";
                                 bbbrt := bbrt;
                                 bbbrd := bbrd;
                                 bbbopcd := bbopcd;
@@ -444,7 +492,7 @@ architecture rtl of stall_if is
                                 bopcd <= inst(31 downto 26);
                         else
                             pouttmp := '1';
-                            fdctrl2 := "01";
+                            fdctrl2 := "00";
                             bbbrt := bbrt;
                             bbbrd := bbrd;
                             bbbopcd := bbopcd;
@@ -455,10 +503,14 @@ architecture rtl of stall_if is
                             brd <= inst(15 downto 11);
                             bopcd <= inst(31 downto 26);
                         end if;
+                        if (inst(31 downto 26) = "000100") then 
+                            outhactrl <= "01";
+                            outflag <= "001";
+                        end if;           
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                 elsif (((bbbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011")))
                     and (bbbrd /= "00000")and (bbbrd = inst(25 downto 21))) then --r-bbb-rs
-                        fdctrl1 := "01";
+                        fdctrl1 := "11";
                         if (((bopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
                             and (brd /= "00000") and (brd = inst(20 downto 16))) then --r-b-rt
                                 pouttmp := '1';
@@ -488,7 +540,7 @@ architecture rtl of stall_if is
                         elsif (((bbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
                             and (bbrd /= "00000") and (bbrd = inst(20 downto 16))) then --r-bb-rt
                                 pouttmp := '1';
-                                fdctrl2 := "01";
+                                fdctrl2 := "10";
                                 bbbrt := bbrt;
                                 bbbrd := bbrd;
                                 bbbopcd := bbopcd;
@@ -501,7 +553,7 @@ architecture rtl of stall_if is
                         elsif (((bbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
                             and (bbrt /= "00000") and (bbrt = inst(20 downto 16))) then --lw-bb-rt
                                 pouttmp := '1';
-                                fdctrl2 := "01";
+                                fdctrl2 := "10";
                                 bbbrt := bbrt;
                                 bbbrd := bbrd;
                                 bbbopcd := bbopcd;
@@ -514,7 +566,7 @@ architecture rtl of stall_if is
                         elsif (((bbbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
                             and (bbbrd /= "00000") and (bbbrd = inst(20 downto 16))) then --r-bbb-rt
                                 pouttmp := '1';
-                                fdctrl2 := "01";
+                                fdctrl2 := "11";
                                 bbbrt := bbrt;
                                 bbbrd := bbrd;
                                 bbbopcd := bbopcd;
@@ -527,7 +579,7 @@ architecture rtl of stall_if is
                         elsif (((bbbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
                             and (bbbrt /= "00000") and (bbbrt = inst(20 downto 16))) then --lw-bbb-rt
                                 pouttmp := '1';
-                                fdctrl2 := "01";
+                                fdctrl2 := "11";
                                 bbbrt := bbrt;
                                 bbbrd := bbrd;
                                 bbbopcd := bbopcd;
@@ -539,7 +591,7 @@ architecture rtl of stall_if is
                                 bopcd <= inst(31 downto 26);
                         else
                             pouttmp := '1';
-                            fdctrl2 := "01";
+                            fdctrl2 := "00";
                             bbbrt := bbrt;
                             bbbrd := bbrd;
                             bbbopcd := bbopcd;
@@ -550,10 +602,14 @@ architecture rtl of stall_if is
                             brd <= inst(15 downto 11);
                             bopcd <= inst(31 downto 26);
                         end if;
+                        if (inst(31 downto 26) = "000100") then 
+                            outhactrl <= "01";
+                            outflag <= "001";
+                        end if;              
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                 elsif (((bbbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011")))
                     and (bbbrt /= "00000")and (bbbrt = inst(25 downto 21))) then --lw-bbb-rs
-                        fdctrl1 := "01";
+                        fdctrl1 := "11";
                         if (((bopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
                             and (brd /= "00000") and (brd = inst(20 downto 16))) then --r-b-rt
                                 pouttmp := '1';
@@ -583,7 +639,7 @@ architecture rtl of stall_if is
                         elsif (((bbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
                             and (bbrd /= "00000") and (bbrd = inst(20 downto 16))) then --r-bb-rt
                                 pouttmp := '1';
-                                fdctrl2 := "01";
+                                fdctrl2 := "10";
                                 bbbrt := bbrt;
                                 bbbrd := bbrd;
                                 bbbopcd := bbopcd;
@@ -596,7 +652,7 @@ architecture rtl of stall_if is
                         elsif (((bbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
                             and (bbrt /= "00000") and (bbrt = inst(20 downto 16))) then --lw-bb-rt
                                 pouttmp := '1';
-                                fdctrl2 := "01";
+                                fdctrl2 := "10";
                                 bbbrt := bbrt;
                                 bbbrd := bbrd;
                                 bbbopcd := bbopcd;
@@ -609,7 +665,7 @@ architecture rtl of stall_if is
                         elsif (((bbbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
                             and (bbbrd /= "00000") and (bbbrd = inst(20 downto 16))) then --r-bbb-rt
                                 pouttmp := '1';
-                                fdctrl2 := "01";
+                                fdctrl2 := "11";
                                 bbbrt := bbrt;
                                 bbbrd := bbrd;
                                 bbbopcd := bbopcd;
@@ -622,7 +678,7 @@ architecture rtl of stall_if is
                         elsif (((bbbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
                             and (bbbrt /= "00000") and (bbbrt = inst(20 downto 16))) then --lw-bbb-rt
                                 pouttmp := '1';
-                                fdctrl2 := "01";
+                                fdctrl2 := "11";
                                 bbbrt := bbrt;
                                 bbbrd := bbrd;
                                 bbbopcd := bbopcd;
@@ -634,7 +690,7 @@ architecture rtl of stall_if is
                                 bopcd <= inst(31 downto 26);
                         else
                             pouttmp := '1';
-                            fdctrl2 := "01";
+                            fdctrl2 := "00";
                             bbbrt := bbrt;
                             bbbrd := bbrd;
                             bbbopcd := bbopcd;
@@ -645,10 +701,15 @@ architecture rtl of stall_if is
                             brd <= inst(15 downto 11);
                             bopcd <= inst(31 downto 26);
                         end if;
+                        if (inst(31 downto 26) = "000100") then 
+                            outhactrl <= "01";
+                            outflag <= "001";
+                        end if;              
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                 elsif (((bopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
                     and (brd /= "00000") and (brd = inst(20 downto 16))) then --r-b-rt
                         pouttmp := '1';
+                        fdctrl1 := "00";
                         fdctrl2 := "01";
                         bbbrt := bbrt;
                         bbbrd := bbrd;
@@ -659,9 +720,14 @@ architecture rtl of stall_if is
                         brt <= inst(20 downto 16);
                         brd <= inst(15 downto 11);
                         bopcd <= inst(31 downto 26);
+                        if (inst(31 downto 26) = "000100") then 
+                            outhactrl <= "01";
+                            outflag <= "001";
+                        end if;           
                 elsif (((bopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
                     and (brt /= "00000") and (brt = inst(20 downto 16))) then --lw-b-rt
                         pouttmp := '1';
+                        fdctrl1 := "00";
                         fdctrl2 := "01";
                         bbbrt := bbrt;
                         bbbrd := bbrd;
@@ -672,9 +738,14 @@ architecture rtl of stall_if is
                         brt <= inst(20 downto 16);
                         brd <= inst(15 downto 11);
                         bopcd <= inst(31 downto 26);
+                        if (inst(31 downto 26) = "000100") then 
+                            outhactrl <= "01";
+                            outflag <= "001";
+                        end if;           
                 elsif (((bbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
                     and (bbrd /= "00000") and (bbrd = inst(20 downto 16))) then --r-bb-rt
                         pouttmp := '1';
+                        fdctrl1 := "00";
                         fdctrl2 := "01";
                         bbbrt := bbrt;
                         bbbrd := bbrd;
@@ -685,9 +756,14 @@ architecture rtl of stall_if is
                         brt <= inst(20 downto 16);
                         brd <= inst(15 downto 11);
                         bopcd <= inst(31 downto 26);
+                        if (inst(31 downto 26) = "000100") then 
+                            outhactrl <= "01";
+                            outflag <= "001";
+                        end if;           
                 elsif (((bbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
                     and (bbrt /= "00000") and (bbrt = inst(20 downto 16))) then --lw-bb-rt
                         pouttmp := '1';
+                        fdctrl1 := "00";
                         fdctrl2 := "01";
                         bbbrt := bbrt;
                         bbbrd := bbrd;
@@ -698,9 +774,14 @@ architecture rtl of stall_if is
                         brt <= inst(20 downto 16);
                         brd <= inst(15 downto 11);
                         bopcd <= inst(31 downto 26);
+                        if (inst(31 downto 26) = "000100") then 
+                            outhactrl <= "01";
+                            outflag <= "001";
+                        end if;           
                 elsif (((bbbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
                     and (bbbrd /= "00000") and (bbbrd = inst(20 downto 16))) then --r-bbb-rt
                         pouttmp := '1';
+                        fdctrl1 := "00";
                         fdctrl2 := "01";
                         bbbrt := bbrt;
                         bbbrd := bbrd;
@@ -711,9 +792,14 @@ architecture rtl of stall_if is
                         brt <= inst(20 downto 16);
                         brd <= inst(15 downto 11);
                         bopcd <= inst(31 downto 26);
+                        if (inst(31 downto 26) = "000100") then 
+                            outhactrl <= "01";
+                            outflag <= "001";
+                        end if;           
                 elsif (((bbbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
                     and (bbbrt /= "00000") and (bbbrt = inst(20 downto 16))) then --lw-bbb-rt
                         pouttmp := '1';
+                        fdctrl1 := "00";
                         fdctrl2 := "01";
                         bbbrt := bbrt;
                         bbbrd := bbrd;
@@ -724,9 +810,29 @@ architecture rtl of stall_if is
                         brt <= inst(20 downto 16);
                         brd <= inst(15 downto 11);
                         bopcd <= inst(31 downto 26);
+                        if (inst(31 downto 26) = "000100") then 
+                            outhactrl <= "01";
+                            outflag <= "001";
+                        end if;   
+                elsif (inst(31 downto 26) = "000100") then --beq
+                    pouttmp := '1';
+                    outhactrl <= "01";
+                    outflag <= "001";
+                    fdctrl1 := "00";
+                    fdctrl2 := "00";
+                    bbbrt := bbrt;
+                    bbbrd := bbrd;
+                    bbbopcd := bbopcd;
+                    bbrt := brt;
+                    bbrd := brd;
+                    bbopcd := bopcd;
+                    brt <= inst(20 downto 16);
+                    brd <= inst(15 downto 11);
+                    bopcd <= inst(31 downto 26);        
                 else
                     pouttmp := '1';
-                    fdctrl2 := "01";
+                    fdctrl1 := "00";
+                    fdctrl2 := "00";
                     bbbrt := bbrt;
                     bbbrd := bbrd;
                     bbbopcd := bbopcd;
@@ -744,10 +850,6 @@ architecture rtl of stall_if is
                     is_stflag := '0';
                 end if;              
                 
-                if (inst(31 downto 26) = "000100") then 
-                    outhactrl <= "01";
-                    outflag <= "001";
-                end if;              
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------                
             when "01" => 

@@ -14,7 +14,7 @@ nop
 add 1 4 3
 add 4 5 6
 add 2 7 10
-beq 3 5 6
+beq 6 10 6
 add 3 8 2
 store 2 1 4
 load 1 7 4
