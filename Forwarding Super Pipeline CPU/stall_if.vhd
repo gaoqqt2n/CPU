@@ -30,7 +30,8 @@ architecture rtl of stall_if is
         variable bbbopcd : std_logic_vector(5 downto 0) := "111111";
         variable pouttmp : std_logic := '0';
         variable fdctrl1 : std_logic_vector(1 downto 0) := "00";
-        variable fdctrl2 : std_logic_vector(2 downto 0) := "000";
+        variable is_stflag : std_logic := '0';
+        variable fdctrl2 : std_logic_vector(1 downto 0) := "00";
         begin
 
         if (rst = '0') then
@@ -46,7 +47,7 @@ architecture rtl of stall_if is
             pouttmp := '0';
             outhactrl <= "00";
             fdctrl1 := "00";
-            fdctrl2 := "000";
+            fdctrl2 := "00";
             outflag <= "000";
         elsif (clk'event and clk = '1') then
             case(inhactrl) is
@@ -56,273 +57,698 @@ architecture rtl of stall_if is
                     pouttmp := '0';
                     outflag <= inflag + 1;
                     fdctrl1 := "00";
-                    fdctrl2 := "000";
+                    fdctrl2 := "00";
                 elsif (inflag = "100") then --happened datahazard after 4clock
                     pouttmp := '0';
                     outflag <= "000";
                     fdctrl1 := "00";
-                    fdctrl2 := "000";
+                    fdctrl2 := "00";
                 elsif (((bopcd = "100011") and (inst(31 downto 26) = "000100")) and ((brt /= "00000") and (brt = inst(25 downto 21)))) then --load - beq --nop
                     pouttmp := '1';
                     outhactrl <= "10";
                     outflag <= "001";
                     fdctrl1 := "00";
-                    fdctrl2 := "000";
+                    fdctrl2 := "00";
                 elsif ((inst(31 downto 26) = "000010") or (inst(31 downto 26) = "000100")) then --jump, beq
                     pouttmp := '1';
                     outhactrl <= "01";
                     outflag <= "001";
                     fdctrl1 := "00";
-                    fdctrl2 := "000";
-                else
-                    if (((bopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) and (brd /= "00000")) then
-                        if (brd = inst(25 downto 21)) then --r-b-rs
-                            pouttmp := '1';
-                            fdctrl1 := "01";
-                        elsif (bbrd = inst(25 downto 21)) then --r-bb-rs
-                            pouttmp := '1';
-                            fdctrl1 := "10";
-                        elsif (bbbrd = inst(25 downto 21)) then --r-bbb-rs
-                            pouttmp := '1';
-                            fdctrl1 := "11";
-                        else 
-                            pouttmp := '1';
-                            fdctrl1 := "00";
-                        end if;
-                    elsif (((bopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) and (brt /= "00000")) then
-                        if (brt = inst(25 downto 21)) then --lw-b-rs
-                            pouttmp := '1';
-                            fdctrl1 := "01";
-                        elsif (bbrt = inst(25 downto 21)) then --lw-bb-rs
-                            pouttmp := '1';
-                            fdctrl1 := "10";
-                        elsif (bbbrt = inst(25 downto 21)) then --lw-bbb-rs
-                            pouttmp := '1';
-                            fdctrl1 := "11";
-                        else 
-                            pouttmp := '1';
-                            fdctrl1 := "00";
-                        end if;
-                    else 
-                        pouttmp := '1';
-                        fdctrl1 := "00";
-                    end if;
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                    if (((bopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "000100"))) and (brd /= "00000")) then
-                        if (brd = inst(20 downto 16)) then --r-b-rt
-                            pouttmp := '1';
-                            fdctrl2 := "001";
-                                    bbbrt := bbrt;
-        bbbrd := bbrd;
-        bbbopcd := bbopcd;
-        bbrt := brt;
-        bbrd := brd;
-        bbopcd := bopcd;
-        brt <= inst(20 downto 16);
-        brd <= inst(15 downto 11);
-        bopcd <= inst(31 downto 26);
-                        elsif (bbrd = inst(20 downto 16)) then --r-bb-rt
-                            pouttmp := '1';
-                            fdctrl2 := "010";
-                                    bbbrt := bbrt;
-        bbbrd := bbrd;
-        bbbopcd := bbopcd;
-        bbrt := brt;
-        bbrd := brd;
-        bbopcd := bopcd;
-        brt <= inst(20 downto 16);
-        brd <= inst(15 downto 11);
-        bopcd <= inst(31 downto 26);
-                        elsif (bbbrd = inst(20 downto 16)) then --r-bbb-rt
-                            pouttmp := '1';
-                            fdctrl2 := "011";
-                                    bbbrt := bbrt;
-        bbbrd := bbrd;
-        bbbopcd := bbopcd;
-        bbrt := brt;
-        bbrd := brd;
-        bbopcd := bopcd;
-        brt <= inst(20 downto 16);
-        brd <= inst(15 downto 11);
-        bopcd <= inst(31 downto 26);
-                        else 
-                            pouttmp := '1';
-                            fdctrl2 := "000";
-                                    bbbrt := bbrt;
-        bbbrd := bbrd;
-        bbbopcd := bbopcd;
-        bbrt := brt;
-        bbrd := brd;
-        bbopcd := bopcd;
-        brt <= inst(20 downto 16);
-        brd <= inst(15 downto 11);
-        bopcd <= inst(31 downto 26);
-                        end if;
-                    elsif (((bopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "000100"))) and (brt /= "00000")) then
-                        if (brt = inst(20 downto 16)) then --lw-b-rt
-                            pouttmp := '1';
-                            fdctrl2 := "001";
-                                    bbbrt := bbrt;
-        bbbrd := bbrd;
-        bbbopcd := bbopcd;
-        bbrt := brt;
-        bbrd := brd;
-        bbopcd := bopcd;
-        brt <= inst(20 downto 16);
-        brd <= inst(15 downto 11);
-        bopcd <= inst(31 downto 26);
-                        elsif (bbrt = inst(20 downto 16)) then --lw-bb-rt
-                            pouttmp := '1';
-                            fdctrl2 := "010";
-                                    bbbrt := bbrt;
-        bbbrd := bbrd;
-        bbbopcd := bbopcd;
-        bbrt := brt;
-        bbrd := brd;
-        bbopcd := bopcd;
-        brt <= inst(20 downto 16);
-        brd <= inst(15 downto 11);
-        bopcd <= inst(31 downto 26);
-                        elsif (bbbrt = inst(20 downto 16)) then --lw-bbb-rt
-                            pouttmp := '1';
-                            fdctrl2 := "011";
-                                    bbbrt := bbrt;
-        bbbrd := bbrd;
-        bbbopcd := bbopcd;
-        bbrt := brt;
-        bbrd := brd;
-        bbopcd := bopcd;
-        brt <= inst(20 downto 16);
-        brd <= inst(15 downto 11);
-        bopcd <= inst(31 downto 26);
-                        else 
-                            pouttmp := '1';
-                            fdctrl2 := "000";
-                                    bbbrt := bbrt;
-        bbbrd := bbrd;
-        bbbopcd := bbopcd;
-        bbrt := brt;
-        bbrd := brd;
-        bbopcd := bopcd;
-        brt <= inst(20 downto 16);
-        brd <= inst(15 downto 11);
-        bopcd <= inst(31 downto 26);
-                        end if;
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                    elsif (((bopcd = "000000") and (inst(31 downto 26) = "101011")) and (brd /= "00000")) then
-                        if (brd = inst(20 downto 16)) then --r-bst-rt
-                            pouttmp := '1';
-                            fdctrl2 := "101";
-                                    bbbrt := bbrt;
-        bbbrd := bbrd;
-        bbbopcd := bbopcd;
-        bbrt := brt;
-        bbrd := brd;
-        bbopcd := bopcd;
-        brt <= inst(20 downto 16);
-        brd <= inst(15 downto 11);
-        bopcd <= inst(31 downto 26);
-                        elsif (bbrd = inst(20 downto 16)) then --r-bbst-rt
-                            pouttmp := '1';
-                            fdctrl2 := "110";
-                                    bbbrt := bbrt;
-        bbbrd := bbrd;
-        bbbopcd := bbopcd;
-        bbrt := brt;
-        bbrd := brd;
-        bbopcd := bopcd;
-        brt <= inst(20 downto 16);
-        brd <= inst(15 downto 11);
-        bopcd <= inst(31 downto 26);
-                        elsif (bbbrd = inst(20 downto 16)) then --r-bbbst-rt
-                            pouttmp := '1';
-                            fdctrl2 := "111";
-                                    bbbrt := bbrt;
-        bbbrd := bbrd;
-        bbbopcd := bbopcd;
-        bbrt := brt;
-        bbrd := brd;
-        bbopcd := bopcd;
-        brt <= inst(20 downto 16);
-        brd <= inst(15 downto 11);
-        bopcd <= inst(31 downto 26);
-                        else 
-                            pouttmp := '1';
-                            fdctrl2 := "000";
-                                    bbbrt := bbrt;
-        bbbrd := bbrd;
-        bbbopcd := bbopcd;
-        bbrt := brt;
-        bbrd := brd;
-        bbopcd := bopcd;
-        brt <= inst(20 downto 16);
-        brd <= inst(15 downto 11);
-        bopcd <= inst(31 downto 26);
-                        end if;
-                    elsif (((bopcd = "100011") and (inst(31 downto 26) = "101011")) and (brt /= "00000")) then
-                        if (brt = inst(20 downto 16)) then --lw-bst-rt
-                            pouttmp := '1';
-                            fdctrl2 := "101";
-                                    bbbrt := bbrt;
-        bbbrd := bbrd;
-        bbbopcd := bbopcd;
-        bbrt := brt;
-        bbrd := brd;
-        bbopcd := bopcd;
-        brt <= inst(20 downto 16);
-        brd <= inst(15 downto 11);
-        bopcd <= inst(31 downto 26);
-                        elsif (bbrt = inst(20 downto 16)) then --lw-bbst-rt
-                            pouttmp := '1';
-                            fdctrl2 := "110";
-                                    bbbrt := bbrt;
-        bbbrd := bbrd;
-        bbbopcd := bbopcd;
-        bbrt := brt;
-        bbrd := brd;
-        bbopcd := bopcd;
-        brt <= inst(20 downto 16);
-        brd <= inst(15 downto 11);
-        bopcd <= inst(31 downto 26);
-                        elsif (bbbrt = inst(20 downto 16)) then --lw-bbbst-rt
-                            pouttmp := '1';
-                            fdctrl2 := "111";
-                                    bbbrt := bbrt;
-        bbbrd := bbrd;
-        bbbopcd := bbopcd;
-        bbrt := brt;
-        bbrd := brd;
-        bbopcd := bopcd;
-        brt <= inst(20 downto 16);
-        brd <= inst(15 downto 11);
-        bopcd <= inst(31 downto 26);
-                        else 
-                            pouttmp := '1';
-                            fdctrl2 := "000";  
-                                    bbbrt := bbrt;
-        bbbrd := bbrd;
-        bbbopcd := bbopcd;
-        bbrt := brt;
-        bbrd := brd;
-        bbopcd := bopcd;
-        brt <= inst(20 downto 16);
-        brd <= inst(15 downto 11);
-        bopcd <= inst(31 downto 26); 
-                        end if;
-                    else 
-                        pouttmp := '1';
-                        fdctrl2 := "000";
+                    fdctrl2 := "00";
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                elsif (((bopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011")))
+                    and (brd /= "00000")and (brd = inst(25 downto 21))) then --r-b-rs
+                        fdctrl1 := "01";
+                        if (((bopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                            and (brd /= "00000") and (brd = inst(20 downto 16))) then --r-b-rt
+                                pouttmp := '1';
+                                fdctrl2 := "01";
                                 bbbrt := bbrt;
-        bbbrd := bbrd;
-        bbbopcd := bbopcd;
-        bbrt := brt;
-        bbrd := brd;
-        bbopcd := bopcd;
-        brt <= inst(20 downto 16);
-        brd <= inst(15 downto 11);
-        bopcd <= inst(31 downto 26);
-                    end if;
+                                bbbrd := bbrd;
+                                bbbopcd := bbopcd;
+                                bbrt := brt;
+                                bbrd := brd;
+                                bbopcd := bopcd;
+                                brt <= inst(20 downto 16);
+                                brd <= inst(15 downto 11);
+                                bopcd <= inst(31 downto 26);
+                        elsif (((bopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                            and (brt /= "00000") and (brt = inst(20 downto 16))) then --lw-b-rt
+                                pouttmp := '1';
+                                fdctrl2 := "01";
+                                bbbrt := bbrt;
+                                bbbrd := bbrd;
+                                bbbopcd := bbopcd;
+                                bbrt := brt;
+                                bbrd := brd;
+                                bbopcd := bopcd;
+                                brt <= inst(20 downto 16);
+                                brd <= inst(15 downto 11);
+                                bopcd <= inst(31 downto 26);
+                        elsif (((bbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                            and (bbrd /= "00000") and (bbrd = inst(20 downto 16))) then --r-bb-rt
+                                pouttmp := '1';
+                                fdctrl2 := "01";
+                                bbbrt := bbrt;
+                                bbbrd := bbrd;
+                                bbbopcd := bbopcd;
+                                bbrt := brt;
+                                bbrd := brd;
+                                bbopcd := bopcd;
+                                brt <= inst(20 downto 16);
+                                brd <= inst(15 downto 11);
+                                bopcd <= inst(31 downto 26);
+                        elsif (((bbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                            and (bbrt /= "00000") and (bbrt = inst(20 downto 16))) then --lw-bb-rt
+                                pouttmp := '1';
+                                fdctrl2 := "01";
+                                bbbrt := bbrt;
+                                bbbrd := bbrd;
+                                bbbopcd := bbopcd;
+                                bbrt := brt;
+                                bbrd := brd;
+                                bbopcd := bopcd;
+                                brt <= inst(20 downto 16);
+                                brd <= inst(15 downto 11);
+                                bopcd <= inst(31 downto 26);
+                        elsif (((bbbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                            and (bbbrd /= "00000") and (bbbrd = inst(20 downto 16))) then --r-bbb-rt
+                                pouttmp := '1';
+                                fdctrl2 := "01";
+                                bbbrt := bbrt;
+                                bbbrd := bbrd;
+                                bbbopcd := bbopcd;
+                                bbrt := brt;
+                                bbrd := brd;
+                                bbopcd := bopcd;
+                                brt <= inst(20 downto 16);
+                                brd <= inst(15 downto 11);
+                                bopcd <= inst(31 downto 26);
+                        elsif (((bbbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                            and (bbbrt /= "00000") and (bbbrt = inst(20 downto 16))) then --lw-bbb-rt
+                                pouttmp := '1';
+                                fdctrl2 := "01";
+                                bbbrt := bbrt;
+                                bbbrd := bbrd;
+                                bbbopcd := bbopcd;
+                                bbrt := brt;
+                                bbrd := brd;
+                                bbopcd := bopcd;
+                                brt <= inst(20 downto 16);
+                                brd <= inst(15 downto 11);
+                                bopcd <= inst(31 downto 26);
+                        else
+                            pouttmp := '1';
+                            fdctrl2 := "01";
+                            bbbrt := bbrt;
+                            bbbrd := bbrd;
+                            bbbopcd := bbopcd;
+                            bbrt := brt;
+                            bbrd := brd;
+                            bbopcd := bopcd;
+                            brt <= inst(20 downto 16);
+                            brd <= inst(15 downto 11);
+                            bopcd <= inst(31 downto 26);
+                        end if;
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                elsif (((bopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011")))
+                    and (brt /= "00000")and (brt = inst(25 downto 21))) then --lw-b-rs
+                        fdctrl1 := "01";
+                        if (((bopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                            and (brd /= "00000") and (brd = inst(20 downto 16))) then --r-b-rt
+                                pouttmp := '1';
+                                fdctrl2 := "01";
+                                bbbrt := bbrt;
+                                bbbrd := bbrd;
+                                bbbopcd := bbopcd;
+                                bbrt := brt;
+                                bbrd := brd;
+                                bbopcd := bopcd;
+                                brt <= inst(20 downto 16);
+                                brd <= inst(15 downto 11);
+                                bopcd <= inst(31 downto 26);
+                        elsif (((bopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                            and (brt /= "00000") and (brt = inst(20 downto 16))) then --lw-b-rt
+                                pouttmp := '1';
+                                fdctrl2 := "01";
+                                bbbrt := bbrt;
+                                bbbrd := bbrd;
+                                bbbopcd := bbopcd;
+                                bbrt := brt;
+                                bbrd := brd;
+                                bbopcd := bopcd;
+                                brt <= inst(20 downto 16);
+                                brd <= inst(15 downto 11);
+                                bopcd <= inst(31 downto 26);
+                        elsif (((bbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                            and (bbrd /= "00000") and (bbrd = inst(20 downto 16))) then --r-bb-rt
+                                pouttmp := '1';
+                                fdctrl2 := "01";
+                                bbbrt := bbrt;
+                                bbbrd := bbrd;
+                                bbbopcd := bbopcd;
+                                bbrt := brt;
+                                bbrd := brd;
+                                bbopcd := bopcd;
+                                brt <= inst(20 downto 16);
+                                brd <= inst(15 downto 11);
+                                bopcd <= inst(31 downto 26);
+                        elsif (((bbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                            and (bbrt /= "00000") and (bbrt = inst(20 downto 16))) then --lw-bb-rt
+                                pouttmp := '1';
+                                fdctrl2 := "01";
+                                bbbrt := bbrt;
+                                bbbrd := bbrd;
+                                bbbopcd := bbopcd;
+                                bbrt := brt;
+                                bbrd := brd;
+                                bbopcd := bopcd;
+                                brt <= inst(20 downto 16);
+                                brd <= inst(15 downto 11);
+                                bopcd <= inst(31 downto 26);
+                        elsif (((bbbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                            and (bbbrd /= "00000") and (bbbrd = inst(20 downto 16))) then --r-bbb-rt
+                                pouttmp := '1';
+                                fdctrl2 := "01";
+                                bbbrt := bbrt;
+                                bbbrd := bbrd;
+                                bbbopcd := bbopcd;
+                                bbrt := brt;
+                                bbrd := brd;
+                                bbopcd := bopcd;
+                                brt <= inst(20 downto 16);
+                                brd <= inst(15 downto 11);
+                                bopcd <= inst(31 downto 26);
+                        elsif (((bbbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                            and (bbbrt /= "00000") and (bbbrt = inst(20 downto 16))) then --lw-bbb-rt
+                                pouttmp := '1';
+                                fdctrl2 := "01";
+                                bbbrt := bbrt;
+                                bbbrd := bbrd;
+                                bbbopcd := bbopcd;
+                                bbrt := brt;
+                                bbrd := brd;
+                                bbopcd := bopcd;
+                                brt <= inst(20 downto 16);
+                                brd <= inst(15 downto 11);
+                                bopcd <= inst(31 downto 26);
+                        else
+                            pouttmp := '1';
+                            fdctrl2 := "01";
+                            bbbrt := bbrt;
+                            bbbrd := bbrd;
+                            bbbopcd := bbopcd;
+                            bbrt := brt;
+                            bbrd := brd;
+                            bbopcd := bopcd;
+                            brt <= inst(20 downto 16);
+                            brd <= inst(15 downto 11);
+                            bopcd <= inst(31 downto 26);
+                        end if;
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                elsif (((bbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011")))
+                    and (bbrd /= "00000")and (bbrd = inst(25 downto 21))) then --r-bb-rs
+                        fdctrl1 := "01";
+                        if (((bopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                            and (brd /= "00000") and (brd = inst(20 downto 16))) then --r-b-rt
+                                pouttmp := '1';
+                                fdctrl2 := "01";
+                                bbbrt := bbrt;
+                                bbbrd := bbrd;
+                                bbbopcd := bbopcd;
+                                bbrt := brt;
+                                bbrd := brd;
+                                bbopcd := bopcd;
+                                brt <= inst(20 downto 16);
+                                brd <= inst(15 downto 11);
+                                bopcd <= inst(31 downto 26);
+                        elsif (((bopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                            and (brt /= "00000") and (brt = inst(20 downto 16))) then --lw-b-rt
+                                pouttmp := '1';
+                                fdctrl2 := "01";
+                                bbbrt := bbrt;
+                                bbbrd := bbrd;
+                                bbbopcd := bbopcd;
+                                bbrt := brt;
+                                bbrd := brd;
+                                bbopcd := bopcd;
+                                brt <= inst(20 downto 16);
+                                brd <= inst(15 downto 11);
+                                bopcd <= inst(31 downto 26);
+                        elsif (((bbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                            and (bbrd /= "00000") and (bbrd = inst(20 downto 16))) then --r-bb-rt
+                                pouttmp := '1';
+                                fdctrl2 := "01";
+                                bbbrt := bbrt;
+                                bbbrd := bbrd;
+                                bbbopcd := bbopcd;
+                                bbrt := brt;
+                                bbrd := brd;
+                                bbopcd := bopcd;
+                                brt <= inst(20 downto 16);
+                                brd <= inst(15 downto 11);
+                                bopcd <= inst(31 downto 26);
+                        elsif (((bbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                            and (bbrt /= "00000") and (bbrt = inst(20 downto 16))) then --lw-bb-rt
+                                pouttmp := '1';
+                                fdctrl2 := "01";
+                                bbbrt := bbrt;
+                                bbbrd := bbrd;
+                                bbbopcd := bbopcd;
+                                bbrt := brt;
+                                bbrd := brd;
+                                bbopcd := bopcd;
+                                brt <= inst(20 downto 16);
+                                brd <= inst(15 downto 11);
+                                bopcd <= inst(31 downto 26);
+                        elsif (((bbbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                            and (bbbrd /= "00000") and (bbbrd = inst(20 downto 16))) then --r-bbb-rt
+                                pouttmp := '1';
+                                fdctrl2 := "01";
+                                bbbrt := bbrt;
+                                bbbrd := bbrd;
+                                bbbopcd := bbopcd;
+                                bbrt := brt;
+                                bbrd := brd;
+                                bbopcd := bopcd;
+                                brt <= inst(20 downto 16);
+                                brd <= inst(15 downto 11);
+                                bopcd <= inst(31 downto 26);
+                        elsif (((bbbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                            and (bbbrt /= "00000") and (bbbrt = inst(20 downto 16))) then --lw-bbb-rt
+                                pouttmp := '1';
+                                fdctrl2 := "01";
+                                bbbrt := bbrt;
+                                bbbrd := bbrd;
+                                bbbopcd := bbopcd;
+                                bbrt := brt;
+                                bbrd := brd;
+                                bbopcd := bopcd;
+                                brt <= inst(20 downto 16);
+                                brd <= inst(15 downto 11);
+                                bopcd <= inst(31 downto 26);
+                        else
+                            pouttmp := '1';
+                            fdctrl2 := "01";
+                            bbbrt := bbrt;
+                            bbbrd := bbrd;
+                            bbbopcd := bbopcd;
+                            bbrt := brt;
+                            bbrd := brd;
+                            bbopcd := bopcd;
+                            brt <= inst(20 downto 16);
+                            brd <= inst(15 downto 11);
+                            bopcd <= inst(31 downto 26);
+                        end if;
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                elsif (((bbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011")))
+                    and (bbrt /= "00000")and (bbrt = inst(25 downto 21))) then --lw-bb-rs
+                        fdctrl1 := "01";
+                        if (((bopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                            and (brd /= "00000") and (brd = inst(20 downto 16))) then --r-b-rt
+                                pouttmp := '1';
+                                fdctrl2 := "01";
+                                bbbrt := bbrt;
+                                bbbrd := bbrd;
+                                bbbopcd := bbopcd;
+                                bbrt := brt;
+                                bbrd := brd;
+                                bbopcd := bopcd;
+                                brt <= inst(20 downto 16);
+                                brd <= inst(15 downto 11);
+                                bopcd <= inst(31 downto 26);
+                        elsif (((bopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                            and (brt /= "00000") and (brt = inst(20 downto 16))) then --lw-b-rt
+                                pouttmp := '1';
+                                fdctrl2 := "01";
+                                bbbrt := bbrt;
+                                bbbrd := bbrd;
+                                bbbopcd := bbopcd;
+                                bbrt := brt;
+                                bbrd := brd;
+                                bbopcd := bopcd;
+                                brt <= inst(20 downto 16);
+                                brd <= inst(15 downto 11);
+                                bopcd <= inst(31 downto 26);
+                        elsif (((bbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                            and (bbrd /= "00000") and (bbrd = inst(20 downto 16))) then --r-bb-rt
+                                pouttmp := '1';
+                                fdctrl2 := "01";
+                                bbbrt := bbrt;
+                                bbbrd := bbrd;
+                                bbbopcd := bbopcd;
+                                bbrt := brt;
+                                bbrd := brd;
+                                bbopcd := bopcd;
+                                brt <= inst(20 downto 16);
+                                brd <= inst(15 downto 11);
+                                bopcd <= inst(31 downto 26);
+                        elsif (((bbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                            and (bbrt /= "00000") and (bbrt = inst(20 downto 16))) then --lw-bb-rt
+                                pouttmp := '1';
+                                fdctrl2 := "01";
+                                bbbrt := bbrt;
+                                bbbrd := bbrd;
+                                bbbopcd := bbopcd;
+                                bbrt := brt;
+                                bbrd := brd;
+                                bbopcd := bopcd;
+                                brt <= inst(20 downto 16);
+                                brd <= inst(15 downto 11);
+                                bopcd <= inst(31 downto 26);
+                        elsif (((bbbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                            and (bbbrd /= "00000") and (bbbrd = inst(20 downto 16))) then --r-bbb-rt
+                                pouttmp := '1';
+                                fdctrl2 := "01";
+                                bbbrt := bbrt;
+                                bbbrd := bbrd;
+                                bbbopcd := bbopcd;
+                                bbrt := brt;
+                                bbrd := brd;
+                                bbopcd := bopcd;
+                                brt <= inst(20 downto 16);
+                                brd <= inst(15 downto 11);
+                                bopcd <= inst(31 downto 26);
+                        elsif (((bbbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                            and (bbbrt /= "00000") and (bbbrt = inst(20 downto 16))) then --lw-bbb-rt
+                                pouttmp := '1';
+                                fdctrl2 := "01";
+                                bbbrt := bbrt;
+                                bbbrd := bbrd;
+                                bbbopcd := bbopcd;
+                                bbrt := brt;
+                                bbrd := brd;
+                                bbopcd := bopcd;
+                                brt <= inst(20 downto 16);
+                                brd <= inst(15 downto 11);
+                                bopcd <= inst(31 downto 26);
+                        else
+                            pouttmp := '1';
+                            fdctrl2 := "01";
+                            bbbrt := bbrt;
+                            bbbrd := bbrd;
+                            bbbopcd := bbopcd;
+                            bbrt := brt;
+                            bbrd := brd;
+                            bbopcd := bopcd;
+                            brt <= inst(20 downto 16);
+                            brd <= inst(15 downto 11);
+                            bopcd <= inst(31 downto 26);
+                        end if;
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                elsif (((bbbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011")))
+                    and (bbbrd /= "00000")and (bbbrd = inst(25 downto 21))) then --r-bbb-rs
+                        fdctrl1 := "01";
+                        if (((bopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                            and (brd /= "00000") and (brd = inst(20 downto 16))) then --r-b-rt
+                                pouttmp := '1';
+                                fdctrl2 := "01";
+                                bbbrt := bbrt;
+                                bbbrd := bbrd;
+                                bbbopcd := bbopcd;
+                                bbrt := brt;
+                                bbrd := brd;
+                                bbopcd := bopcd;
+                                brt <= inst(20 downto 16);
+                                brd <= inst(15 downto 11);
+                                bopcd <= inst(31 downto 26);
+                        elsif (((bopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                            and (brt /= "00000") and (brt = inst(20 downto 16))) then --lw-b-rt
+                                pouttmp := '1';
+                                fdctrl2 := "01";
+                                bbbrt := bbrt;
+                                bbbrd := bbrd;
+                                bbbopcd := bbopcd;
+                                bbrt := brt;
+                                bbrd := brd;
+                                bbopcd := bopcd;
+                                brt <= inst(20 downto 16);
+                                brd <= inst(15 downto 11);
+                                bopcd <= inst(31 downto 26);
+                        elsif (((bbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                            and (bbrd /= "00000") and (bbrd = inst(20 downto 16))) then --r-bb-rt
+                                pouttmp := '1';
+                                fdctrl2 := "01";
+                                bbbrt := bbrt;
+                                bbbrd := bbrd;
+                                bbbopcd := bbopcd;
+                                bbrt := brt;
+                                bbrd := brd;
+                                bbopcd := bopcd;
+                                brt <= inst(20 downto 16);
+                                brd <= inst(15 downto 11);
+                                bopcd <= inst(31 downto 26);
+                        elsif (((bbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                            and (bbrt /= "00000") and (bbrt = inst(20 downto 16))) then --lw-bb-rt
+                                pouttmp := '1';
+                                fdctrl2 := "01";
+                                bbbrt := bbrt;
+                                bbbrd := bbrd;
+                                bbbopcd := bbopcd;
+                                bbrt := brt;
+                                bbrd := brd;
+                                bbopcd := bopcd;
+                                brt <= inst(20 downto 16);
+                                brd <= inst(15 downto 11);
+                                bopcd <= inst(31 downto 26);
+                        elsif (((bbbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                            and (bbbrd /= "00000") and (bbbrd = inst(20 downto 16))) then --r-bbb-rt
+                                pouttmp := '1';
+                                fdctrl2 := "01";
+                                bbbrt := bbrt;
+                                bbbrd := bbrd;
+                                bbbopcd := bbopcd;
+                                bbrt := brt;
+                                bbrd := brd;
+                                bbopcd := bopcd;
+                                brt <= inst(20 downto 16);
+                                brd <= inst(15 downto 11);
+                                bopcd <= inst(31 downto 26);
+                        elsif (((bbbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                            and (bbbrt /= "00000") and (bbbrt = inst(20 downto 16))) then --lw-bbb-rt
+                                pouttmp := '1';
+                                fdctrl2 := "01";
+                                bbbrt := bbrt;
+                                bbbrd := bbrd;
+                                bbbopcd := bbopcd;
+                                bbrt := brt;
+                                bbrd := brd;
+                                bbopcd := bopcd;
+                                brt <= inst(20 downto 16);
+                                brd <= inst(15 downto 11);
+                                bopcd <= inst(31 downto 26);
+                        else
+                            pouttmp := '1';
+                            fdctrl2 := "01";
+                            bbbrt := bbrt;
+                            bbbrd := bbrd;
+                            bbbopcd := bbopcd;
+                            bbrt := brt;
+                            bbrd := brd;
+                            bbopcd := bopcd;
+                            brt <= inst(20 downto 16);
+                            brd <= inst(15 downto 11);
+                            bopcd <= inst(31 downto 26);
+                        end if;
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                elsif (((bbbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011")))
+                    and (bbbrt /= "00000")and (bbbrt = inst(25 downto 21))) then --lw-bbb-rs
+                        fdctrl1 := "01";
+                        if (((bopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                            and (brd /= "00000") and (brd = inst(20 downto 16))) then --r-b-rt
+                                pouttmp := '1';
+                                fdctrl2 := "01";
+                                bbbrt := bbrt;
+                                bbbrd := bbrd;
+                                bbbopcd := bbopcd;
+                                bbrt := brt;
+                                bbrd := brd;
+                                bbopcd := bopcd;
+                                brt <= inst(20 downto 16);
+                                brd <= inst(15 downto 11);
+                                bopcd <= inst(31 downto 26);
+                        elsif (((bopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                            and (brt /= "00000") and (brt = inst(20 downto 16))) then --lw-b-rt
+                                pouttmp := '1';
+                                fdctrl2 := "01";
+                                bbbrt := bbrt;
+                                bbbrd := bbrd;
+                                bbbopcd := bbopcd;
+                                bbrt := brt;
+                                bbrd := brd;
+                                bbopcd := bopcd;
+                                brt <= inst(20 downto 16);
+                                brd <= inst(15 downto 11);
+                                bopcd <= inst(31 downto 26);
+                        elsif (((bbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                            and (bbrd /= "00000") and (bbrd = inst(20 downto 16))) then --r-bb-rt
+                                pouttmp := '1';
+                                fdctrl2 := "01";
+                                bbbrt := bbrt;
+                                bbbrd := bbrd;
+                                bbbopcd := bbopcd;
+                                bbrt := brt;
+                                bbrd := brd;
+                                bbopcd := bopcd;
+                                brt <= inst(20 downto 16);
+                                brd <= inst(15 downto 11);
+                                bopcd <= inst(31 downto 26);
+                        elsif (((bbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                            and (bbrt /= "00000") and (bbrt = inst(20 downto 16))) then --lw-bb-rt
+                                pouttmp := '1';
+                                fdctrl2 := "01";
+                                bbbrt := bbrt;
+                                bbbrd := bbrd;
+                                bbbopcd := bbopcd;
+                                bbrt := brt;
+                                bbrd := brd;
+                                bbopcd := bopcd;
+                                brt <= inst(20 downto 16);
+                                brd <= inst(15 downto 11);
+                                bopcd <= inst(31 downto 26);
+                        elsif (((bbbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                            and (bbbrd /= "00000") and (bbbrd = inst(20 downto 16))) then --r-bbb-rt
+                                pouttmp := '1';
+                                fdctrl2 := "01";
+                                bbbrt := bbrt;
+                                bbbrd := bbrd;
+                                bbbopcd := bbopcd;
+                                bbrt := brt;
+                                bbrd := brd;
+                                bbopcd := bopcd;
+                                brt <= inst(20 downto 16);
+                                brd <= inst(15 downto 11);
+                                bopcd <= inst(31 downto 26);
+                        elsif (((bbbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                            and (bbbrt /= "00000") and (bbbrt = inst(20 downto 16))) then --lw-bbb-rt
+                                pouttmp := '1';
+                                fdctrl2 := "01";
+                                bbbrt := bbrt;
+                                bbbrd := bbrd;
+                                bbbopcd := bbopcd;
+                                bbrt := brt;
+                                bbrd := brd;
+                                bbopcd := bopcd;
+                                brt <= inst(20 downto 16);
+                                brd <= inst(15 downto 11);
+                                bopcd <= inst(31 downto 26);
+                        else
+                            pouttmp := '1';
+                            fdctrl2 := "01";
+                            bbbrt := bbrt;
+                            bbbrd := bbrd;
+                            bbbopcd := bbopcd;
+                            bbrt := brt;
+                            bbrd := brd;
+                            bbopcd := bopcd;
+                            brt <= inst(20 downto 16);
+                            brd <= inst(15 downto 11);
+                            bopcd <= inst(31 downto 26);
+                        end if;
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                elsif (((bopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                    and (brd /= "00000") and (brd = inst(20 downto 16))) then --r-b-rt
+                        pouttmp := '1';
+                        fdctrl2 := "01";
+                        bbbrt := bbrt;
+                        bbbrd := bbrd;
+                        bbbopcd := bbopcd;
+                        bbrt := brt;
+                        bbrd := brd;
+                        bbopcd := bopcd;
+                        brt <= inst(20 downto 16);
+                        brd <= inst(15 downto 11);
+                        bopcd <= inst(31 downto 26);
+                elsif (((bopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                    and (brt /= "00000") and (brt = inst(20 downto 16))) then --lw-b-rt
+                        pouttmp := '1';
+                        fdctrl2 := "01";
+                        bbbrt := bbrt;
+                        bbbrd := bbrd;
+                        bbbopcd := bbopcd;
+                        bbrt := brt;
+                        bbrd := brd;
+                        bbopcd := bopcd;
+                        brt <= inst(20 downto 16);
+                        brd <= inst(15 downto 11);
+                        bopcd <= inst(31 downto 26);
+                elsif (((bbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                    and (bbrd /= "00000") and (bbrd = inst(20 downto 16))) then --r-bb-rt
+                        pouttmp := '1';
+                        fdctrl2 := "01";
+                        bbbrt := bbrt;
+                        bbbrd := bbrd;
+                        bbbopcd := bbopcd;
+                        bbrt := brt;
+                        bbrd := brd;
+                        bbopcd := bopcd;
+                        brt <= inst(20 downto 16);
+                        brd <= inst(15 downto 11);
+                        bopcd <= inst(31 downto 26);
+                elsif (((bbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                    and (bbrt /= "00000") and (bbrt = inst(20 downto 16))) then --lw-bb-rt
+                        pouttmp := '1';
+                        fdctrl2 := "01";
+                        bbbrt := bbrt;
+                        bbbrd := bbrd;
+                        bbbopcd := bbopcd;
+                        bbrt := brt;
+                        bbrd := brd;
+                        bbopcd := bopcd;
+                        brt <= inst(20 downto 16);
+                        brd <= inst(15 downto 11);
+                        bopcd <= inst(31 downto 26);
+                elsif (((bbbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                    and (bbbrd /= "00000") and (bbbrd = inst(20 downto 16))) then --r-bbb-rt
+                        pouttmp := '1';
+                        fdctrl2 := "01";
+                        bbbrt := bbrt;
+                        bbbrd := bbrd;
+                        bbbopcd := bbopcd;
+                        bbrt := brt;
+                        bbrd := brd;
+                        bbopcd := bopcd;
+                        brt <= inst(20 downto 16);
+                        brd <= inst(15 downto 11);
+                        bopcd <= inst(31 downto 26);
+                elsif (((bbbopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100") or (inst(31 downto 26) = "100011"))) 
+                    and (bbbrt /= "00000") and (bbbrt = inst(20 downto 16))) then --lw-bbb-rt
+                        pouttmp := '1';
+                        fdctrl2 := "01";
+                        bbbrt := bbrt;
+                        bbbrd := bbrd;
+                        bbbopcd := bbopcd;
+                        bbrt := brt;
+                        bbrd := brd;
+                        bbopcd := bopcd;
+                        brt <= inst(20 downto 16);
+                        brd <= inst(15 downto 11);
+                        bopcd <= inst(31 downto 26);
+                else
+                    pouttmp := '1';
+                    fdctrl2 := "01";
+                    bbbrt := bbrt;
+                    bbbrd := bbrd;
+                    bbbopcd := bbopcd;
+                    bbrt := brt;
+                    bbrd := brd;
+                    bbopcd := bopcd;
+                    brt <= inst(20 downto 16);
+                    brd <= inst(15 downto 11);
+                    bopcd <= inst(31 downto 26);
                 end if;
+                
+                if (inst(31 downto 26) = "101011") then 
+                    is_stflag := '1';
+                else 
+                    is_stflag := '0';
+                end if;              
+                
+                if (inst(31 downto 26) = "000100") then 
+                    outhactrl <= "01";
+                    outflag <= "001";
+                end if;              
+
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------                
             when "01" => 
                 if (inflag = "001") then
@@ -330,30 +756,30 @@ architecture rtl of stall_if is
                     outhactrl <= "00";
                     outflag <= inflag + 1;
                     fdctrl1 := "00";
-                    fdctrl2 := "000";
-                            bbbrt := bbrt;
-        bbbrd := bbrd;
-        bbbopcd := bbopcd;
-        bbrt := brt;
-        bbrd := brd;
-        bbopcd := bopcd;
-            brt <= (others => '0');
-            brd <= (others => '0');
-            bopcd <= "000001";
+                    fdctrl2 := "00";
+                    bbbrt := bbrt;
+                    bbbrd := bbrd;
+                    bbbopcd := bbopcd;
+                    bbrt := brt;
+                    bbrd := brd;
+                    bbopcd := bopcd;
+                    brt <= (others => '0');
+                    brd <= (others => '0');
+                    bopcd <= "000001";
                 else 
                     pouttmp := '1';
                     outhactrl <= "00";
                     outflag <= "000";
                     fdctrl1 := "00";
-                    fdctrl2 := "000";
+                    fdctrl2 := "00";
                     bbbrd := bbrd;
-        bbbopcd := bbopcd;
-        bbrt := brt;
-        bbrd := brd;
-        bbopcd := bopcd;
-        brt <= inst(20 downto 16);
-        brd <= inst(15 downto 11);
-        bopcd <= inst(31 downto 26);
+                    bbbopcd := bbopcd;
+                    bbrt := brt;
+                    bbrd := brd;
+                    bbopcd := bopcd;
+                    brt <= inst(20 downto 16);
+                    brd <= inst(15 downto 11);
+                    bopcd <= inst(31 downto 26);
                 end if;
             when "10" => 
                 if (inflag = "001") then
@@ -361,45 +787,45 @@ architecture rtl of stall_if is
                     outhactrl <= "00";
                     outflag <= inflag + 1;
                     fdctrl1 := "00";
-                    fdctrl2 := "000";
-                            bbbrt := bbrt;
-        bbbrd := bbrd;
-        bbbopcd := bbopcd;
-        bbrt := brt;
-        bbrd := brd;
-        bbopcd := bopcd;
-            brt <= (others => '0');
-            brd <= (others => '0');
-            bopcd <= "000001";
+                    fdctrl2 := "00";
+                    bbbrt := bbrt;
+                    bbbrd := bbrd;
+                    bbbopcd := bbopcd;
+                    bbrt := brt;
+                    bbrd := brd;
+                    bbopcd := bopcd;
+                    brt <= (others => '0');
+                    brd <= (others => '0');
+                    bopcd <= "000001";
                 else 
                     pouttmp := '1';
                     outhactrl <= "00";
                     outflag <= "000";
                     fdctrl1 := "00";
-                    fdctrl2 := "000";
+                    fdctrl2 := "00";
                     bbbrd := bbrd;
-        bbbopcd := bbopcd;
-        bbrt := brt;
-        bbrd := brd;
-        bbopcd := bopcd;
-        brt <= inst(20 downto 16);
-        brd <= inst(15 downto 11);
-        bopcd <= inst(31 downto 26);
+                    bbbopcd := bbopcd;
+                    bbrt := brt;
+                    bbrd := brd;
+                    bbopcd := bopcd;
+                    brt <= inst(20 downto 16);
+                    brd <= inst(15 downto 11);
+                    bopcd <= inst(31 downto 26);
                 end if;
             when others => 
                 pouttmp := '1';
                 outhactrl <= "00";
                 outflag <= "000";
                 fdctrl1 := "00";
-                fdctrl2 := "000";
+                fdctrl2 := "00";
                 bbbrd := bbrd;
-        bbbopcd := bbopcd;
-        bbrt := brt;
-        bbrd := brd;
-        bbopcd := bopcd;
-        brt <= inst(20 downto 16);
-        brd <= inst(15 downto 11);
-        bopcd <= inst(31 downto 26);
+                bbbopcd := bbopcd;
+                bbrt := brt;
+                bbrd := brd;
+                bbopcd := bopcd;
+                brt <= inst(20 downto 16);
+                brd <= inst(15 downto 11);
+                bopcd <= inst(31 downto 26);
             end case;
         end if;
 
@@ -419,7 +845,7 @@ architecture rtl of stall_if is
         -- else 
         -- end if;
         pout <= pouttmp;
-        forwarding_ctrl <= fdctrl1 & fdctrl2;
+        forwarding_ctrl <= fdctrl1 & is_stflag & fdctrl2;
     
     end process;
     
