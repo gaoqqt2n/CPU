@@ -39,7 +39,7 @@ begin
          when "101011" => ctrl <= "110100100"; --store
          when "000100" => ctrl <= "011101010"; --beq
          when "000010" => ctrl <= "011110000"; --jump
-         when "000001" => ctrl <= "000000000"; --nop
+         when "000000" => ctrl <= "000000000"; --nop
 
          when others => ctrl <= (others => '0');
       end case;
