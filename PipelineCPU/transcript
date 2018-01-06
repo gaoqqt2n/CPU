@@ -1,5 +1,5 @@
-# vsim pcpu_tb -do "add wave pcpu_tb/dut/* ; run -all" 
-# Start time: 19:09:44 on Dec 04,2017
+# vsim pcpu_tb -do "add wave -HEX pcpu_tb/dut/* ; run -all" 
+# Start time: 21:11:48 on Jan 06,2018
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
@@ -29,12 +29,12 @@
 # Loading work.ma_stage(rtl)
 # Loading work.datamem(rtl)
 # Loading work.register_1(rtl)
-# add wave pcpu_tb/dut/* 
+# add wave -HEX pcpu_tb/dut/* 
 # ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
 #           File in use by: sldl77  Hostname: SLDL77-PC  ProcessID: 23316
-#           Attempting to use alternate WLF file "./wlftzn5dvy".
+#           Attempting to use alternate WLF file "./wlfth4hcs3".
 # ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlftzn5dvy
+#           Using alternate file: ./wlfth4hcs3
 #  run -all
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 #    Time: 0 ps  Iteration: 0  Instance: /pcpu_tb/dut/M13/M1
@@ -80,5 +80,3 @@
 #    Time: 300 ns  Iteration: 2  Instance: /pcpu_tb/dut/M3/M1
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 #    Time: 300 ns  Iteration: 2  Instance: /pcpu_tb/dut/M3/M1
-# End time: 19:11:54 on Dec 04,2017, Elapsed time: 0:02:10
-# Errors: 0, Warnings: 24

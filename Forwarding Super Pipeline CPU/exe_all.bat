@@ -8,12 +8,12 @@ for /f %%a in (module.txt) do (
     move /y %%a.vcd vcdfile
 )
 if "%1"=="1" (
-    start gtkwave vcdfile/spcpu.vcd
+    start gtkwave vcdfile/fspcpu.vcd
 )
 if "%1"=="2" (
     start modelsim.bat
 )
 if "%1"=="12" (
-    start gtkwave vcdfile/spcpu.vcd
+    start gtkwave vcdfile/fspcpu.vcd
     start modelsim.bat
 )

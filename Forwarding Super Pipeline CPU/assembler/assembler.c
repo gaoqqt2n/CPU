@@ -107,7 +107,7 @@ void Reopcd(char *op){
   	J(opcd);
   	return ;
   }else if(!strcmp(op,"nop")){
-  	opcd=0x00000000;
+  	opcd=0x04000000;
   	nop(opcd);
   	return ;
   }else{
@@ -119,13 +119,13 @@ void Reopcd(char *op){
 int main(void) {
   char op;
 
-  printf("constant nop : std_logic_vector(31 downto 0) := x\"00000000\"; --nop \n");  
+  printf("constant nop : std_logic_vector(31 downto 0) := x\"04000000\"; --nop \n");  
   while (scanf("%s ",&op) != EOF) {
   inst = 0x00000000;
    instchar[gyo][0] = op;
 		Reopcd(&op); 
 		if(!strcmp(&op,"nop"))
-			printf("constant M%d : std_logic_vector(31 downto 0) := x\"00000000\"; --nop\n", gyo);
+			printf("constant M%d : std_logic_vector(31 downto 0) := x\"04000000\"; --nop\n", gyo);
 		else		    
     		printf("constant M%d : std_logic_vector(31 downto 0) := x\"%08x\"; --%s %d %d %d\n", gyo, inst, &op, (int)instchar[gyo][1], (int)instchar[gyo][2], (int)instchar[gyo][3]);
 		gyo++;

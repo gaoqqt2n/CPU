@@ -31,7 +31,7 @@ end component;
 
 component im
     port(
-        address : in std_logic_vector(4 downto 0);
+        address : in std_logic_vector(5 downto 0);
         inst : out std_logic_vector(31 downto 0)
         );    
 end component;
@@ -57,7 +57,7 @@ end component;
 begin
 
     M1 : pc port map (clk, rst, adsel_pc, pc_im);
-    M2 : im port map (pc_im(6 downto 2), inst);
+    M2 : im port map (pc_im(7 downto 2), inst);
     M3 : adder port map (pc_im, adder_adsel);
     -- M4 : adsel port map (adsel_ctrl, hactrl, adselflag, extend26, adder_adsel, extend16, adselflag, bbpcout, flagout, adsel_pc); --debug
     M4 : adsel port map (clk, rst, adsel_ctrl, hactrl, extend26, adder_adsel, extend16, passout, adsel_pc);

@@ -746,7 +746,7 @@ architecture rtl of stall_if is
                     and (bbrd /= "00000") and (bbrd = inst(20 downto 16))) then --r-bb-rt
                         pouttmp := '1';
                         fdctrl1 := "00";
-                        fdctrl2 := "01";
+                        fdctrl2 := "10";
                         bbbrt := bbrt;
                         bbbrd := bbrd;
                         bbbopcd := bbopcd;
@@ -764,7 +764,7 @@ architecture rtl of stall_if is
                     and (bbrt /= "00000") and (bbrt = inst(20 downto 16))) then --lw-bb-rt
                         pouttmp := '1';
                         fdctrl1 := "00";
-                        fdctrl2 := "01";
+                        fdctrl2 := "10";
                         bbbrt := bbrt;
                         bbbrd := bbrd;
                         bbbopcd := bbopcd;
@@ -782,7 +782,7 @@ architecture rtl of stall_if is
                     and (bbbrd /= "00000") and (bbbrd = inst(20 downto 16))) then --r-bbb-rt
                         pouttmp := '1';
                         fdctrl1 := "00";
-                        fdctrl2 := "01";
+                        fdctrl2 := "11";
                         bbbrt := bbrt;
                         bbbrd := bbrd;
                         bbbopcd := bbopcd;
@@ -800,7 +800,7 @@ architecture rtl of stall_if is
                     and (bbbrt /= "00000") and (bbbrt = inst(20 downto 16))) then --lw-bbb-rt
                         pouttmp := '1';
                         fdctrl1 := "00";
-                        fdctrl2 := "01";
+                        fdctrl2 := "11";
                         bbbrt := bbrt;
                         bbbrd := bbrd;
                         bbbopcd := bbopcd;

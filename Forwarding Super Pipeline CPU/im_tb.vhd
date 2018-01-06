@@ -7,7 +7,7 @@ end im_tb;
 architecture stimulus of im_tb is 
 component im  
 port(
-    address : in std_logic_vector(4 downto 0);
+    address : in std_logic_vector(5 downto 0);
     inst : out std_logic_vector(31 downto 0)
     );
 end component; 
@@ -16,44 +16,44 @@ constant cycle  : time := 200 ns;
 constant half_cycle  : time := 100 ns; 
 constant delay  : time := 20 ns; 
  
-signal address : std_logic_vector(4 downto 0);  
+signal address : std_logic_vector(5 downto 0);  
 signal inst : std_logic_vector(31 downto 0);  
  
 begin  
     dut : im port map(address, inst);
  
     process begin
-        address <= "00000";
+        address <= "000000";
         wait for delay; 
-        address <= "00001";
+        address <= "000001";
         wait for cycle;
-        address <= "00010";
+        address <= "000010";
         wait for cycle;
-        address <= "00011";
+        address <= "000011";
         wait for cycle;
-        address <= "00100";
+        address <= "000100";
         wait for cycle;
-        address <= "00101";
+        address <= "000101";
         wait for cycle;
-        address <= "00110";
+        address <= "000110";
         wait for cycle;
-        address <= "00111";
+        address <= "000111";
         wait for cycle;
-        address <= "01000";
+        address <= "001000";
         wait for cycle;
-        address <= "01001";
+        address <= "001001";
         wait for cycle;
-        address <= "01010";
+        address <= "001010";
         wait for cycle;
-        address <= "01011";
+        address <= "001011";
         wait for cycle;
-        address <= "01100";
+        address <= "001100";
         wait for cycle;
-        address <= "01101";
+        address <= "001101";
         wait for cycle;
-        address <= "01110";
+        address <= "001110";
         wait for cycle;
-        address <= "01111";
+        address <= "001111";
         wait for cycle;
         wait; 
      end process;     

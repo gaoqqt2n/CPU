@@ -1,0 +1,31 @@
+load 0 1 1
+load 0 2 2
+load 0 3 3
+load 0 4 4
+load 0 5 5
+load 0 6 6
+load 0 7 7
+load 0 8 8
+load 0 9 9
+load 0 10 10
+add 1 2 12
+add 3 4 13
+add 5 6 14
+add 7 8 15
+add 9 10 16
+add 12 13 18
+add 15 14 19
+add 16 18 21
+add 19 21 23
+store 0 23 12
+load 0 25 12
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop

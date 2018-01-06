@@ -4,4 +4,4 @@ for /f %%a in (module.txt) do (
     vcom %%a.vhd    
     vcom %%a_tb.vhd    
 )
-vsim pcpu_tb -do "add wave pcpu_tb/dut/* ; run -all"
+vsim pcpu_tb -do "add wave -HEX pcpu_tb/dut/* ; run -all"

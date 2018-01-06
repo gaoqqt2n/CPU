@@ -25,7 +25,7 @@ signal dm_R, R_mux, R1_mux : std_logic_vector(31 downto 0);
 component datamem
     port(
         clk, rst, we : in std_logic;
-        address : in std_logic_vector(4 downto 0);
+        address : in std_logic_vector(5 downto 0);
         indata : in std_logic_vector(31 downto 0);
         outdata : out std_logic_vector(31 downto 0)
     );
@@ -64,7 +64,7 @@ end component;
 
 begin
 
-    M1 : datamem port map (clk, rst, ctrlout_3(2), aluout(4 downto 0), rtdata, dm_R);
+    M1 : datamem port map (clk, rst, ctrlout_3(2), aluout(5 downto 0), rtdata, dm_R);
     -- M2 : register_32 port map (clk, rst, dm_R, R_mux);
     M3 : mux2_32 port map (R3_mux, dm_R, R1_mux, outdata);
     M4 : register_5 port map (clk, rst, wad, regwad);

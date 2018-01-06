@@ -28,7 +28,7 @@ begin
  
     process begin    
  
-    clock : for I in 0 to 90 loop 
+    clock : for I in 0 to 800 loop 
             CLK <= transport '0'; 
             wait for half_cycle; 
             CLK <= transport '1'; 

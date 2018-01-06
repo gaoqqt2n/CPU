@@ -8,7 +8,7 @@ architecture stimulus of datamem_tb is
 component datamem  
     port(
         clk, rst, we : in std_logic;
-        address : in std_logic_vector(4 downto 0);
+        address : in std_logic_vector(5 downto 0);
         indata : in std_logic_vector(31 downto 0);
         outdata : out std_logic_vector(31 downto 0)
     );
@@ -19,7 +19,7 @@ constant half_cycle  : time := 100 ns;
 constant delay  : time := 20 ns; 
  
 signal clk, rst, we : std_logic;  
-signal address : std_logic_vector(4 downto 0);
+signal address : std_logic_vector(5 downto 0);
 signal indata, outdata : std_logic_vector(31 downto 0);  
  
 begin  
@@ -37,24 +37,24 @@ begin
     end process; 
  
      process begin  
-        rst <= '0'; we <= '0'; address <= "00000"; indata <= x"00004444";
+        rst <= '0'; we <= '0'; address <= "000000"; indata <= x"00004444";
         wait for delay; 
         wait for cycle; 
-        rst <= '1'; we <= '0'; address <= "00000"; indata <= x"00004444";
+        rst <= '1'; we <= '0'; address <= "000000"; indata <= x"00004444";
         wait for cycle; 
-        rst <= '1'; we <= '0'; address <= "00001"; indata <= x"11112222";
+        rst <= '1'; we <= '0'; address <= "000001"; indata <= x"11112222";
         wait for cycle; 
-        rst <= '1'; we <= '0'; address <= "00010"; indata <= x"11112222";
+        rst <= '1'; we <= '0'; address <= "000010"; indata <= x"11112222";
         wait for cycle; 
-        rst <= '1'; we <= '0'; address <= "00011"; indata <= x"11112222";
+        rst <= '1'; we <= '0'; address <= "000011"; indata <= x"11112222";
         wait for cycle; 
-        rst <= '1'; we <= '0'; address <= "00100"; indata <= x"11112222";
+        rst <= '1'; we <= '0'; address <= "000100"; indata <= x"11112222";
         wait for cycle; 
-        rst <= '1'; we <= '0'; address <= "01000"; indata <= x"11112222";
+        rst <= '1'; we <= '0'; address <= "001000"; indata <= x"11112222";
         wait for cycle; 
-        rst <= '1'; we <= '1'; address <= "01100"; indata <= x"33338888";
+        rst <= '1'; we <= '1'; address <= "001100"; indata <= x"33338888";
         wait for cycle; 
-        rst <= '1'; we <= '0'; address <= "01100"; indata <= x"33335555";
+        rst <= '1'; we <= '0'; address <= "001100"; indata <= x"33335555";
         wait for cycle; 
         wait; 
      end process;     
