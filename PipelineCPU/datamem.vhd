@@ -41,7 +41,7 @@ architecture rtl of datamem is
             memdata(7)	<= X"00000007";
             memdata(8)	<= X"00000008";
             memdata(9)	<= X"00000009";
-            memdata(10)	<= X"0000000a";
+            memdata(10)	<= X"00000003";
             memdata(11)	<= X"0000000b";
             memdata(12)	<= X"0000000c";
             memdata(13)	<= X"0000000d";

@@ -1,5 +1,5 @@
 # vsim fspcpu_tb -do "add wave -HEX fspcpu_tb/dut/clk ; add wave -HEX fspcpu_tb/dut/rst ; add wave -HEX fspcpu_tb/dut/outdata ; add wave -HEX fspcpu_tb/dut/regwe ; add wave -HEX fspcpu_tb/dut/regwad ; add wave -HEX fspcpu_tb/dut/regwdata ; add wave -HEX fspcpu_tb/dut/m1/m4/* ; add wave -HEX fspcpu_tb/dut/m3/inst ; add wave -HEX fspcpu_tb/dut/R_inst ; add wave -HEX fspcpu_tb/dut/m3/forwarding_ctrl ; add wave -HEX fspcpu_tb/dut/m43/* ; add wave -HEX fspcpu_tb/dut/m33/in1 ; add wave -HEX fspcpu_tb/dut/m33/in2 ; add wave -HEX fspcpu_tb/dut/m33/aluout ; add wave -HEX fspcpu_tb/dut/m6/inst ; add wave -HEX fspcpu_tb/dut/m6/instout ; add wave -HEX fspcpu_tb/dut/m3/*; run -all" 
-# Start time: 21:27:47 on Jan 06,2018
+# Start time: 13:01:55 on Jan 07,2018
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
@@ -39,9 +39,9 @@
 # add wave -HEX fspcpu_tb/dut/clk 
 # ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
 #           File in use by: sldl77  Hostname: SLDL77-PC  ProcessID: 3204
-#           Attempting to use alternate WLF file "./wlftwb9420".
+#           Attempting to use alternate WLF file "./wlft4y4twm".
 # ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlftwb9420
+#           Using alternate file: ./wlft4y4twm
 #  add wave -HEX fspcpu_tb/dut/rst 
 #  add wave -HEX fspcpu_tb/dut/outdata 
 #  add wave -HEX fspcpu_tb/dut/regwe 

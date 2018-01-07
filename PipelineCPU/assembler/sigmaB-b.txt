@@ -1,9 +1,10 @@
 load 0 1 1
+load 0 2 0
 load 0 5 10
-add 0 1 2
+add 1 2 2
 add 2 3 3 
 beq 2 5 2
-jump 3
+jump 4
 store 0 3 12
 load 0 7 12
 nop

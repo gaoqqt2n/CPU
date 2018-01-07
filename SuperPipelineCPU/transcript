@@ -1,5 +1,5 @@
 # vsim spcpu_tb -do "add wave -HEX spcpu_tb/dut/clk ; add wave -HEX spcpu_tb/dut/rst ; add wave -HEX spcpu_tb/dut/outdata ; add wave -HEX spcpu_tb/dut/regwe ; add wave -HEX spcpu_tb/dut/regwad ; add wave -HEX spcpu_tb/dut/regwdata ; add wave -HEX spcpu_tb/dut/m1/m4/* ; add wave -HEX spcpu_tb/dut/m3/inst ; add wave -HEX spcpu_tb/dut/R_inst ; add wave -HEX spcpu_tb/dut/m6/inst ; add wave -HEX spcpu_tb/dut/m6/instout ; run -all" 
-# Start time: 21:06:59 on Jan 06,2018
+# Start time: 13:24:22 on Jan 07,2018
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
@@ -37,9 +37,9 @@
 # add wave -HEX spcpu_tb/dut/clk 
 # ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
 #           File in use by: sldl77  Hostname: SLDL77-PC  ProcessID: 3204
-#           Attempting to use alternate WLF file "./wlft67m9ng".
+#           Attempting to use alternate WLF file "./wlft82t2sr".
 # ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlft67m9ng
+#           Using alternate file: ./wlft82t2sr
 #  add wave -HEX spcpu_tb/dut/rst 
 #  add wave -HEX spcpu_tb/dut/outdata 
 #  add wave -HEX spcpu_tb/dut/regwe 

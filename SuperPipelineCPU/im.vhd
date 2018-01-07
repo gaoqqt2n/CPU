@@ -15,14 +15,14 @@ end im;
 architecture  rtl  of  im  is
 constant nop : std_logic_vector(31 downto 0) := x"04000000"; --nop 
 constant M0 : std_logic_vector(31 downto 0) := x"8c010001"; --load 0 1 1
-constant M1 : std_logic_vector(31 downto 0) := x"8c05000a"; --load 0 5 10
-constant M2 : std_logic_vector(31 downto 0) := x"00011020"; --add 0 1 2
-constant M3 : std_logic_vector(31 downto 0) := x"00431820"; --add 2 3 3
-constant M4 : std_logic_vector(31 downto 0) := x"10450002"; --beq 2 5 2
-constant M5 : std_logic_vector(31 downto 0) := x"08000002"; --jump 2 0 0
-constant M6 : std_logic_vector(31 downto 0) := x"ac03000c"; --store 0 3 12
-constant M7 : std_logic_vector(31 downto 0) := x"8c07000c"; --load 0 7 12
-constant M8 : std_logic_vector(31 downto 0) := x"04000000"; --nop
+constant M1 : std_logic_vector(31 downto 0) := x"8c020000"; --load 0 2 0
+constant M2 : std_logic_vector(31 downto 0) := x"8c05000a"; --load 0 5 10
+constant M3 : std_logic_vector(31 downto 0) := x"00221020"; --add 1 2 2
+constant M4 : std_logic_vector(31 downto 0) := x"00431820"; --add 2 3 3
+constant M5 : std_logic_vector(31 downto 0) := x"10450002"; --beq 2 5 2
+constant M6 : std_logic_vector(31 downto 0) := x"08000004"; --jump 4 0 0
+constant M7 : std_logic_vector(31 downto 0) := x"ac03000c"; --store 0 3 12
+constant M8 : std_logic_vector(31 downto 0) := x"8c07000c"; --load 0 7 12
 constant M9 : std_logic_vector(31 downto 0) := x"04000000"; --nop
 constant M10 : std_logic_vector(31 downto 0) := x"04000000"; --nop
 constant M11 : std_logic_vector(31 downto 0) := x"04000000"; --nop
@@ -45,6 +45,7 @@ constant M27 : std_logic_vector(31 downto 0) := x"04000000"; --nop
 constant M28 : std_logic_vector(31 downto 0) := x"04000000"; --nop
 constant M29 : std_logic_vector(31 downto 0) := x"04000000"; --nop
 constant M30 : std_logic_vector(31 downto 0) := x"04000000"; --nop
+constant M31 : std_logic_vector(31 downto 0) := x"04000000"; --nop
 --end architecture
 
 type mem_array is array (0 to 31) of std_logic_vector(31 downto 0);

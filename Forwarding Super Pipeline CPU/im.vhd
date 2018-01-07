@@ -15,9 +15,9 @@ end im;
 architecture  rtl  of  im  is
 constant nop : std_logic_vector(31 downto 0) := x"04000000"; --nop 
 constant M0 : std_logic_vector(31 downto 0) := x"8c010001"; --load 0 1 1
-constant M1 : std_logic_vector(31 downto 0) := x"8c020001"; --load 0 2 1
+constant M1 : std_logic_vector(31 downto 0) := x"8c020000"; --load 0 2 0
 constant M2 : std_logic_vector(31 downto 0) := x"8c05000a"; --load 0 5 10
-constant M3 : std_logic_vector(31 downto 0) := x"00411020"; --add 2 1 2
+constant M3 : std_logic_vector(31 downto 0) := x"00221020"; --add 1 2 2
 constant M4 : std_logic_vector(31 downto 0) := x"00431820"; --add 2 3 3
 constant M5 : std_logic_vector(31 downto 0) := x"10450002"; --beq 2 5 2
 constant M6 : std_logic_vector(31 downto 0) := x"08000004"; --jump 4 0 0
