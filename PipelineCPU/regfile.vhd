@@ -51,15 +51,4 @@ architecture rtl of regfile is
         end if;
     end process;
 
-
-    --     elsif (clk'event and clk = '1') then
-    --         if (we = '1' and wad /= "00000") then
-    --             regdata(conv_integer(wad)) <= indata;
-    --         end if;
-    --     elsif (clk'event and clk = '0') then
-    --             out1 <= regdata(conv_integer(rad1));
-    --             out2 <= regdata(conv_integer(rad2));
-    --     end if;
-    -- end process;
-
 end;

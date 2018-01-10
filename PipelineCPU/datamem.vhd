@@ -22,15 +22,6 @@ architecture rtl of datamem is
     
     process (clk, rst) begin
         if (rst = '0') then
-            -- memdata(0) <= x"00000000";
-            -- memdata(1) <= x"00000001";
-            -- memdata(2) <= x"00000002";
-            -- memdata(3) <= x"00000003";
-            -- memdata(4) <= x"00000004";
-            -- memdata(5) <= x"00000005";
-            -- memdata(6) <= x"00000006";
-            -- memdata(7) <= x"00000007";
-            -- memdata(8) <= x"00000008";
             memdata(0)	<= X"00000000";
             memdata(1)	<= X"00000001";
             memdata(2)	<= X"00000002";

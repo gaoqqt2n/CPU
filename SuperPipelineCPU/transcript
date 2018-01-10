@@ -91,3 +91,5 @@
 #    Time: 0 ps  Iteration: 1  Instance: /spcpu_tb/dut/M1/M4
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 #    Time: 0 ps  Iteration: 1  Instance: /spcpu_tb/dut/M1/M4
+# End time: 21:08:55 on Jan 07,2018, Elapsed time: 7:44:33
+# Errors: 0, Warnings: 22

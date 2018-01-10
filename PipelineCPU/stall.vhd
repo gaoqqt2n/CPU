@@ -17,8 +17,6 @@ entity stall is
 end stall;
 
 architecture rtl of stall is
-        -- signal ctrltmp : std_logic_vector(1 downto 0) := "00";
-        -- signal flag : std_logic_vector(1 downto 0) := "00";
         signal brt, brd : std_logic_vector(4 downto 0) := "00000";
         signal bopcd : std_logic_vector(5 downto 0) := "111111";
     begin
@@ -96,13 +94,6 @@ architecture rtl of stall is
                     brt <= (others => '0');
                     brd <= (others => '0');
                     bopcd <= "000001";
-
-            -- elsif (inflag = "10") then --datahazard after 3clock
-            --     instout <= x"04000000"; --nop
-            --     outflag <= "00";
-            --     brt <= (others => '0');
-            --     brd <= (others => '0');
-            --     bopcd <= "000001";
             elsif (inflag = "11") then --jump, beq after 4clock
                 instout <= x"04000000"; --nop
                 outflag <= "00";        
@@ -196,7 +187,6 @@ architecture rtl of stall is
             brd <= inst(15 downto 11);
             bopcd <= inst(31 downto 26);
         end if;
-        -- hactrl <= ctrltmp;
     end process;
     
 end;
