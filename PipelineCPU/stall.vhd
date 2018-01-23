@@ -94,7 +94,7 @@ architecture rtl of stall is
                     brt <= (others => '0');
                     brd <= (others => '0');
                     bopcd <= "000001";
-            elsif (inflag = "11") then --jump, beq after 4clock
+            elsif (inflag = "11") then --jump, beq after 3clock
                 instout <= x"04000000"; --nop
                 outflag <= "00";        
                 bbrt := brt;

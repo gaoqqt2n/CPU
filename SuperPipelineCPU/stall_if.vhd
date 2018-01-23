@@ -96,15 +96,6 @@ architecture rtl of stall_if is
                         brt <= (others => '0');
                         brd <= (others => '0');
                         bopcd <= "000001";
-                    -- else
-                    --     pout <= '1';
-                    --     brt <= inst(20 downto 16);
-                    --     brd <= inst(15 downto 11);
-                    --     bopcd <= inst(31 downto 26);
-                    --     bbrt := brt;
-                    --     bbrd := brd;
-                    --     bbopcd := bopcd;
-                    -- end if;
                 elsif (((bopcd = "100011") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "100011") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100"))) and --lw
                     ((brt /= "00000") and ((brt = inst(25 downto 21)) or (brt = inst(20 downto 16))))) then 
                         pout <= '0';
@@ -119,15 +110,6 @@ architecture rtl of stall_if is
                         brt <= (others => '0');
                         brd <= (others => '0');
                         bopcd <= "000001";
-                    -- else 
-                    --     pout <= '1';
-                    --     brt <= inst(20 downto 16);
-                    --     brd <= inst(15 downto 11);
-                    --     bopcd <= inst(31 downto 26);
-                    --     bbrt := brt;
-                    --     bbrd := brd;
-                    --     bbopcd := bopcd;
-                    -- end if;
                 elsif ((((bopcd = "101011") and (inst(31 downto 26) = "100011")) and --st
                         ((brt /= "00000") and ((brt = inst(25 downto 21)) or (brt = inst(20 downto 16)))))) then 
                         pout <= '0';
@@ -142,15 +124,6 @@ architecture rtl of stall_if is
                         brt <= (others => '0');
                         brd <= (others => '0');
                         bopcd <= "000001";
-                    -- else 
-                    --     pout <= '1';
-                    --     brt <= inst(20 downto 16);
-                    --     brd <= inst(15 downto 11);
-                    --     bopcd <= inst(31 downto 26);
-                    --     bbrt := brt;
-                    --     bbrd := brd;
-                    --     bbopcd := bopcd;
-                    -- end if;
                 elsif (((bbopcd = "000000") and ((inst(31 downto 26) = "000000") or (inst(31 downto 26) = "100011") or (inst(31 downto 26) = "101011") or (inst(31 downto 26) = "000100"))) and --R
                         ((bbrd /= "00000") and ((bbrd = inst(25 downto 21)) or (bbrd = inst(20 downto 16))))) then --happned datahazard
                     pout <= '0';
@@ -207,15 +180,6 @@ architecture rtl of stall_if is
                     brt <= (others => '0');
                     brd <= (others => '0');
                     bopcd <= "000001";    
-                -- elsif (inflag = "011") then --jump, beq after 6clock
-                --     pout <= '0';
-                --     outflag <= "000";
-                --     bbrt := brt;
-                --     bbrd := brd;
-                --     bbopcd := bopcd;
-                --     brt <= (others => '0');
-                --     brd <= (others => '0');
-                --     bopcd <= "000001";
                 elsif ((inst(31 downto 26) = "000010") or (inst(31 downto 26) = "000100")) then --jump, beq
                     pout <= '1';
                     outhactrl <= "01";
@@ -243,16 +207,6 @@ architecture rtl of stall_if is
                 end if;
 
             when "01" => 
-                -- if (inflag = "001" or inflag = "010") then 
-                --     pout <= '0';
-                --     outflag <= inflag + 1;
-                --     bbrt := brt;
-                --     bbrd := brd;
-                --     bbopcd := bopcd;
-                --     brt <= (others => '0');
-                --     brd <= (others => '0');
-                --     bopcd <= "000001";
-                -- elsif (inflag = "011") then
                 if (inflag = "001") then
                     pout <= '0';
                     outhactrl <= "00";
@@ -294,16 +248,6 @@ architecture rtl of stall_if is
                     brt <= (others => '0');
                     brd <= (others => '0');
                     bopcd <= "000001";
-                -- elsif ((inflag = "010")) then
-                --     pout <= '0';
-                --     outhactrl <= "00";
-                --     outflag <= inflag + 1;
-                --     bbrt := brt;
-                --     bbrd := brd;
-                --     bbopcd := bopcd;
-                --     brt <= (others => '0');
-                --     brd <= (others => '0');
-                --     bopcd <= "000001";
                 else 
                     pout <= '1';
                     outhactrl <= "00";

@@ -24,10 +24,9 @@ architecture  rtl  of  adsel  is
       variable pc, bpc, bbpc : std_logic_vector(31 downto 0) := x"00000000";
       variable flag : std_logic_vector(1 downto 0) := "00";
       begin
-      if (hactrl = "01") then
+      if (hactrl = "01") then --jump,beq
         bpc := pc4 - 12;
         flag := "01";
-
       end if;
 
       case (adsel_ctrl) is 
@@ -36,7 +35,6 @@ architecture  rtl  of  adsel  is
                 if (flag = "01") then 
                     next_address <= bpc;
                     flag := "00";
-
                 else
                     next_address <= pc4;
                 end if;
@@ -47,7 +45,7 @@ architecture  rtl  of  adsel  is
                 next_address <= pc4;
             end if;
          when "01" => next_address <= extend16 + pc4 - x"00000010";
-                      flag := "00";
+            flag := "00";
          when "10" =>
             pc := pc4 - x"00000004"; 
             next_address <= pc(31 downto 28) & extend26;

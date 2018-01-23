@@ -18,8 +18,6 @@ architecture rtl of alu_jump is
 begin
     
     process (rst, aluctrl, in1, in2) 
-    -- variable sc : integer := conv_integer(shamt); 
-    -- variable tmp : std_logic_vector(31 downto 0) := x"00000000";
     begin
         
         if (rst = '0') then

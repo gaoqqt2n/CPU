@@ -18,7 +18,7 @@ add 15 14 19
 add 16 18 21
 add 19 21 23
 store 0 23 12
-load 0 25 12
+nop
 nop
 nop
 nop

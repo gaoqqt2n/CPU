@@ -930,22 +930,6 @@ architecture rtl of stall_if is
                 bopcd <= inst(31 downto 26);
             end case;
         end if;
-
-        -- if (pouttmp = '1') then 
-        -- bbbrt := bbrt;
-        -- bbbrd := bbrd;
-        -- bbbopcd := bbopcd;
-        -- bbrt := brt;
-        -- bbrd := brd;
-        -- bbopcd := bopcd;
-        --     brt <= (others => '0');
-        --     brd <= (others => '0');
-        --     bopcd <= "000001";
-        -- brt <= inst(20 downto 16);
-        -- brd <= inst(15 downto 11);
-        -- bopcd <= inst(31 downto 26);
-        -- else 
-        -- end if;
         pout <= pouttmp;
         forwarding_ctrl <= fdctrl1 & is_stflag & fdctrl2;
     

@@ -80,8 +80,6 @@ begin
                     outdatamem <= rtdata;
                     bbbdata := maoutdata;
             end case;
-
-            -- bbbdata := maoutdata;
         
         end if;
     end process;

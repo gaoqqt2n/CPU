@@ -10,7 +10,7 @@ add 4 8 8
 beq 2 6 2
 jump 4
 store 0 8 60
-load 0 15 60
+nop
 nop
 nop
 nop
